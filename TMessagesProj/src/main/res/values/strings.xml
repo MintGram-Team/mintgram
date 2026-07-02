@@ -10919,7 +10919,8 @@
     <string name="PlumGramHideReadReceipts">Hide Read Status</string>
     <string name="PlumGramHideReadReceiptsInfo">When enabled, PlumGram will not tell the server that you have read messages when you open chats on this device. If you read the same messages from another client, they may still be marked as read.</string>
     <string name="PlumGramKeepDeletedMessages">Keep Deleted Messages</string>
-    <string name="PlumGramFreeVoiceTranscription">Free Voice Transcription</string>
+    <string name="PlumGramFreeVoiceTranscription">Free Voice Transcription (Unavailable Now)</string>
+    <string name="PlumGramTranscriptionTemporarilyUnavailable">Voice transcription is temporarily unavailable.</string>
     <string name="PlumGramTranscriptionDownloadFirst">Download the voice message first, then try again.</string>
     <string name="PlumGramTranscriptionAndroidVersion">Local transcription from audio files needs Android 13 or newer.</string>
     <string name="PlumGramTranscriptionUnavailable">Speech recognition is not available on this device.</string>

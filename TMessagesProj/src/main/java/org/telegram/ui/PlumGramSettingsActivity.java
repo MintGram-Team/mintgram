@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -354,12 +355,13 @@ public class PlumGramSettingsActivity extends BaseFragment {
 
     private static class FeaturesBlockCell extends FrameLayout {
         private final TextCheckCell freeTranscriptionCell;
+        private final LinearLayout block;
 
         public FeaturesBlockCell(Context context) {
             super(context);
             setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
 
-            LinearLayout block = new LinearLayout(context);
+            block = new LinearLayout(context);
             block.setOrientation(LinearLayout.VERTICAL);
             block.setClipToOutline(true);
             block.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(25), Theme.getColor(Theme.key_windowBackgroundWhite)));
@@ -369,13 +371,16 @@ public class PlumGramSettingsActivity extends BaseFragment {
             block.addView(freeTranscriptionCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
 
             freeTranscriptionCell.setOnClickListener(v -> {
-                SharedConfig.setPlumFreeVoiceTranscription(!SharedConfig.plumFreeVoiceTranscription);
+                SharedConfig.setPlumFreeVoiceTranscription(false);
+                Toast.makeText(context, LocaleController.getString(R.string.PlumGramTranscriptionTemporarilyUnavailable), Toast.LENGTH_SHORT).show();
                 bind();
             });
         }
 
         public void bind() {
-            freeTranscriptionCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramFreeVoiceTranscription), SharedConfig.plumFreeVoiceTranscription, true);
+            freeTranscriptionCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramFreeVoiceTranscription), false, true);
+            freeTranscriptionCell.setEnabled(false, null);
+            block.setAlpha(0.62f);
         }
     }
 

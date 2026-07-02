@@ -278,7 +278,8 @@
     <string name="PlumGramHideReadReceipts">Скрыть прочитано</string>
     <string name="PlumGramHideReadReceiptsInfo">Когда включено, PlumGram не сообщает серверу, что ты прочитал сообщения при открытии чатов на этом устройстве. Если прочитать эти же сообщения в другом клиенте, они всё равно могут стать прочитанными.</string>
     <string name="PlumGramKeepDeletedMessages">Сохранять удалённые</string>
-    <string name="PlumGramFreeVoiceTranscription">Бесплатная расшифровка голосовых</string>
+    <string name="PlumGramFreeVoiceTranscription">Расшифровка голосовых сейчас недоступна</string>
+    <string name="PlumGramTranscriptionTemporarilyUnavailable">Расшифровка голосовых сейчас временно недоступна.</string>
     <string name="PlumGramTranscriptionDownloadFirst">Сначала скачайте голосовое сообщение, потом попробуйте ещё раз.</string>
     <string name="PlumGramTranscriptionAndroidVersion">Локальная расшифровка аудиофайлов требует Android 13 или новее.</string>
     <string name="PlumGramTranscriptionUnavailable">На этом устройстве недоступно распознавание речи.</string>

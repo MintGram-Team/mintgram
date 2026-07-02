@@ -133,7 +133,7 @@ public class TranscribeButton {
 
         this.isOpen = false;
         this.shouldBeOpen = false;
-        premium = parent.getMessageObject() != null && (UserConfig.getInstance(parent.getMessageObject().currentAccount).isPremium() || SharedConfig.plumFreeVoiceTranscription);
+        premium = parent.getMessageObject() != null && UserConfig.getInstance(parent.getMessageObject().currentAccount).isPremium();
 
         loadingFloat = new AnimatedFloat(parent, 250, CubicBezierInterpolator.EASE_OUT_QUINT);
         animatedDrawLock = new AnimatedFloat(parent, 250, CubicBezierInterpolator.EASE_OUT_QUINT);
@@ -692,7 +692,7 @@ public class TranscribeButton {
                 }
                 transcribeOperationsByDialogPosition.put((Integer) reqInfoHash(messageObject), messageObject);
                 int flags = 0;
-                if (!UserConfig.getInstance(account).isPremium() && !SharedConfig.plumFreeVoiceTranscription) {
+                if (!UserConfig.getInstance(account).isPremium()) {
                     flags |= ConnectionsManager.RequestFlagDoNotWaitFloodWait;
                 }
                 ConnectionsManager.getInstance(account).sendRequest(req, (res, err) -> {
