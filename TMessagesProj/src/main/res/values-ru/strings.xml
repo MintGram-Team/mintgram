@@ -267,6 +267,14 @@
     <string name="PlumGramSettingsInfo">Функции приватности</string>
     <string name="PlumGramFeatures">PlumGram Features</string>
     <string name="PlumGramPrivacy">Приватность</string>
+    <string name="PlumGramGhostMode">Режим призрака</string>
+    <string name="PlumGramGhostHideOnline">Не показываться онлайн</string>
+    <string name="PlumGramGhostHideTyping">Скрыть статус набора</string>
+    <string name="PlumGramGhostHideRecordVideo">Скрыть запись видео</string>
+    <string name="PlumGramGhostHideUploadVideo">Скрыть загрузку видео</string>
+    <string name="PlumGramGhostHideRecordVoice">Скрыть запись голосового</string>
+    <string name="PlumGramGhostHideUploadPhoto">Скрыть загрузку фото</string>
+    <string name="PlumGramGhostHideUploadFile">Скрыть загрузку файла</string>
     <string name="PlumGramHideReadReceipts">Скрыть прочитано</string>
     <string name="PlumGramHideReadReceiptsInfo">Когда включено, PlumGram не сообщает серверу, что ты прочитал сообщения при открытии чатов на этом устройстве. Если прочитать эти же сообщения в другом клиенте, они всё равно могут стать прочитанными.</string>
     <string name="PlumGramKeepDeletedMessages">Сохранять удалённые</string>

@@ -10908,6 +10908,14 @@
     <string name="PlumGramSettingsInfo">Privacy features</string>
     <string name="PlumGramFeatures">PlumGram Features</string>
     <string name="PlumGramPrivacy">Privacy</string>
+    <string name="PlumGramGhostMode">Ghost Mode</string>
+    <string name="PlumGramGhostHideOnline">Hide Online Status</string>
+    <string name="PlumGramGhostHideTyping">Hide Typing Status</string>
+    <string name="PlumGramGhostHideRecordVideo">Hide Video Recording Status</string>
+    <string name="PlumGramGhostHideUploadVideo">Hide Video Upload Status</string>
+    <string name="PlumGramGhostHideRecordVoice">Hide Voice Recording Status</string>
+    <string name="PlumGramGhostHideUploadPhoto">Hide Photo Upload Status</string>
+    <string name="PlumGramGhostHideUploadFile">Hide File Upload Status</string>
     <string name="PlumGramHideReadReceipts">Hide Read Status</string>
     <string name="PlumGramHideReadReceiptsInfo">When enabled, PlumGram will not tell the server that you have read messages when you open chats on this device. If you read the same messages from another client, they may still be marked as read.</string>
     <string name="PlumGramKeepDeletedMessages">Keep Deleted Messages</string>

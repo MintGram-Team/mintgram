@@ -333,6 +333,13 @@ public class SharedConfig {
     public static boolean hideReadReceipts;
     public static boolean keepDeletedMessages;
     public static boolean plumFreeVoiceTranscription;
+    public static boolean ghostHideOnline;
+    public static boolean ghostHideTyping;
+    public static boolean ghostHideRecordVideo;
+    public static boolean ghostHideUploadVideo;
+    public static boolean ghostHideRecordVoice;
+    public static boolean ghostHideUploadPhoto;
+    public static boolean ghostHideUploadFile;
     public static int deletedMessageStyle;
     private static HashSet<String> deletedMessages = new HashSet<>();
 
@@ -474,6 +481,13 @@ public class SharedConfig {
                 editor.putBoolean("hideReadReceipts", hideReadReceipts);
                 editor.putBoolean("keepDeletedMessages", keepDeletedMessages);
                 editor.putBoolean("plumFreeVoiceTranscription", plumFreeVoiceTranscription);
+                editor.putBoolean("ghostHideOnline", ghostHideOnline);
+                editor.putBoolean("ghostHideTyping", ghostHideTyping);
+                editor.putBoolean("ghostHideRecordVideo", ghostHideRecordVideo);
+                editor.putBoolean("ghostHideUploadVideo", ghostHideUploadVideo);
+                editor.putBoolean("ghostHideRecordVoice", ghostHideRecordVoice);
+                editor.putBoolean("ghostHideUploadPhoto", ghostHideUploadPhoto);
+                editor.putBoolean("ghostHideUploadFile", ghostHideUploadFile);
                 editor.putInt("deletedMessageStyle", deletedMessageStyle);
                 editor.putStringSet("plumDeletedMessages", new HashSet<>(deletedMessages));
                 editor.apply();
@@ -530,6 +544,52 @@ public class SharedConfig {
             ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean("plumFreeVoiceTranscription", plumFreeVoiceTranscription)
+                    .apply();
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    public static void setGhostHideOnline(boolean value) {
+        setMainConfigBoolean("ghostHideOnline", value);
+        ghostHideOnline = value;
+    }
+
+    public static void setGhostHideTyping(boolean value) {
+        setMainConfigBoolean("ghostHideTyping", value);
+        ghostHideTyping = value;
+    }
+
+    public static void setGhostHideRecordVideo(boolean value) {
+        setMainConfigBoolean("ghostHideRecordVideo", value);
+        ghostHideRecordVideo = value;
+    }
+
+    public static void setGhostHideUploadVideo(boolean value) {
+        setMainConfigBoolean("ghostHideUploadVideo", value);
+        ghostHideUploadVideo = value;
+    }
+
+    public static void setGhostHideRecordVoice(boolean value) {
+        setMainConfigBoolean("ghostHideRecordVoice", value);
+        ghostHideRecordVoice = value;
+    }
+
+    public static void setGhostHideUploadPhoto(boolean value) {
+        setMainConfigBoolean("ghostHideUploadPhoto", value);
+        ghostHideUploadPhoto = value;
+    }
+
+    public static void setGhostHideUploadFile(boolean value) {
+        setMainConfigBoolean("ghostHideUploadFile", value);
+        ghostHideUploadFile = value;
+    }
+
+    private static void setMainConfigBoolean(String key, boolean value) {
+        try {
+            ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(key, value)
                     .apply();
         } catch (Exception e) {
             FileLog.e(e);
@@ -705,6 +765,13 @@ public class SharedConfig {
             hideReadReceipts = preferences.getBoolean("hideReadReceipts", false);
             keepDeletedMessages = preferences.getBoolean("keepDeletedMessages", false);
             plumFreeVoiceTranscription = preferences.getBoolean("plumFreeVoiceTranscription", false);
+            ghostHideOnline = preferences.getBoolean("ghostHideOnline", false);
+            ghostHideTyping = preferences.getBoolean("ghostHideTyping", false);
+            ghostHideRecordVideo = preferences.getBoolean("ghostHideRecordVideo", false);
+            ghostHideUploadVideo = preferences.getBoolean("ghostHideUploadVideo", false);
+            ghostHideRecordVoice = preferences.getBoolean("ghostHideRecordVoice", false);
+            ghostHideUploadPhoto = preferences.getBoolean("ghostHideUploadPhoto", false);
+            ghostHideUploadFile = preferences.getBoolean("ghostHideUploadFile", false);
             deletedMessageStyle = preferences.getInt("deletedMessageStyle", 0);
             deletedMessages = new HashSet<>(preferences.getStringSet("plumDeletedMessages", new HashSet<>()));
             distanceSystemType = preferences.getInt("distanceSystemType", 0);

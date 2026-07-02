@@ -10217,7 +10217,7 @@ public class MessagesController extends BaseController implements NotificationCe
         checkReadTasks();
 
         if (getUserConfig().isClientActivated()) {
-            if (!ignoreSetOnline && getConnectionsManager().getPauseTime() == 0 && ApplicationLoader.isScreenOn && !ApplicationLoader.mainInterfacePausedStageQueue) {
+            if (!SharedConfig.ghostHideOnline && !ignoreSetOnline && getConnectionsManager().getPauseTime() == 0 && ApplicationLoader.isScreenOn && !ApplicationLoader.mainInterfacePausedStageQueue) {
                 if (ApplicationLoader.mainInterfacePausedStageQueueTime != 0 && Math.abs(ApplicationLoader.mainInterfacePausedStageQueueTime - System.currentTimeMillis()) > 1000) {
                     if (statusSettingState != 1 && (lastStatusUpdateTime == 0 || Math.abs(System.currentTimeMillis() - lastStatusUpdateTime) >= 55000 || offlineSent)) {
                         statusSettingState = 1;
@@ -11079,6 +11079,9 @@ public class MessagesController extends BaseController implements NotificationCe
         if (action < 0 || action >= sendingTypings.length || dialogId == 0) {
             return false;
         }
+        if (isTypingActionHiddenByGhostMode(action)) {
+            return false;
+        }
         final long selfId = UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId();
         if (dialogId == selfId) {
             return false;
@@ -11179,6 +11182,23 @@ public class MessagesController extends BaseController implements NotificationCe
             }
         }
         return true;
+    }
+
+    private boolean isTypingActionHiddenByGhostMode(int action) {
+        if (action == 0) {
+            return SharedConfig.ghostHideTyping;
+        } else if (action == 1) {
+            return SharedConfig.ghostHideRecordVoice;
+        } else if (action == 3) {
+            return SharedConfig.ghostHideUploadFile;
+        } else if (action == 4) {
+            return SharedConfig.ghostHideUploadPhoto;
+        } else if (action == 5 || action == 8) {
+            return SharedConfig.ghostHideUploadVideo;
+        } else if (action == 7) {
+            return SharedConfig.ghostHideRecordVideo;
+        }
+        return false;
     }
 
     protected void removeDeletedMessagesFromArray(final long dialogId, ArrayList<TLRPC.Message> messages) {

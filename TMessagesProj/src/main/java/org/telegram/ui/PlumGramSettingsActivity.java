@@ -41,6 +41,7 @@ public class PlumGramSettingsActivity extends BaseFragment {
     private static final int VIEW_TYPE_PRIVACY_BLOCK = 1;
     private static final int VIEW_TYPE_SHADOW = 2;
     private static final int VIEW_TYPE_FEATURES_BLOCK = 3;
+    private static final int VIEW_TYPE_GHOST_BLOCK = 4;
 
     @Override
     public View createView(Context context) {
@@ -81,8 +82,11 @@ public class PlumGramSettingsActivity extends BaseFragment {
         items.add(new ItemInner(VIEW_TYPE_HEADER, 0, LocaleController.getString(R.string.PlumGramPrivacy)));
         items.add(new ItemInner(VIEW_TYPE_PRIVACY_BLOCK, 1, null));
         items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, null));
-        items.add(new ItemInner(VIEW_TYPE_HEADER, 3, LocaleController.getString(R.string.PlumGramFeatures)));
-        items.add(new ItemInner(VIEW_TYPE_FEATURES_BLOCK, 4, null));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 3, LocaleController.getString(R.string.PlumGramGhostMode)));
+        items.add(new ItemInner(VIEW_TYPE_GHOST_BLOCK, 4, null));
+        items.add(new ItemInner(VIEW_TYPE_SHADOW, 5, null));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 6, LocaleController.getString(R.string.PlumGramFeatures)));
+        items.add(new ItemInner(VIEW_TYPE_FEATURES_BLOCK, 7, null));
         items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, LocaleController.getString(R.string.PlumGramFeaturesInfo)));
         if (adapter != null) {
             adapter.notifyDataSetChanged();
@@ -121,6 +125,8 @@ public class PlumGramSettingsActivity extends BaseFragment {
                 view = new HeaderCell(getContext());
             } else if (viewType == VIEW_TYPE_PRIVACY_BLOCK) {
                 view = new PrivacyBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_GHOST_BLOCK) {
+                view = new GhostBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_FEATURES_BLOCK) {
                 view = new FeaturesBlockCell(getContext());
             } else {
@@ -148,6 +154,8 @@ public class PlumGramSettingsActivity extends BaseFragment {
                 }
             } else if (holder.getItemViewType() == VIEW_TYPE_PRIVACY_BLOCK) {
                 ((PrivacyBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_GHOST_BLOCK) {
+                ((GhostBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_FEATURES_BLOCK) {
                 ((FeaturesBlockCell) holder.itemView).bind();
             }
@@ -265,6 +273,82 @@ public class PlumGramSettingsActivity extends BaseFragment {
         public void bind() {
             hideReadCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramHideReadReceipts), SharedConfig.hideReadReceipts, true);
             keepDeletedCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramKeepDeletedMessages), SharedConfig.keepDeletedMessages, false);
+        }
+    }
+
+    private static class GhostBlockCell extends FrameLayout {
+        private final TextCheckCell hideOnlineCell;
+        private final TextCheckCell hideTypingCell;
+        private final TextCheckCell hideRecordVideoCell;
+        private final TextCheckCell hideUploadVideoCell;
+        private final TextCheckCell hideRecordVoiceCell;
+        private final TextCheckCell hideUploadPhotoCell;
+        private final TextCheckCell hideUploadFileCell;
+
+        public GhostBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = new LinearLayout(context);
+            block.setOrientation(LinearLayout.VERTICAL);
+            block.setClipToOutline(true);
+            block.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(25), Theme.getColor(Theme.key_windowBackgroundWhite)));
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            hideOnlineCell = new TextCheckCell(context, 21);
+            hideTypingCell = new TextCheckCell(context, 21);
+            hideRecordVideoCell = new TextCheckCell(context, 21);
+            hideUploadVideoCell = new TextCheckCell(context, 21);
+            hideRecordVoiceCell = new TextCheckCell(context, 21);
+            hideUploadPhotoCell = new TextCheckCell(context, 21);
+            hideUploadFileCell = new TextCheckCell(context, 21);
+
+            block.addView(hideOnlineCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideTypingCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideRecordVideoCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideUploadVideoCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideRecordVoiceCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideUploadPhotoCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(hideUploadFileCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+
+            hideOnlineCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideOnline(!SharedConfig.ghostHideOnline);
+                bind();
+            });
+            hideTypingCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideTyping(!SharedConfig.ghostHideTyping);
+                bind();
+            });
+            hideRecordVideoCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideRecordVideo(!SharedConfig.ghostHideRecordVideo);
+                bind();
+            });
+            hideUploadVideoCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideUploadVideo(!SharedConfig.ghostHideUploadVideo);
+                bind();
+            });
+            hideRecordVoiceCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideRecordVoice(!SharedConfig.ghostHideRecordVoice);
+                bind();
+            });
+            hideUploadPhotoCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideUploadPhoto(!SharedConfig.ghostHideUploadPhoto);
+                bind();
+            });
+            hideUploadFileCell.setOnClickListener(v -> {
+                SharedConfig.setGhostHideUploadFile(!SharedConfig.ghostHideUploadFile);
+                bind();
+            });
+        }
+
+        public void bind() {
+            hideOnlineCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideOnline), SharedConfig.ghostHideOnline, true);
+            hideTypingCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideTyping), SharedConfig.ghostHideTyping, true);
+            hideRecordVideoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideRecordVideo), SharedConfig.ghostHideRecordVideo, true);
+            hideUploadVideoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadVideo), SharedConfig.ghostHideUploadVideo, true);
+            hideRecordVoiceCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideRecordVoice), SharedConfig.ghostHideRecordVoice, true);
+            hideUploadPhotoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadPhoto), SharedConfig.ghostHideUploadPhoto, true);
+            hideUploadFileCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadFile), SharedConfig.ghostHideUploadFile, false);
         }
     }
 

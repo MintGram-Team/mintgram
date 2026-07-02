@@ -309,7 +309,7 @@ public class SessionBottomSheet extends BottomSheet {
     }
 
     private static String getDisplayAppName(TLRPC.TL_authorization session) {
-        if (session != null && session.api_id == BuildVars.APP_ID && session.app_version != null && session.app_version.contains("(1)")) {
+        if (session != null && session.api_id == BuildVars.APP_ID) {
             return "PlumGram";
         }
         return session != null ? session.app_name : "";
