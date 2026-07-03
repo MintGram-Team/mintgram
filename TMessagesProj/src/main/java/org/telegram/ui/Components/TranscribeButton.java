@@ -786,15 +786,15 @@ public class TranscribeButton {
 
         File file = getVoiceFile(messageObject);
         if (file == null || !file.exists() || file.length() <= 0) {
-            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.PlumGramTranscriptionDownloadFirst), start, minDuration);
+            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.MintGramTranscriptionDownloadFirst), start, minDuration);
             return;
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.PlumGramTranscriptionAndroidVersion), start, minDuration);
+            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.MintGramTranscriptionAndroidVersion), start, minDuration);
             return;
         }
         if (!SpeechRecognizer.isRecognitionAvailable(ApplicationLoader.applicationContext)) {
-            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.PlumGramTranscriptionUnavailable), start, minDuration);
+            finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.MintGramTranscriptionUnavailable), start, minDuration);
             return;
         }
         AndroidUtilities.runOnUIThread(() -> {
@@ -820,7 +820,7 @@ public class TranscribeButton {
                     @Override
                     public void onError(int error) {
                         closeRecognizer(finalRecognizer, finalDescriptor, finalPcmAudio);
-                        finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.PlumGramTranscriptionFailed), start, minDuration);
+                        finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.MintGramTranscriptionFailed), start, minDuration);
                     }
 
                     @Override
@@ -829,7 +829,7 @@ public class TranscribeButton {
                         ArrayList<String> matches = results != null ? results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) : null;
                         String text = matches != null && !matches.isEmpty() ? matches.get(0) : "";
                         if (TextUtils.isEmpty(text)) {
-                            text = LocaleControllerString(R.string.PlumGramTranscriptionNoWords);
+                            text = LocaleControllerString(R.string.MintGramTranscriptionNoWords);
                         }
                         finishLocalTranscription(messageObject, dialogId, messageId, text, start, minDuration);
                     }
@@ -845,7 +845,7 @@ public class TranscribeButton {
             } catch (Exception e) {
                 FileLog.e(e);
                 closeRecognizer(recognizer, descriptor, pcmAudio);
-                finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.PlumGramTranscriptionFailed), start, minDuration);
+                finishLocalTranscription(messageObject, dialogId, messageId, LocaleControllerString(R.string.MintGramTranscriptionFailed), start, minDuration);
             }
         });
     }

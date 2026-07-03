@@ -32,7 +32,7 @@ import org.telegram.ui.Components.RecyclerListView;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PlumGramSettingsActivity extends BaseFragment {
+public class MintGramSettingsActivity extends BaseFragment {
 
     private RecyclerListView listView;
     private ListAdapter adapter;
@@ -48,7 +48,7 @@ public class PlumGramSettingsActivity extends BaseFragment {
     public View createView(Context context) {
         actionBar.setBackButtonImage(R.drawable.ic_ab_back);
         actionBar.setAllowOverlayTitle(true);
-        actionBar.setTitle(LocaleController.getString(R.string.PlumGramSettings));
+        actionBar.setTitle(LocaleController.getString(R.string.MintGramSettings));
         actionBar.setActionBarMenuOnItemClick(new ActionBar.ActionBarMenuOnItemClick() {
             @Override
             public void onItemClick(int id) {
@@ -80,15 +80,15 @@ public class PlumGramSettingsActivity extends BaseFragment {
 
     private void updateItems() {
         items.clear();
-        items.add(new ItemInner(VIEW_TYPE_HEADER, 0, LocaleController.getString(R.string.PlumGramPrivacy)));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 0, LocaleController.getString(R.string.MintGramPrivacy)));
         items.add(new ItemInner(VIEW_TYPE_PRIVACY_BLOCK, 1, null));
         items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, null));
-        items.add(new ItemInner(VIEW_TYPE_HEADER, 3, LocaleController.getString(R.string.PlumGramGhostMode)));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 3, LocaleController.getString(R.string.MintGramGhostMode)));
         items.add(new ItemInner(VIEW_TYPE_GHOST_BLOCK, 4, null));
         items.add(new ItemInner(VIEW_TYPE_SHADOW, 5, null));
-        items.add(new ItemInner(VIEW_TYPE_HEADER, 6, LocaleController.getString(R.string.PlumGramFeatures)));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 6, LocaleController.getString(R.string.MintGramFeatures)));
         items.add(new ItemInner(VIEW_TYPE_FEATURES_BLOCK, 7, null));
-        items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, LocaleController.getString(R.string.PlumGramFeaturesInfo)));
+        items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, LocaleController.getString(R.string.MintGramFeaturesInfo)));
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
@@ -220,21 +220,21 @@ public class PlumGramSettingsActivity extends BaseFragment {
             layout.setPadding(0, AndroidUtilities.dp(6), 0, AndroidUtilities.dp(6));
 
             AlertDialog dialog = new AlertDialog.Builder(context)
-                    .setTitle(LocaleController.getString(R.string.PlumGramDeletedColorTitle))
+                    .setTitle(LocaleController.getString(R.string.MintGramDeletedColorTitle))
                     .setView(layout)
-                    .setNegativeButton(LocaleController.getString(R.string.PlumGramEnableKeepDeleted), (dialogInterface, which) -> {
+                    .setNegativeButton(LocaleController.getString(R.string.MintGramEnableKeepDeleted), (dialogInterface, which) -> {
                         SharedConfig.setKeepDeletedMessages(true);
                         bind();
                     })
-                    .setPositiveButton(LocaleController.getString(R.string.PlumGramDisableKeepDeleted), (dialogInterface, which) -> {
+                    .setPositiveButton(LocaleController.getString(R.string.MintGramDisableKeepDeleted), (dialogInterface, which) -> {
                         SharedConfig.setKeepDeletedMessages(false);
                         bind();
                     })
                     .create();
 
-            addColorRow(layout, LocaleController.getString(R.string.PlumGramDeletedStyleRed), 0xFFE53935, 0, dialog);
-            addColorRow(layout, LocaleController.getString(R.string.PlumGramDeletedStyleBlue), 0xFF1E88E5, 1, dialog);
-            addColorRow(layout, LocaleController.getString(R.string.PlumGramDeletedStyleWhite), 0xFFFFFFFF, 2, dialog);
+            addColorRow(layout, LocaleController.getString(R.string.MintGramDeletedStyleRed), 0xFFE53935, 0, dialog);
+            addColorRow(layout, LocaleController.getString(R.string.MintGramDeletedStyleBlue), 0xFF1E88E5, 1, dialog);
+            addColorRow(layout, LocaleController.getString(R.string.MintGramDeletedStyleWhite), 0xFFFFFFFF, 2, dialog);
             dialog.show();
         }
 
@@ -272,8 +272,8 @@ public class PlumGramSettingsActivity extends BaseFragment {
         }
 
         public void bind() {
-            hideReadCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramHideReadReceipts), SharedConfig.hideReadReceipts, true);
-            keepDeletedCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramKeepDeletedMessages), SharedConfig.keepDeletedMessages, false);
+            hideReadCell.setTextAndCheck(LocaleController.getString(R.string.MintGramHideReadReceipts), SharedConfig.hideReadReceipts, true);
+            keepDeletedCell.setTextAndCheck(LocaleController.getString(R.string.MintGramKeepDeletedMessages), SharedConfig.keepDeletedMessages, false);
         }
     }
 
@@ -343,13 +343,13 @@ public class PlumGramSettingsActivity extends BaseFragment {
         }
 
         public void bind() {
-            hideOnlineCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideOnline), SharedConfig.ghostHideOnline, true);
-            hideTypingCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideTyping), SharedConfig.ghostHideTyping, true);
-            hideRecordVideoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideRecordVideo), SharedConfig.ghostHideRecordVideo, true);
-            hideUploadVideoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadVideo), SharedConfig.ghostHideUploadVideo, true);
-            hideRecordVoiceCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideRecordVoice), SharedConfig.ghostHideRecordVoice, true);
-            hideUploadPhotoCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadPhoto), SharedConfig.ghostHideUploadPhoto, true);
-            hideUploadFileCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramGhostHideUploadFile), SharedConfig.ghostHideUploadFile, false);
+            hideOnlineCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideOnline), SharedConfig.ghostHideOnline, true);
+            hideTypingCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideTyping), SharedConfig.ghostHideTyping, true);
+            hideRecordVideoCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideRecordVideo), SharedConfig.ghostHideRecordVideo, true);
+            hideUploadVideoCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideUploadVideo), SharedConfig.ghostHideUploadVideo, true);
+            hideRecordVoiceCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideRecordVoice), SharedConfig.ghostHideRecordVoice, true);
+            hideUploadPhotoCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideUploadPhoto), SharedConfig.ghostHideUploadPhoto, true);
+            hideUploadFileCell.setTextAndCheck(LocaleController.getString(R.string.MintGramGhostHideUploadFile), SharedConfig.ghostHideUploadFile, false);
         }
     }
 
@@ -372,13 +372,13 @@ public class PlumGramSettingsActivity extends BaseFragment {
 
             freeTranscriptionCell.setOnClickListener(v -> {
                 SharedConfig.setPlumFreeVoiceTranscription(false);
-                Toast.makeText(context, LocaleController.getString(R.string.PlumGramTranscriptionTemporarilyUnavailable), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, LocaleController.getString(R.string.MintGramTranscriptionTemporarilyUnavailable), Toast.LENGTH_SHORT).show();
                 bind();
             });
         }
 
         public void bind() {
-            freeTranscriptionCell.setTextAndCheck(LocaleController.getString(R.string.PlumGramFreeVoiceTranscription), false, true);
+            freeTranscriptionCell.setTextAndCheck(LocaleController.getString(R.string.MintGramFreeVoiceTranscription), false, true);
             freeTranscriptionCell.setEnabled(false, null);
             block.setAlpha(0.62f);
         }

@@ -673,7 +673,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             items.add(UItem.asShadow(null));
         }
 
-        items.add(SettingCell.Factory.of(24, 0xFF9B7CFF, 0xFF5A8CFF, R.drawable.settings_privacy, getString(R.string.PlumGramFeatures), getString(R.string.PlumGramSettingsInfo)));
+        items.add(SettingCell.Factory.of(24, 0xFF9B7CFF, 0xFF5A8CFF, R.drawable.settings_privacy, getString(R.string.MintGramFeatures), getString(R.string.MintGramSettingsInfo)));
         items.add(UItem.asShadow(null));
 
         if (accountNumbers.size() > 0) {
@@ -815,7 +815,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 presentSettingFragment(new PrivacySettingsActivity());
                 break;
             case 24:
-                presentSettingFragment(new PlumGramSettingsActivity());
+                presentSettingFragment(new MintGramSettingsActivity());
                 break;
             case 5:
                 presentSettingFragment(new NotificationsSettingsActivity());

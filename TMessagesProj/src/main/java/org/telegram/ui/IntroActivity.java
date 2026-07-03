@@ -143,7 +143,7 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
 
     @Override
     public View createView(Context context) {
-        titles[0] = "PlumGram";
+        titles[0] = "MintGram";
 
 
         actionBar.setAddToContainer(false);

@@ -313,7 +313,7 @@ public class SessionCell extends FrameLayout {
 
     private static String getDisplayAppName(TLRPC.TL_authorization session) {
         if (session != null && session.api_id == BuildVars.APP_ID) {
-            return "PlumGram";
+            return "MintGram";
         }
         return session != null ? session.app_name : "";
     }

@@ -2,7 +2,7 @@
   <img src="https://telegram.org/img/t_logo.svg" width="180" alt="Telegram logo">
 </p>
 
-<h1 align="center">PlumGram</h1>
+<h1 align="center">MintGram</h1>
 
 <p align="center">
   <a href="LICENSE">Licensed under the GNU General Public License v2.0</a>
@@ -14,10 +14,10 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/plumgram_tg">
+  <a href="https://t.me/mintgram_tg">
     <img src="https://img.shields.io/badge/Channel-Telegram-229ED9?style=for-the-badge" alt="Channel Telegram">
   </a>
-  <a href="https://t.me/plumgram_chat">
+  <a href="https://t.me/mintgram_chat">
     <img src="https://img.shields.io/badge/Chat-Telegram-229ED9?style=for-the-badge" alt="Chat Telegram">
   </a>
   <a href="../../releases">
@@ -27,12 +27,12 @@
 
 ## About
 
-PlumGram is an unofficial fork of Telegram for Android with a custom visual style and privacy-focused client features.
+MintGram is an unofficial fork of Telegram for Android with a custom visual style and privacy-focused client features.
 
 ## Features
 
-- PlumGram branding
-- PlumGram Basic theme
+- MintGram branding
+- MintGram Basic theme
 - Hide Read Status
 - Keep Deleted Messages
 - Free Voice Transcription toggle
@@ -69,8 +69,8 @@ Keep `.env`, `local.properties`, APK files, AAB files, and keystores out of git.
 
 ## License
 
-PlumGram is distributed under the GNU General Public License v2.0. See [LICENSE](LICENSE).
+MintGram is distributed under the GNU General Public License v2.0. See [LICENSE](LICENSE).
 
 ## Fork Notice
 
-PlumGram is an unofficial fork of Telegram for Android based on the official Telegram Android source code.
+MintGram is an unofficial fork of Telegram for Android based on the official Telegram Android source code.

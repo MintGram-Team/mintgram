@@ -18320,7 +18320,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             icon.setOverrideColor(getPlumDeletedMessageColor());
             builder.setSpan(icon, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             int start = builder.length();
-            builder.append(getString(R.string.PlumGramDeletedMessage));
+            builder.append(getString(R.string.MintGramDeletedMessage));
             builder.setSpan(new ForegroundColorSpan(getPlumDeletedMessageColor()), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.append(" · ");
             builder.append(currentTimeString);

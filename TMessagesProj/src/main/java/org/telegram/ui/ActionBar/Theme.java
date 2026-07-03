@@ -2461,7 +2461,7 @@ public class Theme {
             if (isDark != UNKNOWN) {
                 return isDark == DARK;
             }
-            if ("Dark Blue".equals(name) || "Night".equals(name) || "PlumGram basic".equals(name)) {
+            if ("Dark Blue".equals(name) || "Night".equals(name) || "MintGram basic".equals(name)) {
                 isDark = DARK;
             } else if ("Blue".equals(name) || "Arctic Blue".equals(name) || "Day".equals(name)) {
                 isDark = LIGHT;
@@ -2587,19 +2587,19 @@ public class Theme {
                     themeAccent.patternSlug = patternSlugs[a];
                 }
 
-                                if (isHome(themeAccent) && (name.equals("Dark Blue") || name.equals("Night") || name.equals("PlumGram basic"))) {
-                    if (name.equals("PlumGram basic")) {
-                        themeAccent.myMessagesAccentColor = 0xffB8860B;
-                        themeAccent.myMessagesGradientAccentColor1 = 0xff9F730A;
-                        themeAccent.myMessagesGradientAccentColor2 = 0xff7D5A08;
-                        themeAccent.myMessagesGradientAccentColor3 = 0xff5D4306;
+                                if (isHome(themeAccent) && (name.equals("Dark Blue") || name.equals("Night") || name.equals("MintGram basic"))) {
+                    if (name.equals("MintGram basic")) {
+                        themeAccent.myMessagesAccentColor = 0xff3e927a;
+                        themeAccent.myMessagesGradientAccentColor1 = 0;
+                        themeAccent.myMessagesGradientAccentColor2 = 0;
+                        themeAccent.myMessagesGradientAccentColor3 = 0;
                     } else {
                         themeAccent.myMessagesAccentColor = 0xff258DE5;
                         themeAccent.myMessagesGradientAccentColor1 = 0xff4272DF;
                         themeAccent.myMessagesGradientAccentColor2 = 0xff8146D7;
                         themeAccent.myMessagesGradientAccentColor3 = 0xff9F3EAA;
                     }
-                    if (name.equals("Night") || name.equals("PlumGram basic")) {
+                    if (name.equals("Night") || name.equals("MintGram basic")) {
                         themeAccent.patternIntensity = -0.57f;
                         themeAccent.backgroundOverrideColor = 0xff6c7fa6;
                         themeAccent.backgroundGradientOverrideColor1 = 0xff2e344b;
@@ -4701,14 +4701,14 @@ public class Theme {
         themes.add(themeInfo);
         themesDict.put("Night", themeInfo);
 
-        ThemeInfo plumGramBasicTheme = new ThemeInfo(themeInfo);
-        plumGramBasicTheme.name = "PlumGram basic";
-        plumGramBasicTheme.assetName = "plumgram_basic.attheme";
-        plumGramBasicTheme.previewOutColor = 0xffB8860B;
-        plumGramBasicTheme.sortIndex = 0;
-        plumGramBasicTheme.setAccentColorOptions(new int[] { 0xFFB8860B });
-        themes.add(plumGramBasicTheme);
-        themesDict.put("PlumGram basic", currentNightTheme = plumGramBasicTheme);
+        ThemeInfo mintGramBasicTheme = new ThemeInfo(themeInfo);
+        mintGramBasicTheme.name = "MintGram basic";
+        mintGramBasicTheme.assetName = "mintgram_basic.attheme";
+        mintGramBasicTheme.previewOutColor = 0xff3e927a;
+        mintGramBasicTheme.sortIndex = 0;
+        mintGramBasicTheme.setAccentColorOptions(new int[] { 0xFF3E927A });
+        themes.add(mintGramBasicTheme);
+        themesDict.put("MintGram basic", currentNightTheme = mintGramBasicTheme);
 
         String themesString = themeConfig.getString("themes2", null);
 
@@ -4797,7 +4797,7 @@ public class Theme {
             }
 
             if (!preferences.contains("theme") && !themeConfig.contains("lastDayTheme")) {
-                ThemeInfo plumDefaultTheme = themesDict.get("PlumGram basic");
+                ThemeInfo plumDefaultTheme = themesDict.get("MintGram basic");
                 if (plumDefaultTheme == null) {
                     plumDefaultTheme = themeDarkBlue;
                 }
@@ -4809,7 +4809,7 @@ public class Theme {
             }
 
             if (!themeConfig.getBoolean("plumBasicThemeMigrated", false)) {
-                ThemeInfo plumDefaultTheme = themesDict.get("PlumGram basic");
+                ThemeInfo plumDefaultTheme = themesDict.get("MintGram basic");
                 if (plumDefaultTheme != null) {
                     applyingTheme = plumDefaultTheme;
                     currentDayTheme = plumDefaultTheme;
@@ -6131,9 +6131,9 @@ public class Theme {
 
     private static void sortThemes() {
         Collections.sort(themes, (o1, o2) -> {
-            if ("PlumGram basic".equals(o1.name)) {
+            if ("MintGram basic".equals(o1.name)) {
                 return -1;
-            } else if ("PlumGram basic".equals(o2.name)) {
+            } else if ("MintGram basic".equals(o2.name)) {
                 return 1;
             }
             if (o1.pathToFile == null && o1.assetName == null) {
@@ -9528,7 +9528,7 @@ public class Theme {
         return getColor(key, isDefault, false);
     }
 
-    private static final int PLUM_TEST_ACCENT_COLOR = 0xFFB8860B;
+    private static final int PLUM_TEST_ACCENT_COLOR = 0xFF3E927A;
     private static final int PLUM_DARK_ON_GOLD_COLOR = 0xFF1A1D21;
 
     private static boolean isPlumTestAccentKey(int key) {
@@ -9562,6 +9562,8 @@ public class Theme {
                 || key == key_contextProgressOuter1
                 || key == key_fastScrollActive
                 || key == key_changephoneinfo_image2
+                || key == key_avatar_backgroundSaved
+                || key == key_avatar_background2Saved
                 || key == key_avatar_backgroundArchivedHidden
                 || key == key_chats_actionBackground
                 || key == key_chats_actionMessage
@@ -9637,7 +9639,7 @@ public class Theme {
     }
 
     public static boolean isPlumBasicThemeActive() {
-        return currentTheme != null && "PlumGram basic".equals(currentTheme.name);
+        return currentTheme != null && "MintGram basic".equals(currentTheme.name);
     }
 
     public static int getColor(int key, boolean[] isDefault, boolean ignoreAnimation) {

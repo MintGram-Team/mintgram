@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="AppName">PlumGram</string>
-    <string name="AppNameBeta">PlumGram</string>
+    <string name="AppName">MintGram</string>
+    <string name="AppNameBeta">MintGram</string>
     <string name="LanguageName">Deutsch</string>
     <string name="English">Englisch</string>
     <string name="LanguageNameInEnglish">German</string>
@@ -33,15 +33,15 @@
 
     <string name="YourCode">Nummer verifizieren</string>
     <string name="SentSmsCode">Wir haben eine SMS mit Aktivierungscode an **%1$s** gesendet.</string>
-    <string name="SentAppCode">Code wurde dir per **PlumGram** an deine aktive App geschickt.</string>
-    <string name="SentAppCodeWithPhone">Wir haben den Code für %1$s per Chatnachricht an die **PlumGram App** auf deinem anderen Gerät gesendet.</string>
-    <string name="SentAppCodeTitle">Prüfe deine PlumGram-Nachrichten</string>
+    <string name="SentAppCode">Code wurde dir per **MintGram** an deine aktive App geschickt.</string>
+    <string name="SentAppCodeWithPhone">Wir haben den Code für %1$s per Chatnachricht an die **MintGram App** auf deinem anderen Gerät gesendet.</string>
+    <string name="SentAppCodeTitle">Prüfe deine MintGram-Nachrichten</string>
     <string name="SentFragmentCode">Erhalte den Code für %1$s im Bereich \'Anonymous Numbers\' bei Fragment.</string>
     <string name="SentSmsCodeTitle">Code eingeben</string>
     <string name="OpenFragment">Fragment öffnen</string>
-    <string name="SentCallCode">Wir rufen dich jetzt unter **%1$s** an.\n\nBitte den Anruf nicht annehmen, PlumGram kümmert sich um alles.</string>
+    <string name="SentCallCode">Wir rufen dich jetzt unter **%1$s** an.\n\nBitte den Anruf nicht annehmen, MintGram kümmert sich um alles.</string>
     <string name="SentCallOnly">**%1$s** wird angerufen, \num dir einen Code anzusagen.</string>
-    <string name="CallText">PlumGram ruft dich in %1$d:%2$02d an</string>
+    <string name="CallText">MintGram ruft dich in %1$d:%2$02d an</string>
     <string name="SmsText">Senden dir eine SMS in %1$d:%2$02d</string>
     <string name="Calling">Wir rufen dich an…</string>
     <string name="SendingSms">SMS wird gesendet...</string>
@@ -60,7 +60,7 @@
     <string name="CancelLinkExpired">Link ist ungültig oder abgelaufen.</string>
     <string name="CancelLinkSuccessTitle">Erfolgreich!</string>
     <string name="CancelLinkSuccess">Löschvorgang für dein Konto %1$s wurde abgebrochen. Du kannst das Fenster nun schließen.</string>
-    <string name="OtherLoginCode">Dein Anmeldecode lautet **%1$s**. Gebe ihn in der PlumGram-App ein, bei der du dich anmelden möchtest.\n\nDen Code niemals weitergeben.</string>
+    <string name="OtherLoginCode">Dein Anmeldecode lautet **%1$s**. Gebe ihn in der MintGram-App ein, bei der du dich anmelden möchtest.\n\nDen Code niemals weitergeben.</string>
     <string name="SmsAvailableIn">Du kannst eine SMS anfordern in: %1$d:%2$02d</string>
     <string name="ResendSmsAvailableIn">In %1$d:%2$02d kannst du eine neue SMS anfordern.</string>
     <string name="RequestSmsButton">Code per SMS anfordern</string>
@@ -91,7 +91,7 @@
     <string name="WidgetShortcuts">Verknüpfungen</string>
     <string name="WidgetLoggedOff">Konto wurde abgemeldet.</string>
 
-    <string name="NotificationMessageGiftCode">%1$s hat dir einen Geschenkcode für %2$s von PlumGram Premium geschickt</string>
+    <string name="NotificationMessageGiftCode">%1$s hat dir einen Geschenkcode für %2$s von MintGram Premium geschickt</string>
     <string name="NotificationMessageGiveaway">%1$s hat dir eine Verlosung von %2$sx %3$sm Premium-Abonnements geschickt</string>
     <string name="NotificationMessageChannelGiveaway">%1$s hat eine Verlosung von %2$sx %3$sm Premium-Abonnements veröffentlicht</string>
     <string name="NotificationMessageChatGiveaway">%1$s hat eine Verlosung von %3$sx %4$sm Premium-Abonnements an die Gruppe %2$s geschickt</string>
@@ -173,15 +173,15 @@
     <string name="NotificationGroupKickMember">%1$s hat %3$s aus der Gruppe %2$s entfernt</string>
     <string name="NotificationGroupKickYou">%1$s hat dich aus der Gruppe %2$s entfernt</string>
     <string name="NotificationGroupLeftMember">%1$s hat die Gruppe %2$s verlassen</string>
-    <string name="NotificationContactJoined">%1$s benutzt jetzt PlumGram!</string>
-    <string name="NotificationUnrecognizedDevice">%1$s,\nwir haben eine Anmeldung von einem neuen Gerät am %2$s festgestellt.\n\nGerät: %3$s\nStandort: %4$s\n\nWenn du das nicht selbst gewesen bist, melde die entsprechende Sitzung in den PlumGram Einstellungen unter Geräte unverzüglich ab.\n\nWenn du der Meinung bist, dass sich jemand gegen deinen Willen bei deinem Konto angemeldet hat, kannst du in den Einstellungen unter Privatsphäre und Sicherheit die zweistufige Bestätigung aktivieren.\n\nDein PlumGram Team</string>
+    <string name="NotificationContactJoined">%1$s benutzt jetzt MintGram!</string>
+    <string name="NotificationUnrecognizedDevice">%1$s,\nwir haben eine Anmeldung von einem neuen Gerät am %2$s festgestellt.\n\nGerät: %3$s\nStandort: %4$s\n\nWenn du das nicht selbst gewesen bist, melde die entsprechende Sitzung in den MintGram Einstellungen unter Geräte unverzüglich ab.\n\nWenn du der Meinung bist, dass sich jemand gegen deinen Willen bei deinem Konto angemeldet hat, kannst du in den Einstellungen unter Privatsphäre und Sicherheit die zweistufige Bestätigung aktivieren.\n\nDein MintGram Team</string>
     <string name="NotificationContactNewPhoto">%1$s hat das Profilbild geändert</string>
     <string name="NotificationInvitedToGroupByLink">%1$s ist per Einladungslink der Gruppe %2$s beigetreten</string>
     <string name="NotificationGroupFew">%1$s hat %3$s an die Gruppe %2$s gesendet</string>
     <string name="NotificationGroupAlbum">%1$s hat ein Album an die Gruppe %2$s gesendet</string>
     <string name="NotificationGroupForwardedFew">%1$s hat %3$s an die Gruppe %2$s weitergeleitet</string>
-    <string name="NotificationHiddenName">PlumGram</string>
-    <string name="NotificationHiddenChatName">PlumGram</string>
+    <string name="NotificationHiddenName">MintGram</string>
+    <string name="NotificationHiddenChatName">MintGram</string>
     <string name="NotificationHiddenChatUserName">Nutzer</string>
     <string name="NotificationHiddenMessage">Neue Nachricht</string>
     <string name="Reply">Antworten</string>
@@ -245,7 +245,7 @@
     <string name="NotificationActionPinnedGeoLiveUser">%1$s hat einen Live-Standort angeheftet</string>
     <string name="NotificationActionPinnedGifUser">%1$s hat ein GIF angeheftet</string>
     <string name="NotificationActionPinnedMusicUser">%1$s hat eine Audiodatei angeheftet</string>
-    <string name="SecretChatName">PlumGram</string>
+    <string name="SecretChatName">MintGram</string>
 
     <string name="ResetNotificationsText">Einstellungen wurden zurückgesetzt</string>
     <string name="ResetNotificationsAlertTitle">Benachrichtigungen zurücksetzen</string>
@@ -282,7 +282,7 @@
     <string name="NotificationsAndSounds">Mitteilungen und Töne</string>
     <string name="CustomNotifications">Eigene Benachrichtigungen</string>
     <string name="ProfilePopupNotification">Popup Mitteilungen</string>
-    <string name="ProfilePopupNotificationInfo">Neue Nachrichten von diesem Kontakt erscheinen auf deinem Bildschirm, wenn du PlumGram nicht benutzt.</string>
+    <string name="ProfilePopupNotificationInfo">Neue Nachrichten von diesem Kontakt erscheinen auf deinem Bildschirm, wenn du MintGram nicht benutzt.</string>
     <string name="NotificationsLed">LED</string>
     <string name="NotificationsLedColor">Farbe</string>
     <string name="ColorBlue">Blau</string>
@@ -364,7 +364,7 @@
     <string name="MessagesSettings">Nachrichten</string>
     <string name="SendByEnter">Mit Enter senden</string>
     <string name="Events">Ereignisse</string>
-    <string name="ContactJoined">Kontakt ist PlumGram beigetreten</string>
+    <string name="ContactJoined">Kontakt ist MintGram beigetreten</string>
     <string name="PinnedMessages">Angeheftete Nachrichten</string>
     <string name="TranslateMessages">Nachrichten übersetzen</string>
     <string name="ShowTranslateButton">Übersetzen-Knopf zeigen</string>
@@ -382,12 +382,12 @@
     <string name="LanguageUnknownTitle">Unzureichende Daten</string>
     <string name="LanguageUnsupportedError">Sprache nicht gefunden.</string>
     <string name="LanguageSame">Du benutzt bereits das Sprachpaket (**%1$s**). In den Einstellungen kannst du die Sprache jederzeit wieder ändern.</string>
-    <string name="LanguageUnknownCustomAlert">Leider enthält das benutzerdefinierte Sprachpaket (**%1$s**) keine Daten für PlumGram Android.</string>
-    <string name="AskAQuestionInfo">Bedenke bitte, dass der PlumGram Support von Freiwilligen betreut wird. Alle versuchen so schnell wie möglich zu antworten, dies kann jedoch manchmal ein bisschen dauern.\n\nBitte schau auch in den <![CDATA[<a href=\"https://telegram.org/faq/de#allgemeine-fragen\">PlumGram FAQ</a>]]> nach. Dort findest du Antworten auf die meisten Fragen und wichtige Tipps zur <![CDATA[<a href=\"https://telegram.org/faq/de#problembehandlung\">Problembehandlung</a>]]>.</string>
+    <string name="LanguageUnknownCustomAlert">Leider enthält das benutzerdefinierte Sprachpaket (**%1$s**) keine Daten für MintGram Android.</string>
+    <string name="AskAQuestionInfo">Bedenke bitte, dass der MintGram Support von Freiwilligen betreut wird. Alle versuchen so schnell wie möglich zu antworten, dies kann jedoch manchmal ein bisschen dauern.\n\nBitte schau auch in den <![CDATA[<a href=\"https://telegram.org/faq/de#allgemeine-fragen\">MintGram FAQ</a>]]> nach. Dort findest du Antworten auf die meisten Fragen und wichtige Tipps zur <![CDATA[<a href=\"https://telegram.org/faq/de#problembehandlung\">Problembehandlung</a>]]>.</string>
     <string name="AskButton">Eine Frage stellen</string>
-    <string name="TelegramFAQ">PlumGram FAQ</string>
-    <string name="TelegramFaq">PlumGram FAQ</string>
-    <string name="TelegramFeatures">PlumGram Funktionen</string>
+    <string name="TelegramFAQ">MintGram FAQ</string>
+    <string name="TelegramFaq">MintGram FAQ</string>
+    <string name="TelegramFeatures">MintGram Funktionen</string>
     <string name="TelegramFeaturesUrl">https://t.me/TelegramTipsDE</string>
     <string name="AddAccount">Konto hinzufügen</string>
     <string name="SelectAccount">Konto auswählen</string>
@@ -404,7 +404,7 @@
     <string name="NotificationsService">Keep-Alive-Dienst</string>
     <string name="NotificationsServiceInfo">Sofern die App beendet wurde, diese automatisch neu starten, um Benachrichtigungen zu gewährleisten.</string>
     <string name="NotificationsServiceConnection">Hintergrundverbindung</string>
-    <string name="NotificationsServiceConnectionInfo">Nutzt eine batterieschonende Hintergrundverbindung zu PlumGram, um Benachrichtigungen zu gewährleisten.</string>
+    <string name="NotificationsServiceConnectionInfo">Nutzt eine batterieschonende Hintergrundverbindung zu MintGram, um Benachrichtigungen zu gewährleisten.</string>
     <string name="SortBy">sortiert nach</string>
     <string name="ImportContacts">Kontakte importieren</string>
     <string name="SortFirstName">Vorname</string>
@@ -496,14 +496,14 @@
     <string name="NotificationsPriorityUrgent">Dringend</string>
     <string name="RepeatNotificationsNever">Niemals</string>
     <string name="RepeatNotifications">Erneut benachrichtigen</string>
-    <string name="PhoneNumberHelp">Du kannst deine Telefonnummer hier ändern. Dein Konto und alle Daten in der PlumGram-Cloud, also Nachrichten, Medien, Kontakte, etc. werden auf das neue Konto übertragen.</string>
+    <string name="PhoneNumberHelp">Du kannst deine Telefonnummer hier ändern. Dein Konto und alle Daten in der MintGram-Cloud, also Nachrichten, Medien, Kontakte, etc. werden auf das neue Konto übertragen.</string>
     <string name="PhoneNumberAlert">Nutzer werden deine neue Nummer sehen, wenn sie diese in ihrem Adressbuch gespeichert haben oder deine Einstellungen es erlauben. Unter Einstellungen &gt; Privatsphäre und Sicherheit &gt; Telefonnummer kannst du es jederzeit anpassen.</string>
     <string name="PhoneNumberChange2">Nummer ändern</string>
     <string name="PhoneNumberChangeTitle">Nummer ändern</string>
     <string name="PhoneNumberKeepButton">%1$s behalten</string>
     <string name="ChangePhoneNewNumber">Neue Nummer</string>
     <string name="ChangePhoneHelp">Der Bestätigungscode kommt per Anruf oder SMS an deine neue Nummer.</string>
-    <string name="ChangePhoneNumberOccupied">Die Telefonnummer %1$s ist bereits ein PlumGram Konto. Bitte lösche es, bevor du mit der Übertragung auf das neue Konto startest.</string>
+    <string name="ChangePhoneNumberOccupied">Die Telefonnummer %1$s ist bereits ein MintGram Konto. Bitte lösche es, bevor du mit der Übertragung auf das neue Konto startest.</string>
     <string name="NotificationsOther">Sonstiges</string>
     <string name="VibrationDisabled">Deaktiviert</string>
     <string name="PopupEnabled">Aktiviert</string>
@@ -528,13 +528,13 @@
     <string name="SmartNotificationsInfo">%1$d / %2$s</string>
     <string name="SmartNotificationsDisabled">Deaktiviert</string>
     <string name="SecretWebPage">Linkvorschau</string>
-    <string name="SecretWebPageInfo">Die Linkvorschau wird auf den Servern von PlumGram generiert. Wir speichern keine Daten über die von dir gesendeten Links.</string>
+    <string name="SecretWebPageInfo">Die Linkvorschau wird auf den Servern von MintGram generiert. Wir speichern keine Daten über die von dir gesendeten Links.</string>
     <string name="SecretChat">Geheime Chats</string>
     <string name="DirectShare">Direktes Teilen</string>
     <string name="DirectShareInfo">Letzte Chats im Teilen-Menü anzeigen</string>
     <string name="Emoji">Emoji</string>
     <string name="LargeEmoji">Große Emoji</string>
-    <string name="TelegramVersion">PlumGram für Android %1$s</string>
+    <string name="TelegramVersion">MintGram für Android %1$s</string>
     <string name="ChangeLanguageLater">Du kannst deine Sprache später in den Einstellungen ändern.</string>
     <string name="ChooseYourLanguage">Wähle deine Sprache</string>
     <string name="ChooseYourLanguageOther">Weitere</string>
@@ -573,7 +573,7 @@
     <string name="UseProxySponsorInfo">Dieser Kanal wird von deinem Proxyserver angezeigt. Deaktiviere den Proxy unter Einstellungen &gt; Daten und Speicher, um den Kanal zu entfernen.</string>
     <string name="UseProxyInfo">SOCKS5 Proxy-Einstellungen</string>
     <string name="UseProxyTelegramInfo">MTProto Proxy-Einstellungen.</string>
-    <string name="UseProxyTelegramInfo2">Dieser Proxy könnte einen gesponserten Kanal in deiner Chatliste anzeigen. Das wird jedoch nicht deinen PlumGram-Datenverkehr enthüllen.</string>
+    <string name="UseProxyTelegramInfo2">Dieser Proxy könnte einen gesponserten Kanal in deiner Chatliste anzeigen. Das wird jedoch nicht deinen MintGram-Datenverkehr enthüllen.</string>
     <string name="UseProxyForCalls">Proxy für Anrufe benutzen</string>
     <string name="UseProxyForCallsInfo">Proxyserver können die Qualität von Anrufen beinflussen.</string>
     <string name="ConnectingToProxyEnable">Aktivieren</string>
@@ -589,7 +589,7 @@
     <string name="AutodownloadSizeLimitUpTo">bis zu %1$s</string>
     <string name="Streaming">Streaming</string>
     <string name="EnableStreaming">Videos und Audios streamen</string>
-    <string name="EnableAllStreamingInfo">PlumGram wird versuchen, Musik und Videos sofort zu streamen, ohne dass du erst auf den vollständigen Download warten musst.</string>
+    <string name="EnableAllStreamingInfo">MintGram wird versuchen, Musik und Videos sofort zu streamen, ohne dass du erst auf den vollständigen Download warten musst.</string>
     <string name="TapToChangePhone">Antippen, um Nummer zu ändern</string>
     <string name="ShowNotificationsFor">Zeige Benachrichtigungen von</string>
     <string name="AllAccounts">Allen Konten</string>
@@ -638,13 +638,13 @@
     <string name="AuthAnotherClientOk">Authentifizierung erfolgreich</string>
     <string name="AuthAnotherClientDownloadClientUrl">https://desktop.telegram.org/</string>
     <string name="AuthAnotherWebClientUrl">https://web.telegram.org/</string>
-    <string name="AuthAnotherClientInfo1">Installiere PlumGram Desktop auf deinem Computer von *desktop.telegram.org*.</string>
+    <string name="AuthAnotherClientInfo1">Installiere MintGram Desktop auf deinem Computer von *desktop.telegram.org*.</string>
     <string name="AuthAnotherClientInfo2">Starte das Programm auf dem Computer, um deinen QR-Code zu erhalten.</string>
     <string name="AuthAnotherClientInfo3">Scanne den QR-Code mit deinem Handy, um dich mit deinem Konto zu verbinden.</string>
-    <string name="AuthAnotherClientUrl">Mit diesem Code kann man sich bei deinem PlumGram Konto anmelden.\n\nUm die Anmeldung zu bestätigen, in die Einstellungen von PlumGram wechseln &gt; Geräte &gt; QR-Code scannen und den Code mit der Kamera scannen.</string>
-    <string name="QRCodePermissionNoCameraWithHint">**PlumGram** benötigt Zugriff auf deine **Kamera**, damit du QR-Codes scannen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="AuthAnotherClientUrl">Mit diesem Code kann man sich bei deinem MintGram Konto anmelden.\n\nUm die Anmeldung zu bestätigen, in die Einstellungen von MintGram wechseln &gt; Geräte &gt; QR-Code scannen und den Code mit der Kamera scannen.</string>
+    <string name="QRCodePermissionNoCameraWithHint">**MintGram** benötigt Zugriff auf deine **Kamera**, damit du QR-Codes scannen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
     <string name="SetProfilePhoto">Profilbild festlegen</string>
-    <string name="AppUpdate">PlumGram aktualisieren</string>
+    <string name="AppUpdate">MintGram aktualisieren</string>
     <string name="AppUpdateVersionAndSize">Version %1$s • %2$s</string>
     <string name="AppUpdateDownloading">%1$d%% wird geladen...</string>
     <string name="AppUpdateNow">Jetzt aktualisieren</string>
@@ -680,7 +680,7 @@
     <string name="ChannelTitleChanged">Kanalname geändert.</string>
     <string name="ChannelDescriptionChanged">Kanalbeschreibung aktualisiert.</string>
     <string name="CheckPhoneNumber">Ist %1$s noch deine Nummer?</string>
-    <string name="CheckPhoneNumberInfo">Halte deine Nummer stets auf dem aktuellsten Stand, damit du dich immer bei PlumGram anmelden kannst. **Mehr dazu hier**</string>
+    <string name="CheckPhoneNumberInfo">Halte deine Nummer stets auf dem aktuellsten Stand, damit du dich immer bei MintGram anmelden kannst. **Mehr dazu hier**</string>
     <string name="CheckPhoneNumberLearnMoreUrl">https://telegram.org/faq/de#f-ich-habe-eine-neue-nummer-was-soll-ich-tun</string>
     <string name="CheckPhoneNumberYes">Ja</string>
     <string name="CheckPhoneNumberNo">Nein</string>
@@ -972,7 +972,7 @@
     <string name="YourEmailInfo">Falls du dein Passwort vergisst, benötigen wir deine richtige E-Mail Adresse.</string>
     <string name="YourEmailSkip">Überspringen</string>
     <string name="YourEmailSkipWarning">Warnung</string>
-    <string name="YourEmailSkipWarningText">Das ist keine gute Idee.\n\nWenn du dein Passwort vergisst, verlierst du den Zugang zu deinem PlumGram-Konto. Für immer, ohne Ausnahme.</string>
+    <string name="YourEmailSkipWarningText">Das ist keine gute Idee.\n\nWenn du dein Passwort vergisst, verlierst du den Zugang zu deinem MintGram-Konto. Für immer, ohne Ausnahme.</string>
     <string name="YourEmailAlmostThere">Fast geschafft!</string>
     <string name="YourEmailAlmostThereText">Bitte überprüfe deine Mails (auch den Spam-Ordner) um die zweistufige Bestätigung abzuschließen.</string>
     <string name="YourPasswordSuccess">Geschafft!</string>
@@ -992,7 +992,7 @@
     <string name="CancelPasswordResetNo">NEIN</string>
     <string name="CancelReset">Zurücksetzung abbrechen</string>
     <string name="CancelEmailQuestionTitle">Einrichtung abbrechen</string>
-    <string name="TurnPasswordOffPassport">Alle Daten in deinem PlumGram Passport gehen verloren!</string>
+    <string name="TurnPasswordOffPassport">Alle Daten in deinem MintGram Passport gehen verloren!</string>
     <string name="PasswordHint">Passwort-Erinnerung</string>
     <string name="PasswordHintDescription">Du kannst einen Passworthinweis hinterlegen.</string>
     <string name="PasswordHintPlaceholder">Hinweis</string>
@@ -1009,7 +1009,7 @@
     <string name="PasswordAsHintError">Der Hinweis darf nicht das Passwort sein.</string>
     <string name="PasswordEmailInvalid">Ungültige E-Mail-Adresse. Bitte prüfe, ob du sie richtig eingetippt hast und versuche es erneut.</string>
     <string name="RestorePasswordNoEmailTitle">Tut uns leid</string>
-    <string name="RestorePasswordNoEmailText">Da du für diesen Fall keine E-Mail-Adresse hinterlegt hast, kannst du nur noch hoffen, dass dir dein Passwort wieder einfällt oder du musst dein PlumGram-Konto zurückzusetzen.</string>
+    <string name="RestorePasswordNoEmailText">Da du für diesen Fall keine E-Mail-Adresse hinterlegt hast, kannst du nur noch hoffen, dass dir dein Passwort wieder einfällt oder du musst dein MintGram-Konto zurückzusetzen.</string>
     <string name="RestorePasswordNoEmailText2">Da du bei der Einrichtung deines Passwortes keine E-Mail-Adresse für die Wiederherstellung angegeben hattest, kannst du nur hoffen, dass dir dein Passwort wieder einfällt oder du wartest 7 Tage, bis dein Passwort zurückgesetzt wird.</string>
     <string name="RestorePasswordResetPasswordText">Wirklich das Passwort der zweistufigen Bestätigung zurücksetzen?</string>
     <string name="RestorePasswordResetPasswordOk">Dein Passwort für die zweistufige Bestätigung wurde zurückgesetzt.</string>
@@ -1022,7 +1022,7 @@
     <string name="RestoreEmailSentInfo">Überprüfe deine Mails und gib den 6-stelligen Code aus unserer E-Mail ein, um dein Cloud-Passwort zu deaktivieren.</string>
     <string name="RestoreEmailTrouble">Keinen Zugang zu %1$s?</string>
     <string name="RestoreEmailTroubleNoEmail">Kein Zugang zu deiner E-Mail-Adresse?</string>
-    <string name="RestoreEmailTroubleText">Wenn du nicht in deine E-Mails kommst, kannst du nur hoffen, dass dir dein Passwort wieder einfällt oder du musst dein PlumGram-Konto zurücksetzen.</string>
+    <string name="RestoreEmailTroubleText">Wenn du nicht in deine E-Mails kommst, kannst du nur hoffen, dass dir dein Passwort wieder einfällt oder du musst dein MintGram-Konto zurücksetzen.</string>
     <string name="RestoreEmailTroubleText2">Falls du keinen Zugriff auf deine E-Mail-Adresse hast, kannst du nur hoffen, dass dir dein Passwort wieder einfällt oder du wartest 7 Tage, bis dein Passwort zurückgesetzt wird.</string>
     <string name="RestoreEmailNoAccess">Keinen Zugang zu %1$s?</string>
     <string name="ResetPasswordWait">Du hast kürzlich eine Zurücksetzung deines Passwortes angefordert, die abgebrochen wurde. Bitte warte %1$s, bevor du eine neue Anfrage stellst.</string>
@@ -1041,9 +1041,9 @@
     <string name="VerificationCode">Verifizierungscode</string>
     <string name="EnterCode">Code eingeben</string>
     <string name="ResendCodeInfo">Der Bestätigungscode wurde an deine E-Mail gesendet.</string>
-    <string name="EnabledPasswordText">Du hast die zweistufige Bestätigung aktiviert.\nWenn du dich bei PlumGram anmeldest, brauchst du dein Passwort.</string>
+    <string name="EnabledPasswordText">Du hast die zweistufige Bestätigung aktiviert.\nWenn du dich bei MintGram anmeldest, brauchst du dein Passwort.</string>
     <string name="AddEmailTitle">E-Mail für Anmeldung</string>
-    <string name="AddEmailSubtitle">Du erhältst jetzt PlumGram Anmeldecodes per E-Mail und nicht mehr per SMS. Bitte gib deine E-Mail-Adresse ein.</string>
+    <string name="AddEmailSubtitle">Du erhältst jetzt MintGram Anmeldecodes per E-Mail und nicht mehr per SMS. Bitte gib deine E-Mail-Adresse ein.</string>
     <string name="EnterNewEmail">Deine neue E-Mail</string>
     <string name="VerificationCodeSubtitle">Bitte prüfe deine E-Mails bei %1$s (Spam-Ordner nicht vergessen) und den Code eingeben.</string>
     <string name="CheckYourEmail">Prüfe deine E-Mails</string>
@@ -1130,7 +1130,7 @@
     <string name="ActionBotDocumentRentalAgreement">Mietvertrag</string>
     <string name="ActionBotDocumentPhone">Telefonnummer</string>
     <string name="ActionBotDocumentEmail">E-Mail-Adresse</string>
-    <string name="UnsupportedMedia2">Diese Nachricht wird von deiner PlumGram-Version nicht unterstützt. Bitte aktualisiere die App.</string>
+    <string name="UnsupportedMedia2">Diese Nachricht wird von deiner MintGram-Version nicht unterstützt. Bitte aktualisiere die App.</string>
     <string name="YourVersionIsLatest">Deine Version ist aktuell.</string>
     <string name="AttachPhoto">Bild</string>
     <string name="AttachVideo">Video</string>
@@ -1164,10 +1164,10 @@
     <string name="DeleteAll">Alles löschen</string>
     <string name="StopLoadingTitle">Laden stoppen?</string>
     <string name="StopLoading">Ladevorgang wirklich abbrechen?</string>
-    <string name="UpdateTelegram">Aktualisiere PlumGram</string>
-    <string name="UpdateAppAlert">Deine PlumGram-App ist leider veraltet und kann diese Anfrage nicht verarbeiten. Bitte aktualisiere PlumGram.</string>
+    <string name="UpdateTelegram">Aktualisiere MintGram</string>
+    <string name="UpdateAppAlert">Deine MintGram-App ist leider veraltet und kann diese Anfrage nicht verarbeiten. Bitte aktualisiere MintGram.</string>
     <string name="InvalidPhoneNumber">Ungültige Telefonnummer. Bitte prüfe, ob du sie richtig eingetippt hast und versuche es erneut.</string>
-    <string name="PleaseLoginPassport">Bitte melde dich mit deinem PlumGram-Konto an, um PlumGram Passport nutzen zu können.</string>
+    <string name="PleaseLoginPassport">Bitte melde dich mit deinem MintGram-Konto an, um MintGram Passport nutzen zu können.</string>
     <string name="BannedPhoneNumber">Diese Nummer wurde gesperrt.</string>
     <string name="CodeExpired">Code ist abgelaufen, bitte melde dich erneut an</string>
     <string name="WrongCodeTitle">Falscher Code</string>
@@ -1189,7 +1189,7 @@
     <string name="NoPlayerInstalled">Du hast keinen Videoplayer. Bitte installiere einen um fortzufahren.</string>
     <string name="NoMailInstalled">Bitte sende eine E-Mail an reports@stel.com mit einer Beschreibung des Problems.</string>
     <string name="NoHandleAppInstalled">Du hast keine Applikationen, die den Dateityp \'%1$s\' öffnen könnten. Bitte installiere eine entsprechende Anwendung um fortzufahren.</string>
-    <string name="InviteUser">Dieser Nutzer hat noch kein PlumGram. Möchtest du ihn einladen?</string>
+    <string name="InviteUser">Dieser Nutzer hat noch kein MintGram. Möchtest du ihn einladen?</string>
     <string name="AreYouSure">Bist du sicher?</string>
     <string name="AddToTheGroupAlertTitle">Bot hinzufügen</string>
     <string name="AddToTheGroupAlertText">Möchtest du **%1$s** der Gruppe **%2$s** hinzufügen?</string>
@@ -1205,7 +1205,7 @@
     <string name="SendMessagesToText">Möchtest du diese Nachricht **%1$s** senden?</string>
     <string name="SendGameToText">Möchtest du dieses Spiel mit **%1$s** teilen?</string>
     <string name="SendContactToText">Möchtest du diesen Kontakt **%1$s** senden?</string>
-    <string name="AreYouSureLogout">Wirklich abmelden?\n\nAbmelden löscht deine Geheimen Chats.\n\nDu kannst PlumGram von all deinen Geräten gleichzeitig nutzen.</string>
+    <string name="AreYouSureLogout">Wirklich abmelden?\n\nAbmelden löscht deine Geheimen Chats.\n\nDu kannst MintGram von all deinen Geräten gleichzeitig nutzen.</string>
     <string name="DeleteFewChatsTitle">%1$s löschen</string>
     <string name="ClearFewChatsTitle">%1$s leeren</string>
     <string name="ClearCacheFewChatsTitle">Cache für %1$s leeren</string>
@@ -1269,16 +1269,16 @@
     <string name="SendGameToGroupText">Möchtest du dieses Spiel mit **%1$s** teilen?</string>
     <string name="SendContactToGroupText">"Möchtest du diesen Kontakt **%1$s** senden? "</string>
     <string name="NoUsernameFound">Benutzername nicht gefunden.</string>
-    <string name="NoPhoneFound">Es gibt kein Konto bei PlumGram unter dieser Nummer.</string>
+    <string name="NoPhoneFound">Es gibt kein Konto bei MintGram unter dieser Nummer.</string>
     <string name="NoFolderFound">Kein Chat-Ordner gefunden.</string>
     <string name="BotCantJoinGroups">Keine Gruppen mit diesem Bot möglich</string>
-    <string name="SecretLinkPreviewAlert">Möchtest du die erweiterte Linkvorschau in Geheimen Chats aktivieren? Die Vorschau wird auf den PlumGram Servern generiert.</string>
+    <string name="SecretLinkPreviewAlert">Möchtest du die erweiterte Linkvorschau in Geheimen Chats aktivieren? Die Vorschau wird auf den MintGram Servern generiert.</string>
     <string name="SecretChatContextBotAlert">Inline Bots werden von Drittentwicklern erstellt. Symbole, die du nach dem Botnamen eingibst, werden an den jeweiligen Entwickler geschickt, damit der Bot funktioniert.</string>
     <string name="EditMessageError">Du kannst diese Nachricht nicht bearbeiten.</string>
-    <string name="AllowReadCall">Bitte erlaube PlumGram den Zugriff auf Anrufe, so dass wir den Code automatisch in der App eingeben können.</string>
-    <string name="AllowReadCallAndLog">Bitte erlaube PlumGram, Anrufe zu empfangen und die Anrufliste einzusehen , so dass wir den Code automatisch für dich eingeben können.</string>
-    <string name="AllowReadCallLog">Bitte erlaube PlumGram auf die Anrufliste zuzugreifen, so dass wir den Code für dich automatisch eingeben können.</string>
-    <string name="AllowFillNumber">Bitte erlaube PlumGram, Anrufe zu empfangen, damit wir deine Telefonnummer automatisch bestätigen können.</string>
+    <string name="AllowReadCall">Bitte erlaube MintGram den Zugriff auf Anrufe, so dass wir den Code automatisch in der App eingeben können.</string>
+    <string name="AllowReadCallAndLog">Bitte erlaube MintGram, Anrufe zu empfangen und die Anrufliste einzusehen , so dass wir den Code automatisch für dich eingeben können.</string>
+    <string name="AllowReadCallLog">Bitte erlaube MintGram auf die Anrufliste zuzugreifen, so dass wir den Code für dich automatisch eingeben können.</string>
+    <string name="AllowFillNumber">Bitte erlaube MintGram, Anrufe zu empfangen, damit wir deine Telefonnummer automatisch bestätigen können.</string>
     <string name="UserRestricted">Du kannst diese Aktion nicht durchführen.</string>
     <string name="YouBlockedUser">Du kannst diesen Nutzer oder Bot Gruppen leider nicht hinzufügen, da du ihn blockiert hast. Gebe ihn wieder frei, um fortzufahren.</string>
     <string name="AddAdminErrorNotAMember">Du kannst diesen Nutzer nicht als Admin festlegen, da er kein Mitglied dieser Gruppe ist oder du keine Erlaubnis hast, ihn einzuladen.</string>
@@ -1306,36 +1306,36 @@
     <string name="ErrorSendRestrictedPrivacyVoiceMessages">Der Nutzer hat den Empfang von Sprachnachrichten bei sich in den Einstellungen ausgeschaltet.</string>
     <string name="ErrorSendRestrictedPrivacyVideoMessages">"Leider kannst du aufgrund seiner Einstellungen diesem Nutzer keine Videonachrichten schicken. "</string>
     <string name="UnableForward">Weiterleitung nicht möglich</string>
-    <string name="TosDecline">Tut uns sehr leid, aber in diesem Fall kannst du dich nicht bei PlumGram registrieren.\n\nIm Gegensatz zu anderen, nutzen wir deine Daten nicht für die Ausrichtung von Werbung und verkaufen sie nicht an andere. PlumGram speichert nur die Informationen, die es benötigt, um als funktionsreicher Cloud-Dienst aufzutreten. Im Bereich \'Privatsphäre &amp; Sicherheit\' kannst du festlegen, wie wir deine Daten verwenden.\n\nWenn du allgemein nicht mit unseren bescheidenen Anforderungen einverstanden bist, wird es uns nicht möglich sein, dir diesen Dienst anzubieten.</string>
+    <string name="TosDecline">Tut uns sehr leid, aber in diesem Fall kannst du dich nicht bei MintGram registrieren.\n\nIm Gegensatz zu anderen, nutzen wir deine Daten nicht für die Ausrichtung von Werbung und verkaufen sie nicht an andere. MintGram speichert nur die Informationen, die es benötigt, um als funktionsreicher Cloud-Dienst aufzutreten. Im Bereich \'Privatsphäre &amp; Sicherheit\' kannst du festlegen, wie wir deine Daten verwenden.\n\nWenn du allgemein nicht mit unseren bescheidenen Anforderungen einverstanden bist, wird es uns nicht möglich sein, dir diesen Dienst anzubieten.</string>
     <string name="TosAgeTitle">Altersverifikation</string>
     <string name="PrivacyPolicyAndTerms">Datenschutzerklärung und Nutzungsbedingungen</string>
     <string name="TosAgeText">Tippe auf Zustimmen, um zu bestätigen, dass du mindestens %1$s oder älter bist.</string>
-    <string name="TosUpdateDecline">Leider gibt es keine anderen Alternativen. Im Gegensatz zu anderen Apps verwendet PlumGram die Nutzerdaten nicht für Werbezwecke oder andere kommerzielle Zwecke. PlumGram speichert nur die Informationen, die es braucht, um als funktionsreicher Clouddienst zu funktionieren. Du kannst in den Privatsphäre- und Sicherheitseinstellungen einstellen, wie deine Daten verwendet werden.\n\nWenn du mit diesen bescheidenen Anforderungen von PlumGram nicht einverstanden bist, ist es uns nicht möglich, dir den Dienst zur Verfügung zu stellen.</string>
-    <string name="TosDeclineDeleteAccount">Warnung! Das wird dein Konto mit all deinen Daten aus der PlumGram-Cloud unwiderruflich löschen.\n\nWichtig: Du kannst jetzt abbrechen und deine Daten vor der Löschung noch exportieren. (Öffne dazu die aktuellste Version von PlumGram Desktop &gt; Einstellungen &gt; Erweitert &gt; Daten exportieren.)</string>
+    <string name="TosUpdateDecline">Leider gibt es keine anderen Alternativen. Im Gegensatz zu anderen Apps verwendet MintGram die Nutzerdaten nicht für Werbezwecke oder andere kommerzielle Zwecke. MintGram speichert nur die Informationen, die es braucht, um als funktionsreicher Clouddienst zu funktionieren. Du kannst in den Privatsphäre- und Sicherheitseinstellungen einstellen, wie deine Daten verwendet werden.\n\nWenn du mit diesen bescheidenen Anforderungen von MintGram nicht einverstanden bist, ist es uns nicht möglich, dir den Dienst zur Verfügung zu stellen.</string>
+    <string name="TosDeclineDeleteAccount">Warnung! Das wird dein Konto mit all deinen Daten aus der MintGram-Cloud unwiderruflich löschen.\n\nWichtig: Du kannst jetzt abbrechen und deine Daten vor der Löschung noch exportieren. (Öffne dazu die aktuellste Version von MintGram Desktop &gt; Einstellungen &gt; Erweitert &gt; Daten exportieren.)</string>
 
-    <string name="PermissionStorageWithHint">**PlumGram** benötigt Zugriff auf deinen **Speicher**, damit du Bilder, Videos, Musik und weitere Medien senden und speichern kannst. Tippe unten auf Einstellungen -&gt; Berechtigungen und schalte den Zugriff ein.</string>
-    <string name="PermissionNoAudioWithHint">**PlumGram** benötigt Zugriff auf dein **Mikrofon**, damit du Sprachnachrichten senden kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoAudioVideoWithHint">**PlumGram** benötigt Zugriff auf dein **Mikrofon**, damit du Sprachnachrichten senden kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoCameraWithHint">**PlumGram** benötigt Zugriff auf deine **Kamera**, damit du Bilder und Videos aufnehmen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoCameraMicVideo">**PlumGram** benötigt Zugriff auf deine **Kamera** und dein **Mikrofon**, damit du Videonachrichten aufnehmen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff für beides.</string>
-    <string name="PermissionNoLocation">"PlumGram benötigt Zugriff auf deinen Standort, damit du ihn mit Freunden teilen kannst. "</string>
-    <string name="PermissionNoLocationStory">PlumGram braucht Zugriff auf deinen Standort, damit du das Wetter-Widget deiner Story hinzufügen kannst.</string>
-    <string name="PermissionNoLocationFriends">**PlumGram** benötigt Zugriff auf deinen **Standort**, damit du ihn mit Freunden teilen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoLocationNavigation">**PlumGram** benötigt Zugriff auf deinen **Standort**, damit du Anweisungen erhalten kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoContactsSharing">**PlumGram** benötigt Zugriff auf deine **Kontakte**, damit du sie mit deinen Freunden teilen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoStorageAvatar">**PlumGram** benötigt Zugriff auf deinen **Speicher**, damit du ein Profilbild hochladen kannst. Tippe auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
-    <string name="PermissionNoAudioStorageStory">**PlumGram** benötigt Zugriff auf Musikdateien, damit du diese mit deiner Story hochladen kannst. Tippe auf Einstellungen &gt; Berechtigungen und aktiviere **Musik und Audio**.</string>
-    <string name="PermissionDrawAboveOtherApps">PlumGram braucht Zugriff auf die Funktion \'Über andere Apps einblenden\'. Nur so können Videos im Bild in Bild Modus wiedergegeben werden.</string>
-    <string name="PermissionDrawAboveOtherAppsGroupCall">Der Überlagerungsmodus erlaubt dir die Verwendung von Push-To-Talk und die Anzeige, wer gerade spricht, selbst wenn du dich ausserhalb von PlumGram befindest.</string>
+    <string name="PermissionStorageWithHint">**MintGram** benötigt Zugriff auf deinen **Speicher**, damit du Bilder, Videos, Musik und weitere Medien senden und speichern kannst. Tippe unten auf Einstellungen -&gt; Berechtigungen und schalte den Zugriff ein.</string>
+    <string name="PermissionNoAudioWithHint">**MintGram** benötigt Zugriff auf dein **Mikrofon**, damit du Sprachnachrichten senden kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoAudioVideoWithHint">**MintGram** benötigt Zugriff auf dein **Mikrofon**, damit du Sprachnachrichten senden kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoCameraWithHint">**MintGram** benötigt Zugriff auf deine **Kamera**, damit du Bilder und Videos aufnehmen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoCameraMicVideo">**MintGram** benötigt Zugriff auf deine **Kamera** und dein **Mikrofon**, damit du Videonachrichten aufnehmen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff für beides.</string>
+    <string name="PermissionNoLocation">"MintGram benötigt Zugriff auf deinen Standort, damit du ihn mit Freunden teilen kannst. "</string>
+    <string name="PermissionNoLocationStory">MintGram braucht Zugriff auf deinen Standort, damit du das Wetter-Widget deiner Story hinzufügen kannst.</string>
+    <string name="PermissionNoLocationFriends">**MintGram** benötigt Zugriff auf deinen **Standort**, damit du ihn mit Freunden teilen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoLocationNavigation">**MintGram** benötigt Zugriff auf deinen **Standort**, damit du Anweisungen erhalten kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoContactsSharing">**MintGram** benötigt Zugriff auf deine **Kontakte**, damit du sie mit deinen Freunden teilen kannst. Tippe unten auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoStorageAvatar">**MintGram** benötigt Zugriff auf deinen **Speicher**, damit du ein Profilbild hochladen kannst. Tippe auf Einstellungen &gt; Berechtigungen und aktiviere den Zugriff.</string>
+    <string name="PermissionNoAudioStorageStory">**MintGram** benötigt Zugriff auf Musikdateien, damit du diese mit deiner Story hochladen kannst. Tippe auf Einstellungen &gt; Berechtigungen und aktiviere **Musik und Audio**.</string>
+    <string name="PermissionDrawAboveOtherApps">MintGram braucht Zugriff auf die Funktion \'Über andere Apps einblenden\'. Nur so können Videos im Bild in Bild Modus wiedergegeben werden.</string>
+    <string name="PermissionDrawAboveOtherAppsGroupCall">Der Überlagerungsmodus erlaubt dir die Verwendung von Push-To-Talk und die Anzeige, wer gerade spricht, selbst wenn du dich ausserhalb von MintGram befindest.</string>
     <string name="PermissionOpenSettings">Einstellungen</string>
-    <string name="PermissionXiaomiLockscreen">Bitte erlaube PlumGram auf dem Sperrbildschirm, damit Anrufe signalisiert werden können.</string>
-    <string name="PermissionBackgroundLocation">Um deinen Live-Standort in diesem Chat zu teilen, muss PlumGram die ganze Zeit Zugang zu deinem Standort haben, auch während die App im Hintergrund läuft.\n\nWir greifen nur für die von dir gewählte Dauer auf deinen Standort zu und du kannst jederzeit aufhören, ihn zu teilen. Wir werden deinen Standort für keinen anderen Zweck nutzen, als ihn in diesem Chat zu teilen.</string>
+    <string name="PermissionXiaomiLockscreen">Bitte erlaube MintGram auf dem Sperrbildschirm, damit Anrufe signalisiert werden können.</string>
+    <string name="PermissionBackgroundLocation">Um deinen Live-Standort in diesem Chat zu teilen, muss MintGram die ganze Zeit Zugang zu deinem Standort haben, auch während die App im Hintergrund läuft.\n\nWir greifen nur für die von dir gewählte Dauer auf deinen Standort zu und du kannst jederzeit aufhören, ihn zu teilen. Wir werden deinen Standort für keinen anderen Zweck nutzen, als ihn in diesem Chat zu teilen.</string>
     <string name="PermissionDrawAboveOtherAppsTitle">Bild-in-Bild</string>
     <string name="PermissionDrawAboveOtherAppsGroupCallTitle">Videochat-Überlagerung</string>
 
-    <string name="ContactShortcutMessage">Nachricht in PlumGram %1$s</string>
-    <string name="ContactShortcutVoiceCall">Sprachanruf in PlumGram %1$s</string>
-    <string name="ContactShortcutVideoCall">Videoanruf in PlumGram %1$s</string>
+    <string name="ContactShortcutMessage">Nachricht in MintGram %1$s</string>
+    <string name="ContactShortcutVoiceCall">Sprachanruf in MintGram %1$s</string>
+    <string name="ContactShortcutVideoCall">Videoanruf in MintGram %1$s</string>
 
     <string name="formatterBoostExpired">dd. MMMM yyyy</string>
     <string name="formatterGiveawayCard">dd. MMM yyyy</string>

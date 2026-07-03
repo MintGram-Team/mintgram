@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="AppName">PlumGram</string>
-    <string name="AppNameBeta">PlumGram</string>
+    <string name="AppName">MintGram</string>
+    <string name="AppNameBeta">MintGram</string>
     <string name="LanguageName">Українська</string>
     <string name="English">Англійська</string>
     <string name="LanguageNameInEnglish">Ukrainian</string>
@@ -27,21 +27,21 @@
     <string name="WrongNumberFormat">Неправильний формат</string>
     <string name="ShortNumberInfo">Вказаний номер є занадто коротким для **%1$s**:\n\n**%2$s**\n\nВведіть номер телефону повністю, разом із кодом країни.</string>
     <string name="EditNumber">Змінити номер</string>
-    <string name="DidNotGetTheCodeInfo">Якщо ви не одержали коду в SMS або виклику, перевірте **налаштування мобільної мережі** та номер телефону:\n\n**%1$s**\n\nЯкщо це не допоможе, вам залишиться спробувати інший номер телефону або звʼязатися з підтримкою PlumGram. Натисніть **Допомога**, щоб надіслати нам технічну інформацію і ми могли зʼясувати проблему.</string>
+    <string name="DidNotGetTheCodeInfo">Якщо ви не одержали коду в SMS або виклику, перевірте **налаштування мобільної мережі** та номер телефону:\n\n**%1$s**\n\nЯкщо це не допоможе, вам залишиться спробувати інший номер телефону або звʼязатися з підтримкою MintGram. Натисніть **Допомога**, щоб надіслати нам технічну інформацію і ми могли зʼясувати проблему.</string>
     <string name="DidNotGetTheCodeHelpButton">Допомога</string>
     <string name="DidNotGetTheCodeEditNumberButton">Змінити номер</string>
 
     <string name="YourCode">Підтвердження номера</string>
     <string name="SentSmsCode">Ми надіслали SMS із кодом активації на ваш телефон **%1$s**.</string>
-    <string name="SentAppCode">Ми надіслали код до **PlumGram** на іншому вашому пристрої.</string>
-    <string name="SentAppCodeWithPhone">Ми надіслали код до **PlumGram** для %1$s на іншому вашому пристрої.</string>
-    <string name="SentAppCodeTitle">Перевірте повідомлення в PlumGram</string>
+    <string name="SentAppCode">Ми надіслали код до **MintGram** на іншому вашому пристрої.</string>
+    <string name="SentAppCodeWithPhone">Ми надіслали код до **MintGram** для %1$s на іншому вашому пристрої.</string>
+    <string name="SentAppCodeTitle">Перевірте повідомлення в MintGram</string>
     <string name="SentFragmentCode">Отримайте код для %1$s у розділі «Anonymous Numbers» на Fragment.</string>
     <string name="SentSmsCodeTitle">Введіть код</string>
     <string name="OpenFragment">Відкрити Fragment</string>
-    <string name="SentCallCode">Ми телефонуємо на ваш номер **%1$s**.\n\nВідповідати на виклик не потрібно, PlumGram автоматично зробить усе сам.</string>
+    <string name="SentCallCode">Ми телефонуємо на ваш номер **%1$s**.\n\nВідповідати на виклик не потрібно, MintGram автоматично зробить усе сам.</string>
     <string name="SentCallOnly">Ми телефонуємо на номер **%1$s**, щоб продиктувати код.</string>
-    <string name="CallText">PlumGram зателефонує вам за %1$d:%2$02d</string>
+    <string name="CallText">MintGram зателефонує вам за %1$d:%2$02d</string>
     <string name="SmsText">Ми надішлемо вам SMS за %1$d:%2$02d</string>
     <string name="Calling">Телефонуємо вам...</string>
     <string name="SendingSms">Надсилаємо SMS...</string>
@@ -52,7 +52,7 @@
     <string name="DidNotGetTheCodeSms">Отримати код в SMS</string>
     <string name="DidNotGetTheCodeFragment">Отримати код на платформі Fragment</string>
     <string name="CancelAccountReset">Скасувати скидання акаунта</string>
-    <string name="CancelAccountResetInfo2">Хтось з доступом до **%1$s ** запросив видалення вашого акаунта PlumGram і скидання хмарного пароля.\n\nЯкщо це були не ви, введіть код з SMS, надісланого на ваш номер. Ви також можете скасувати видалення, *змінивши номер телефону*.</string>
+    <string name="CancelAccountResetInfo2">Хтось з доступом до **%1$s ** запросив видалення вашого акаунта MintGram і скидання хмарного пароля.\n\nЯкщо це були не ви, введіть код з SMS, надісланого на ваш номер. Ви також можете скасувати видалення, *змінивши номер телефону*.</string>
     <string name="ResetAccount">Скинути акаунт</string>
     <string name="ResetAccountInfo">"Акаунт **%1$s** активний та захищений паролем, тому з міркувань безпеки ми видалимо його лише через тиждень.\n\nВи можете скасувати цей процес будь-коли. "</string>
     <string name="ResetAccountStatus">Ви зможете скинути акаунт через:</string>
@@ -61,7 +61,7 @@
     <string name="CancelLinkExpired">Посилання недійсне або застаріле.</string>
     <string name="CancelLinkSuccessTitle">Успіх!</string>
     <string name="CancelLinkSuccess">Процес видалення вашого акаунта %1$s було скасовано. Зараз ви можете закрити це вікно.</string>
-    <string name="OtherLoginCode">Ваш код для входу – **%1$s**. Введіть його у програмі PlumGram, через яку ви хочете увійти.\n\nНе повідомляйте цей код нікому.</string>
+    <string name="OtherLoginCode">Ваш код для входу – **%1$s**. Введіть його у програмі MintGram, через яку ви хочете увійти.\n\nНе повідомляйте цей код нікому.</string>
     <string name="SmsAvailableIn">Ви зможете зробити запит на SMS за %1$d:%2$02d</string>
     <string name="ResendSmsAvailableIn">Ви зможете зробити запит на SMS за %1$d:%2$02d</string>
     <string name="RequestSmsButton">Отримати код в SMS-повідомленні</string>
@@ -130,7 +130,7 @@
     <string name="PleaseEnterNewSecondPasswordHint">Введіть новий пароль ще раз</string>
     <string name="RecoveryEmail">Е-пошта для відновлення</string>
     <string name="RecoveryEmailTitle">Е-пошта для відновлення</string>
-    <string name="RecoveryEmailSubtitle">Ви можете встановити е-пошту, за допомогою якої ви зможете скинути пароль і відновити доступ до PlumGram-акаунта.</string>
+    <string name="RecoveryEmailSubtitle">Ви можете встановити е-пошту, за допомогою якої ви зможете скинути пароль і відновити доступ до MintGram-акаунта.</string>
     <string name="YourEmail">Ваша е-пошта</string>
     <string name="YourNewEmail">Ваша нова е-пошта</string>
     <string name="YourLoginEmailChangedSuccess">Вашу адресу е-пошти змінено.</string>
@@ -139,7 +139,7 @@
     <string name="YourEmailInfo">Додайте свою дійсну адресу е-пошти. Це єдиний спосіб відновити забутий пароль.</string>
     <string name="YourEmailSkip">Пропустити</string>
     <string name="YourEmailSkipWarning">Попередження</string>
-    <string name="YourEmailSkipWarningText">Ні, серйозно.\n\nЯкщо ви забудете пароль, ви втратите доступ до акаунта PlumGram. Його буде неможливо відновити.</string>
+    <string name="YourEmailSkipWarningText">Ні, серйозно.\n\nЯкщо ви забудете пароль, ви втратите доступ до акаунта MintGram. Його буде неможливо відновити.</string>
     <string name="YourEmailAlmostThere">Майже готово!</string>
     <string name="YourEmailAlmostThereText">Щоб активувати двоетапну перевірку, введіть код з листа, який ми вам надіслали. Не забудьте перевірити теку зі спамом.</string>
     <string name="YourPasswordSuccess">Успіх!</string>
@@ -160,7 +160,7 @@
     <string name="CancelPasswordResetNo">НІ</string>
     <string name="CancelReset">Скасувати скидання</string>
     <string name="CancelEmailQuestionTitle">Перервати увімкнення</string>
-    <string name="TurnPasswordOffPassport">Усі дані, збережені в PlumGram Passport, буде втрачено.</string>
+    <string name="TurnPasswordOffPassport">Усі дані, збережені в MintGram Passport, буде втрачено.</string>
     <string name="PasswordHint">Підказка пароля</string>
     <string name="PasswordHintDescription">За бажанням ви можете додати підказку до пароля.</string>
     <string name="PasswordHintPlaceholder">Підказка</string>
@@ -196,9 +196,9 @@
     <string name="RestoreEmailNoAccess">Не маєте доступу до %1$s?</string>
     <string name="ResetPasswordWait">Ви нещодавно запитували скидання пароля, але запит був скасований. Будь ласка, зачекайте %1$s, перш ніж зробити новий запит.</string>
     <string name="ResetMyAccount">СКИНУТИ МІЙ АКАУНТ</string>
-    <string name="ResetMyAccountText">Ви втратите всі чати, повідомлення, фото, відео й файли в PlumGram, якщо ви продовжите скидання акаунта.</string>
+    <string name="ResetMyAccountText">Ви втратите всі чати, повідомлення, фото, відео й файли в MintGram, якщо ви продовжите скидання акаунта.</string>
     <string name="ResetMyAccountWarning">Попередження</string>
-    <string name="ResetMyAccountWarningText">Це незворотна дія. Ви втратите всі чати, повідомлення, фото, відео й файли в PlumGram, якщо продовжите скидання акаунта.</string>
+    <string name="ResetMyAccountWarningText">Це незворотна дія. Ви втратите всі чати, повідомлення, фото, відео й файли в MintGram, якщо продовжите скидання акаунта.</string>
     <string name="ResetMyAccountWarningReset">Скинути акаунт</string>
     <string name="LoginPassword">Пароль</string>
     <string name="LoginPasswordText">Ви вмикали двоетапну перевірку. Ваш акаунт захищений додатковим паролем.</string>
@@ -211,9 +211,9 @@
     <string name="VerificationCode">Код підтвердження</string>
     <string name="EnterCode">Введіть код</string>
     <string name="ResendCodeInfo">На вашу е-пошту надіслано код підтвердження.</string>
-    <string name="EnabledPasswordText">Увімкнено двоетапну перевірку.\nДля входу в акаунт PlumGram вам знадобиться встановлений тут пароль.</string>
+    <string name="EnabledPasswordText">Увімкнено двоетапну перевірку.\nДля входу в акаунт MintGram вам знадобиться встановлений тут пароль.</string>
     <string name="AddEmailTitle">Вкажіть е-пошту для входу</string>
-    <string name="AddEmailSubtitle">Ви отримуватимете коди для входу в PlumGram на е-пошту, а не через SMS. Будь ласка, додайте адресу, до якої ви маєте доступ.</string>
+    <string name="AddEmailSubtitle">Ви отримуватимете коди для входу в MintGram на е-пошту, а не через SMS. Будь ласка, додайте адресу, до якої ви маєте доступ.</string>
     <string name="EnterNewEmail">Вкажіть нову е-пошту</string>
     <string name="VerificationCodeSubtitle">"Перевірте свою е-пошту %1$s і введіть код, який ми вам щойно надіслали. Не забудьте перевірити теку зі спамом. "</string>
     <string name="CheckYourEmail">Перевірте вашу е-пошту</string>
@@ -222,18 +222,18 @@
     <string name="CheckYourNewEmailSubtitle">Введіть код, який ми щойно надіслали на вашу нову е-пошту %1$s.</string>
     <string name="LoginOrSingInWithGoogle">або</string>
 
-    <string name="Page1Title">PlumGram</string>
+    <string name="Page1Title">MintGram</string>
     <string name="Page2Title">Швидкий</string>
     <string name="Page3Title">Безплатний</string>
     <string name="Page4Title">Захищений</string>
     <string name="Page5Title">Потужний</string>
     <string name="Page6Title">Хмарний</string>
     <string name="Page1Message">**Найшвидший** месенджер у світі.\n**Безплатний** і **захищений**.</string>
-    <string name="Page2Message">**PlumGram** доставляє повідомлення\nшвидше за всі інші застосунки.</string>
-    <string name="Page3Message">У **PlumGram** можна безплатно зберігати\nскільки завгодно повідомлень і медіафайлів.</string>
-    <string name="Page4Message">**PlumGram** оберігає ваші повідомлення\nвід хакерських атак.</string>
-    <string name="Page5Message">**PlumGram** не обмежує вас\nу розмірі чатів і медіа.</string>
-    <string name="Page6Message">**PlumGram** надає вам доступ до\nповідомлень з безлічі пристроїв.</string>
+    <string name="Page2Message">**MintGram** доставляє повідомлення\nшвидше за всі інші застосунки.</string>
+    <string name="Page3Message">У **MintGram** можна безплатно зберігати\nскільки завгодно повідомлень і медіафайлів.</string>
+    <string name="Page4Message">**MintGram** оберігає ваші повідомлення\nвід хакерських атак.</string>
+    <string name="Page5Message">**MintGram** не обмежує вас\nу розмірі чатів і медіа.</string>
+    <string name="Page6Message">**MintGram** надає вам доступ до\nповідомлень з безлічі пристроїв.</string>
     <string name="StartMessaging">Почати спілкування</string>
 
     <string name="formatterBoostExpired">dd MMM yyyy</string>

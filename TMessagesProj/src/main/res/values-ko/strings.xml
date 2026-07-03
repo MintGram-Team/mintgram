@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="AppName">PlumGram</string>
-    <string name="AppNameBeta">PlumGram</string>
+    <string name="AppName">MintGram</string>
+    <string name="AppNameBeta">MintGram</string>
     <string name="LanguageName">한국어</string>
     <string name="English">영어</string>
     <string name="LanguageNameInEnglish">한국어</string>
@@ -1079,7 +1079,7 @@
     <string name="PermissionNoCameraWithHint">**텔레그램**이 사진 및 동영상을 찍으려면 접근 권한이 필요합니다. 설정 &gt; 권한을 탭하고 **카메라**를 활성화 해주세요.</string>
     <string name="PermissionNoCameraMicVideo">**텔레그램**이 영상 메시지를 보내려면 카메라와 마이크 접근 권한이 필요합니다. 설정 &gt; 권한을 탭하고 **마이크**와 **카메라**를 활성화 해주세요.</string>
     <string name="PermissionNoLocation">회원님의 위치를 친구들과 공유하려면 텔레그램에게 위치 접근 권한이 필요합니다.</string>
-    <string name="PermissionNoLocationStory">PlumGram needs access to your location so that you can add the weather widget to your stories.</string>
+    <string name="PermissionNoLocationStory">MintGram needs access to your location so that you can add the weather widget to your stories.</string>
     <string name="PermissionNoLocationFriends">**텔레그램**이 친구들과 위치를 공유하려면 위치 접근 권한이 필요합니다. 설정 &gt; 권한을 탭하고 **위치**를 활성화 해주세요.</string>
     <string name="PermissionNoLocationNavigation">**텔레그램**이 길을 찾으려면 위치 접근 권한이 필요합니다. 설정 &gt; 권한을 탭하고 **위치**를 활성화 해주세요.</string>
     <string name="PermissionNoContactsSharing">**텔레그램**에서 연락처를 친구들에게 공유 하려면 연락처 접근 권한이 필요합니다. 설정 &gt; 권한을 탭하고 **연락처**를 활성화 해주세요.</string>
