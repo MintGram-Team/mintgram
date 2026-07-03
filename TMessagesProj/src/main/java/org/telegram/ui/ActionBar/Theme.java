@@ -9561,6 +9561,7 @@ public class Theme {
                 || key == key_progressCircle
                 || key == key_contextProgressOuter1
                 || key == key_fastScrollActive
+                || key == key_changephoneinfo_image2
                 || key == key_avatar_backgroundArchivedHidden
                 || key == key_chats_actionBackground
                 || key == key_chats_actionMessage
@@ -9576,8 +9577,6 @@ public class Theme {
                 || key == key_chat_fieldOverlayText
                 || key == key_chat_TextSelectionCursor
                 || key == key_chat_outTextSelectionCursor
-                || key == key_chat_inReplyLine
-                || key == key_chat_inReplyNameText
                 || key == key_chat_inQuote
                 || key == key_chat_attachActiveTab
                 || key == key_chat_emojiPanelStickerPackSelectorLine
