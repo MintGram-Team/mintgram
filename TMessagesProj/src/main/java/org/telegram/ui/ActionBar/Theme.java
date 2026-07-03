@@ -9536,6 +9536,7 @@ public class Theme {
                 || key == key_dialogTextBlue2
                 || key == key_dialogTextBlue4
                 || key == key_dialogButton
+                || key == key_dialogTopBackground
                 || key == key_dialogInputFieldActivated
                 || key == key_dialogCheckboxSquareBackground
                 || key == key_dialogRadioBackgroundChecked
