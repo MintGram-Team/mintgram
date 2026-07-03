@@ -22062,6 +22062,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                             Theme.chat_forwardNamePaint.setColor(peerColor.getColor(0, resourcesProvider));
                         }
                     }
+                    if (Theme.isPlumBasicThemeActive()) {
+                        Theme.chat_forwardNamePaint.setColor(getThemedColor(Theme.key_chat_inForwardedNameText));
+                    }
                 }
                 if (currentMessageObject.isOutOwner()) {
                     if (currentMessageObject.needDrawForwarded()) {

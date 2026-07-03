@@ -15,6 +15,7 @@ import android.view.View;
 
 import org.telegram.messenger.browser.Browser;
 import org.telegram.tgnet.TLObject;
+import org.telegram.ui.ActionBar.Theme;
 
 public class URLSpanNoUnderline extends URLSpan {
 
@@ -58,7 +59,7 @@ public class URLSpanNoUnderline extends URLSpan {
         if (style != null) {
             style.applyStyle(p);
         }
-        p.setUnderlineText(l == c && !forceNoUnderline);
+        p.setUnderlineText((l == c || l == Theme.getColor(Theme.key_chat_messageLinkOut)) && !forceNoUnderline);
     }
 
     public void setObject(TLObject spanObject) {

@@ -9574,6 +9574,20 @@ public class Theme {
                 || key == key_chat_outBubbleSelected
                 || key == key_chat_messagePanelSend
                 || key == key_chat_botSwitchToInlineText
+                || key == key_chat_messageLinkIn
+                || key == key_chat_serviceLink
+                || key == key_chat_inForwardedNameText
+                || key == key_chat_outForwardedNameText
+                || key == key_chat_inViaBotNameText
+                || key == key_chat_outViaBotNameText
+                || key == key_chat_inPreviewLine
+                || key == key_chat_inInstant
+                || key == key_chat_outInstant
+                || key == key_chat_inPreviewInstantText
+                || key == key_chat_addContact
+                || key == key_chat_topPanelLine
+                || key == key_chat_topPanelTitle
+                || key == key_chat_emojiPanelNewTrending
                 || key == key_chat_fieldOverlayText
                 || key == key_chat_TextSelectionCursor
                 || key == key_chat_outTextSelectionCursor
@@ -9618,13 +9632,20 @@ public class Theme {
                 || key == key_chat_outViewsSelected;
     }
 
-    private static boolean isPlumBasicThemeActive() {
+    private static boolean isPlumWhiteOnGoldKey(int key) {
+        return key == key_chat_messageLinkOut;
+    }
+
+    public static boolean isPlumBasicThemeActive() {
         return currentTheme != null && "PlumGram basic".equals(currentTheme.name);
     }
 
     public static int getColor(int key, boolean[] isDefault, boolean ignoreAnimation) {
         if (isPlumBasicThemeActive() && isPlumDarkOnGoldKey(key)) {
             return PLUM_DARK_ON_GOLD_COLOR;
+        }
+        if (isPlumBasicThemeActive() && isPlumWhiteOnGoldKey(key)) {
+            return 0xFFFFFFFF;
         }
         if (isPlumBasicThemeActive() && isPlumTestAccentKey(key)) {
             return PLUM_TEST_ACCENT_COLOR;
