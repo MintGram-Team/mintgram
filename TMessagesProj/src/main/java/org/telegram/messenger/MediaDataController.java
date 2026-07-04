@@ -9230,6 +9230,8 @@ public class MediaDataController extends BaseController {
         int count = preferences.getInt("count", 0);
         ArrayList<ChatThemeBottomSheet.ChatThemeItem> previewItems = new ArrayList<>();
         previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createHomePreviewTheme(currentAccount)));
+        previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram basic", "\uD83C\uDF31")));
+        previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram Extended", "\uD83C\uDF3F")));
         for (int i = 0; i < count; ++i) {
             String value = preferences.getString("theme_" + i, "");
             SerializedData serializedData = new SerializedData(Utilities.hexToBytes(value));
@@ -9275,6 +9277,8 @@ public class MediaDataController extends BaseController {
         if (!emojiPreviewThemes.isEmpty()) {
             final ArrayList<ChatThemeBottomSheet.ChatThemeItem> previewItems = new ArrayList<>();
             previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createHomePreviewTheme(currentAccount)));
+            previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram basic", "\uD83C\uDF31")));
+            previewItems.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram Extended", "\uD83C\uDF3F")));
             for (int i = 0; i < emojiPreviewThemes.size(); i++) {
                 TLRPC.TL_theme theme = emojiPreviewThemes.get(i);
                 EmojiThemes chatTheme = EmojiThemes.createPreviewFullTheme(currentAccount, theme);
@@ -9298,6 +9302,9 @@ public class MediaDataController extends BaseController {
             });
         } else {
             defaultEmojiThemes.clear();
+            defaultEmojiThemes.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createHomePreviewTheme(currentAccount)));
+            defaultEmojiThemes.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram basic", "\uD83C\uDF31")));
+            defaultEmojiThemes.add(new ChatThemeBottomSheet.ChatThemeItem(EmojiThemes.createMintGramPreviewTheme(currentAccount, "MintGram Extended", "\uD83C\uDF3F")));
             NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.emojiPreviewThemesChanged);
         }
     }

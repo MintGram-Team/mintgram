@@ -260,6 +260,22 @@ public class EmojiThemes {
         return themeItem;
     }
 
+    public static EmojiThemes createMintGramPreviewTheme(int currentAccount, String themeName, String emoji) {
+        EmojiThemes themeItem = new EmojiThemes(currentAccount);
+        themeItem.emoji = emoji;
+        themeItem.key = ThemeKey.ofEmoticon(themeItem.emoji);
+        themeItem.chatTheme = TLRPC.ChatTheme.ofEmoticon(themeItem.emoji);
+
+        Theme.ThemeInfo themeInfo = Theme.getTheme(themeName);
+        for (int i = 0; i < 4; i++) {
+            ThemeItem item = new ThemeItem();
+            item.themeInfo = themeInfo;
+            item.accentId = themeInfo != null ? themeInfo.currentAccentId : 0;
+            themeItem.items.add(item);
+        }
+        return themeItem;
+    }
+
     public static EmojiThemes createHomeQrTheme(int currentAccount) {
         EmojiThemes themeItem = new EmojiThemes(currentAccount);
         themeItem.emoji = "\uD83C\uDFE0";
