@@ -1445,7 +1445,7 @@ public class ConnectionsManager extends BaseController {
         protected NativeByteBuffer doInBackground(Void... voids) {
             try {
                 if (native_isTestBackend(currentAccount) != 0) {
-                    throw new Exception("test backend");
+                    throw new Exception("Test Server");
                 }
                 firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
                 String currentValue = firebaseRemoteConfig.getString("ipconfigv3");

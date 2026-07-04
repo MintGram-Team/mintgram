@@ -673,7 +673,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             items.add(UItem.asShadow(null));
         }
 
-        items.add(SettingCell.Factory.of(24, 0xFF9B7CFF, 0xFF5A8CFF, R.drawable.settings_privacy, getString(R.string.MintGramFeatures), getString(R.string.MintGramSettingsInfo)));
+        items.add(SettingCell.Factory.of(24, 0xFF3E927A, 0xFF3E927A, R.drawable.mintgram_logo_icon, getString(R.string.MintGramFeatures), getString(R.string.MintGramSettingsInfo)));
         items.add(UItem.asShadow(null));
 
         if (accountNumbers.size() > 0) {

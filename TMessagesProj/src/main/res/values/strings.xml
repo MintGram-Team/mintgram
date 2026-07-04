@@ -5962,7 +5962,7 @@
     <string name="DebugMessageSkeletonsLightOverlayAlpha">Light overlay alpha</string>
     <string name="DebugMessageSkeletonsSaturation">Saturation</string>
     <string name="DebugGeneral">General</string>
-    <string name="DebugTestBackend">Test Backend</string>
+    <string name="DebugTestBackend">Test Server</string>
     <string name="YouTubeVideoErrorInvalid">This video has invalid URL.</string>
     <string name="YouTubeVideoErrorHTML">An error occurred while trying to play this video.</string>
     <string name="YouTubeVideoErrorNotFound">Video not found.</string>
