@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://telegram.org/img/t_logo.svg" width="180" alt="Telegram logo">
+  <img src="docs/mintgram-logo.png" width="180" alt="MintGram logo">
 </p>
 
 <h1 align="center">MintGram</h1>
@@ -15,13 +15,13 @@
 
 <p align="center">
   <a href="https://t.me/mintgram_tg">
-    <img src="https://img.shields.io/badge/Channel-Telegram-229ED9?style=for-the-badge" alt="Channel Telegram">
+    <img src="https://img.shields.io/badge/Channel-MintGram-3E927A?style=for-the-badge" alt="MintGram channel">
   </a>
   <a href="https://t.me/mintgram_chat">
-    <img src="https://img.shields.io/badge/Chat-Telegram-229ED9?style=for-the-badge" alt="Chat Telegram">
+    <img src="https://img.shields.io/badge/Chat-MintGram-3E927A?style=for-the-badge" alt="MintGram chat">
   </a>
   <a href="../../releases">
-    <img src="https://img.shields.io/badge/Download-Releases-229ED9?style=for-the-badge" alt="Download Releases">
+    <img src="https://img.shields.io/badge/Download-Releases-3E927A?style=for-the-badge" alt="Download Releases">
   </a>
 </p>
 
@@ -33,6 +33,7 @@ MintGram is an unofficial fork of Telegram for Android with a custom visual styl
 
 - MintGram branding
 - MintGram Basic theme
+- MintGram Extended theme
 - Hide Read Status
 - Keep Deleted Messages
 - Free Voice Transcription toggle
