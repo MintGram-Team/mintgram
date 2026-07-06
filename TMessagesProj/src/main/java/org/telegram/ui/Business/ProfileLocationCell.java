@@ -128,12 +128,7 @@ public class ProfileLocationCell extends LinearLayout {
         if (activity == null || location == null) return;
         if (location.geo_point != null && !(location.geo_point instanceof TLRPC.TL_geoPointEmpty)) {
             try {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", location.geo_point.lat, location.geo_point._long);
-                if (!TextUtils.isEmpty(location.address)) {
-                    uri += "?q=" + location.address;
-                }
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                activity.startActivity(intent);
+                AndroidUtilities.openMapLocation(activity, location.geo_point.lat, location.geo_point._long);
             } catch (Exception e) {
                 FileLog.e(e);
             }

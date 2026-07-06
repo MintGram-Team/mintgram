@@ -3990,7 +3990,7 @@ public class RichMessageLayout {
         private void applyImage() {
             if (block.geo == null) return;
             final int currentAccount = root.currentAccount;
-            currentMapProvider = MessagesController.getInstance(currentAccount).mapProvider;
+            currentMapProvider = AndroidUtilities.getMapPreviewProvider(currentAccount, -1);
             final int wDp = (int) (imgWidth / AndroidUtilities.density);
             final int hDp = (int) (imgHeight / AndroidUtilities.density);
             final int zoom = block.zoom > 0 ? block.zoom : 15;
@@ -4081,7 +4081,7 @@ public class RichMessageLayout {
                         try {
                             final double lat = block.geo.lat;
                             final double lon = block.geo._long;
-                            view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + lat + "," + lon + "?q=" + lat + "," + lon)));
+                            AndroidUtilities.openMapLocation(view.getContext(), lat, lon);
                         } catch (Exception e) {
                             FileLog.e(e);
                         }

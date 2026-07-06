@@ -128,12 +128,12 @@ public class RichMapCell extends FrameLayout
         }
         final int wDp = (int) (contentW / AndroidUtilities.density);
         final int hDp = (int) (contentH / AndroidUtilities.density);
-        final String key = map.geo.lat + "_" + map.geo._long + "_" + wDp + "x" + hDp;
+        currentMapProvider = AndroidUtilities.getMapPreviewProvider(currentAccount, -1);
+        final String key = currentMapProvider + "_" + map.geo.lat + "_" + map.geo._long + "_" + wDp + "x" + hDp;
         if (key.equals(loadedKey)) {
             return;
         }
         loadedKey = key;
-        currentMapProvider = MessagesController.getInstance(currentAccount).mapProvider;
         if (currentMapProvider == 2) {
             final WebFile webFile = WebFile.createWithGeoPoint(map.geo, wDp, hDp, MAP_ZOOM, Math.min(2, (int) Math.ceil(AndroidUtilities.density)));
             imageReceiver.setImage(ImageLocation.getForWebFile(webFile), null, null, null, null, 0);

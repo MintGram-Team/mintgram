@@ -10908,6 +10908,13 @@
     <string name="MintGramSettingsInfo">Privacy features</string>
     <string name="MintGramFeatures">MintGram Features</string>
     <string name="MintGramPrivacy">Privacy</string>
+    <string name="MintGramMaps">Карты</string>
+    <string name="MintGramMapProvider">Map Provider</string>
+    <string name="MintGramMapProviderDefault">Default</string>
+    <string name="MintGramMapProviderOpenStreetMap">OpenStreetMap</string>
+    <string name="MintGramUseYandexMaps">Использовать Яндекс Карты</string>
+    <string name="MintGramYandexMapsAgreement">Используя Яндекс Карты, вы соглашаетесь с их соглашением.</string>
+    <string name="MintGramYandexMapsAgreementLink">соглашением</string>
     <string name="MintGramGhostMode">Ghost Mode</string>
     <string name="MintGramGhostHideOnline">Hide Online Status</string>
     <string name="MintGramGhostHideTyping">Hide Typing Status</string>

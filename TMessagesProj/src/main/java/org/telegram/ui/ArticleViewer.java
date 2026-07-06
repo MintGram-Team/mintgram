@@ -13006,7 +13006,7 @@ public class ArticleViewer extends IArticleViewer implements NotificationCenter.
                 try {
                     double lat = currentBlock.geo.lat;
                     double lon = currentBlock.geo._long;
-                    getContext().startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:" + lat + "," + lon + "?q=" + lat + "," + lon)));
+                    AndroidUtilities.openMapLocation(getContext(), lat, lon);
                 } catch (Exception e) {
                     FileLog.e(e);
                 }
@@ -13060,7 +13060,7 @@ public class ArticleViewer extends IArticleViewer implements NotificationCenter.
                 String currentUrl = AndroidUtilities.formapMapUrl(currentAccount, currentBlock.geo.lat, currentBlock.geo._long, (int) (photoWidth / AndroidUtilities.density), (int) (height / AndroidUtilities.density), true, 15, -1);
                 WebFile currentWebFile = WebFile.createWithGeoPoint(currentBlock.geo, (int) (photoWidth / AndroidUtilities.density), (int) (height / AndroidUtilities.density), 15, Math.min(2, (int) Math.ceil(AndroidUtilities.density)));
 
-                currentMapProvider = MessagesController.getInstance(currentAccount).mapProvider;
+                currentMapProvider = AndroidUtilities.getMapPreviewProvider(currentAccount, -1);
                 if (currentMapProvider == 2) {
                     if (currentWebFile != null) {
                         imageView.setImage(ImageLocation.getForWebFile(currentWebFile), null, null, null, adapter != null ? adapter.currentPage : null, 0);

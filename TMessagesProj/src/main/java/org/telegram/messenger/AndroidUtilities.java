@@ -2862,9 +2862,7 @@ public class AndroidUtilities {
 
     public static String formapMapUrl(int account, double lat, double lon, int width, int height, boolean marker, int zoom, int provider) {
         int scale = Math.min(2, (int) Math.ceil(AndroidUtilities.density));
-        if (provider == -1) {
-            provider = MessagesController.getInstance(account).mapProvider;
-        }
+        provider = getMapPreviewProvider(account, provider);
         if (provider == 1 || provider == 3) {
             String lang = null;
             String[] availableLangs = new String[]{"ru_RU", "tr_TR"};
@@ -2882,6 +2880,12 @@ public class AndroidUtilities {
             } else {
                 return String.format(Locale.US, "https://static-maps.yandex.ru/1.x/?ll=%.6f,%.6f&z=%d&size=%d,%d&l=map&scale=%d&lang=%s", lon, lat, zoom, width * scale, height * scale, scale, lang);
             }
+        } else if (provider == 5) {
+            if (marker) {
+                return String.format(Locale.US, "https://staticmap.openstreetmap.de/staticmap.php?center=%.6f,%.6f&zoom=%d&size=%dx%d&markers=%.6f,%.6f,red-pushpin", lat, lon, zoom, width * scale, height * scale, lat, lon);
+            } else {
+                return String.format(Locale.US, "https://staticmap.openstreetmap.de/staticmap.php?center=%.6f,%.6f&zoom=%d&size=%dx%d", lat, lon, zoom, width * scale, height * scale);
+            }
         } else {
             String k = MessagesController.getInstance(account).mapKey;
             if (!TextUtils.isEmpty(k)) {
@@ -2898,6 +2902,56 @@ public class AndroidUtilities {
                 }
             }
         }
+    }
+
+    public static int getMapPreviewProvider(int account, int provider) {
+        if (provider != -1) {
+            return provider;
+        }
+        switch (SharedConfig.mintGramMapProvider) {
+            case 1:
+                return 4;
+            case 2:
+                return 1;
+            case 3:
+                return 5;
+            default:
+                return MessagesController.getInstance(account).mapProvider;
+        }
+    }
+
+    public static String getMintGramMapProviderName() {
+        switch (SharedConfig.mintGramMapProvider) {
+            case 1:
+                return LocaleController.getString(R.string.MapPreviewProviderGoogle);
+            case 2:
+                return LocaleController.getString(R.string.MapPreviewProviderYandex);
+            case 3:
+                return LocaleController.getString(R.string.MintGramMapProviderOpenStreetMap);
+            default:
+                return LocaleController.getString(R.string.MintGramMapProviderDefault);
+        }
+    }
+
+    public static Intent createMapsIntent(double lat, double lon) {
+        String uri;
+        switch (SharedConfig.mintGramMapProvider) {
+            case 2:
+                uri = String.format(Locale.US, "https://yandex.ru/maps/?pt=%.6f,%.6f&z=16&l=map", lon, lat);
+                break;
+            case 3:
+                uri = String.format(Locale.US, "https://www.openstreetmap.org/?mlat=%.6f&mlon=%.6f#map=16/%.6f/%.6f", lat, lon, lat, lon);
+                break;
+            case 1:
+            default:
+                uri = String.format(Locale.US, "geo:%.6f,%.6f?q=%.6f,%.6f", lat, lon, lat, lon);
+                break;
+        }
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+    }
+
+    public static void openMapLocation(Context context, double lat, double lon) {
+        context.startActivity(createMapsIntent(lat, lon));
     }
 
     public static float getPixelsInCM(float cm, boolean isX) {

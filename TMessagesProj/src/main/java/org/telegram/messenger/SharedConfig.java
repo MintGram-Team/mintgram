@@ -341,6 +341,7 @@ public class SharedConfig {
     public static boolean ghostHideUploadPhoto;
     public static boolean ghostHideUploadFile;
     public static int deletedMessageStyle;
+    public static int mintGramMapProvider;
     private static HashSet<String> deletedMessages = new HashSet<>();
 
     private static int chatSwipeAction;
@@ -489,6 +490,7 @@ public class SharedConfig {
                 editor.putBoolean("ghostHideUploadPhoto", ghostHideUploadPhoto);
                 editor.putBoolean("ghostHideUploadFile", ghostHideUploadFile);
                 editor.putInt("deletedMessageStyle", deletedMessageStyle);
+                editor.putInt("mintGramMapProvider", mintGramMapProvider);
                 editor.putStringSet("plumDeletedMessages", new HashSet<>(deletedMessages));
                 editor.apply();
             } catch (Exception e) {
@@ -605,6 +607,21 @@ public class SharedConfig {
             ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Context.MODE_PRIVATE)
                     .edit()
                     .putInt("deletedMessageStyle", deletedMessageStyle)
+                    .apply();
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    public static void setMintGramMapProvider(int value) {
+        if (mintGramMapProvider == value) {
+            return;
+        }
+        mintGramMapProvider = value;
+        try {
+            ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Context.MODE_PRIVATE)
+                    .edit()
+                    .putInt("mintGramMapProvider", mintGramMapProvider)
                     .apply();
         } catch (Exception e) {
             FileLog.e(e);
@@ -773,6 +790,7 @@ public class SharedConfig {
             ghostHideUploadPhoto = preferences.getBoolean("ghostHideUploadPhoto", false);
             ghostHideUploadFile = preferences.getBoolean("ghostHideUploadFile", false);
             deletedMessageStyle = preferences.getInt("deletedMessageStyle", 0);
+            mintGramMapProvider = preferences.getInt("mintGramMapProvider", 0);
             deletedMessages = new HashSet<>(preferences.getStringSet("plumDeletedMessages", new HashSet<>()));
             distanceSystemType = preferences.getInt("distanceSystemType", 0);
             keepMedia = preferences.getInt("keep_media", CacheByChatsController.KEEP_MEDIA_ONE_MONTH);

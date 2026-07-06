@@ -6049,6 +6049,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             } else {
                 provider = -1;
             }
+            if (SharedConfig.mintGramMapProvider != 0) {
+                provider = -1;
+            }
             if (object.messageOwner.media instanceof TLRPC.TL_messageMediaGeoLive) {
                 int photoWidth = backgroundWidth - dp(21);
                 int photoHeight = dp(195);
@@ -9344,6 +9347,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     } else {
                         provider = -1;
                     }
+                    if (SharedConfig.mintGramMapProvider != 0) {
+                        provider = -1;
+                    }
 
                     if (MessageObject.getMedia(messageObject.messageOwner) instanceof TLRPC.TL_messageMediaGeoLive) {
                         if (AndroidUtilities.isTablet()) {
@@ -9448,7 +9454,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         currentWebFile = WebFile.createWithGeoPoint(point, (int) (photoWidth / AndroidUtilities.density), (int) (photoHeight / AndroidUtilities.density), 15, Math.min(2, (int) Math.ceil(AndroidUtilities.density)));
                     }
                     if ((int) messageObject.getDialogId() == 0) {
-                        if (SharedConfig.mapPreviewType == 0) {
+                        if (SharedConfig.mintGramMapProvider != 0) {
+                            currentMapProvider = AndroidUtilities.getMapPreviewProvider(messageObject.currentAccount, -1);
+                        } else if (SharedConfig.mapPreviewType == 0) {
                             currentMapProvider = 2;
                         } else if (SharedConfig.mapPreviewType == 1) {
                             currentMapProvider = 1;
@@ -9458,7 +9466,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                             currentMapProvider = -1;
                         }
                     } else {
-                        currentMapProvider = MessagesController.getInstance(messageObject.currentAccount).mapProvider;
+                        currentMapProvider = AndroidUtilities.getMapPreviewProvider(messageObject.currentAccount, -1);
                     }
                     if (locationLoadingThumb == null) {
                         SvgHelper.SvgDrawable svgThumb = DocumentObject.getSvgThumb(R.raw.map_placeholder, Theme.key_chat_outLocationIcon, (Theme.isCurrentThemeDark() ? 3 : 6) * .12f);

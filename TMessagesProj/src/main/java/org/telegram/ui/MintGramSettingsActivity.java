@@ -2,7 +2,10 @@ package org.telegram.ui;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -43,6 +46,7 @@ public class MintGramSettingsActivity extends BaseFragment {
     private static final int VIEW_TYPE_SHADOW = 2;
     private static final int VIEW_TYPE_FEATURES_BLOCK = 3;
     private static final int VIEW_TYPE_GHOST_BLOCK = 4;
+    private static final int VIEW_TYPE_MAPS_BLOCK = 5;
 
     @Override
     public View createView(Context context) {
@@ -88,10 +92,25 @@ public class MintGramSettingsActivity extends BaseFragment {
         items.add(new ItemInner(VIEW_TYPE_SHADOW, 5, null));
         items.add(new ItemInner(VIEW_TYPE_HEADER, 6, LocaleController.getString(R.string.MintGramFeatures)));
         items.add(new ItemInner(VIEW_TYPE_FEATURES_BLOCK, 7, null));
-        items.add(new ItemInner(VIEW_TYPE_SHADOW, 2, LocaleController.getString(R.string.MintGramFeaturesInfo)));
+        items.add(new ItemInner(VIEW_TYPE_SHADOW, 8, null));
+        items.add(new ItemInner(VIEW_TYPE_HEADER, 9, LocaleController.getString(R.string.MintGramMaps)));
+        items.add(new ItemInner(VIEW_TYPE_MAPS_BLOCK, 10, null));
+        items.add(new ItemInner(VIEW_TYPE_SHADOW, 11, createYandexAgreementText()));
+        items.add(new ItemInner(VIEW_TYPE_SHADOW, 12, LocaleController.getString(R.string.MintGramFeaturesInfo)));
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private CharSequence createYandexAgreementText() {
+        String text = LocaleController.getString(R.string.MintGramYandexMapsAgreement);
+        String link = LocaleController.getString(R.string.MintGramYandexMapsAgreementLink);
+        SpannableString spannable = new SpannableString(text);
+        int start = text.indexOf(link);
+        if (start >= 0) {
+            spannable.setSpan(new URLSpan("https://yandex.ru/legal/maps_api_offer/"), start, start + link.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return spannable;
     }
 
     private static class ItemInner extends AdapterWithDiffUtils.Item {
@@ -130,6 +149,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 view = new GhostBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_FEATURES_BLOCK) {
                 view = new FeaturesBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_MAPS_BLOCK) {
+                view = new MapsBlockCell(getContext());
             } else {
                 view = new TextInfoPrivacyCell(getContext());
             }
@@ -159,6 +180,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 ((GhostBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_FEATURES_BLOCK) {
                 ((FeaturesBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_MAPS_BLOCK) {
+                ((MapsBlockCell) holder.itemView).bind();
             }
         }
 
@@ -381,6 +404,33 @@ public class MintGramSettingsActivity extends BaseFragment {
             freeTranscriptionCell.setTextAndCheck(LocaleController.getString(R.string.MintGramFreeVoiceTranscription), false, true);
             freeTranscriptionCell.setEnabled(false, null);
             block.setAlpha(0.62f);
+        }
+    }
+
+    private static class MapsBlockCell extends FrameLayout {
+        private final TextCheckCell yandexMapsCell;
+
+        public MapsBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = new LinearLayout(context);
+            block.setOrientation(LinearLayout.VERTICAL);
+            block.setClipToOutline(true);
+            block.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(25), Theme.getColor(Theme.key_windowBackgroundWhite)));
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            yandexMapsCell = new TextCheckCell(context, 21);
+            block.addView(yandexMapsCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+
+            yandexMapsCell.setOnClickListener(v -> {
+                SharedConfig.setMintGramMapProvider(SharedConfig.mintGramMapProvider == 2 ? 0 : 2);
+                bind();
+            });
+        }
+
+        public void bind() {
+            yandexMapsCell.setTextAndCheck(LocaleController.getString(R.string.MintGramUseYandexMaps), SharedConfig.mintGramMapProvider == 2, false);
         }
     }
 

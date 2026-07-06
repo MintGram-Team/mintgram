@@ -581,7 +581,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
                     try {
                         double lat = messageObject.messageOwner.media.geo.lat;
                         double lon = messageObject.messageOwner.media.geo._long;
-                        getParentActivity().startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:" + lat + "," + lon + "?q=" + lat + "," + lon)));
+                        AndroidUtilities.openMapLocation(getParentActivity(), lat, lon);
                     } catch (Exception e) {
                         FileLog.e(e);
                     }
@@ -735,7 +735,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
                     try {
                         double lat = messageObject.messageOwner.media.geo.lat;
                         double lon = messageObject.messageOwner.media.geo._long;
-                        getParentActivity().startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:" + lat + "," + lon + "?q=" + lat + "," + lon)));
+                        AndroidUtilities.openMapLocation(getParentActivity(), lat, lon);
                     } catch (Exception e) {
                         FileLog.e(e);
                     }
