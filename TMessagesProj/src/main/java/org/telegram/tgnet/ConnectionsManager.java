@@ -220,18 +220,13 @@ public class ConnectionsManager extends BaseController {
             langCode = LocaleController.getLocaleStringIso639().toLowerCase();
             deviceModel = Build.MANUFACTURER + Build.MODEL;
             PackageInfo pInfo = ApplicationLoader.applicationContext.getPackageManager().getPackageInfo(ApplicationLoader.applicationContext.getPackageName(), 0);
-            appVersion = pInfo.versionName + " (2)";
-            if (BuildVars.DEBUG_PRIVATE_VERSION) {
-                appVersion += " pbeta";
-            } else if (BuildVars.DEBUG_VERSION) {
-                appVersion += " beta";
-            }
+            appVersion = "MintGram " + pInfo.versionName;
             systemVersion = "SDK " + Build.VERSION.SDK_INT;
         } catch (Exception e) {
             systemLangCode = "en";
             langCode = "";
             deviceModel = "Android unknown";
-            appVersion = BuildVars.BUILD_VERSION_STRING + " (2)";
+            appVersion = "MintGram " + BuildVars.BUILD_VERSION_STRING;
             systemVersion = "SDK " + Build.VERSION.SDK_INT;
         }
         if (systemLangCode.trim().length() == 0) {
