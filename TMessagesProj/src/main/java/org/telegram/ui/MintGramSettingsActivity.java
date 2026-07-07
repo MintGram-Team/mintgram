@@ -363,7 +363,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             mainCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(0)));
             customizationCell.setOnClickListener(v -> Toast.makeText(getContext(), LocaleController.getString(R.string.MintGramCustomizationTemporarilyUnavailable), Toast.LENGTH_SHORT).show());
             otherCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(2)));
-            helpCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(3)));
+            helpCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgramsupport"));
         }
 
         public void bind() {
