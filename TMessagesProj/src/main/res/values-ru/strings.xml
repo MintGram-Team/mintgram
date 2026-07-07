@@ -273,6 +273,12 @@
     <string name="MintGramHelpSection">Помощь</string>
     <string name="MintGramSelected">Выбрано</string>
     <string name="MintGramCustomizationEmpty">Здесь скоро появятся настройки кастомизации.</string>
+    <string name="MintGramCustomizationTemporarilyUnavailable">Кастомизация временно недоступна.</string>
+    <string name="MintGramMessageSize">Размер сообщений</string>
+    <string name="MintGramMessageSizeSmall">Маленький</string>
+    <string name="MintGramMessageSizeLarge">Большой</string>
+    <string name="MintGramPreviewSender">Алексей</string>
+    <string name="MintGramPreviewMessage">Прекрасная погода сегодня!</string>
     <string name="MintGramOtherEmpty">Здесь пока ничего нет.</string>
     <string name="MintGramLinks">Ссылки</string>
     <string name="MintGramChannel">Канал</string>

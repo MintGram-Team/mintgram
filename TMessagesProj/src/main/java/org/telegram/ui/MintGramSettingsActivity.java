@@ -1,12 +1,17 @@
 package org.telegram.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,9 +25,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.telegram.messenger.LocaleController;
+import org.telegram.messenger.MessagesController;
+import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.UserConfig;
 import org.telegram.messenger.browser.Browser;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.ActionBar;
@@ -56,6 +64,7 @@ public class MintGramSettingsActivity extends BaseFragment {
     private static final int VIEW_TYPE_SECTION_BLOCK = 7;
     private static final int VIEW_TYPE_EMPTY_BLOCK = 8;
     private static final int VIEW_TYPE_LINKS_BLOCK = 9;
+    private static final int VIEW_TYPE_MESSAGE_SIZE_BLOCK = 10;
 
     public MintGramSettingsActivity() {
     }
@@ -124,7 +133,8 @@ public class MintGramSettingsActivity extends BaseFragment {
             items.add(new ItemInner(VIEW_TYPE_SHADOW, 16, LocaleController.getString(R.string.MintGramFeaturesInfo)));
         } else if (selectedSection == 1) {
             items.add(new ItemInner(VIEW_TYPE_HEADER, 22, LocaleController.getString(R.string.MintGramCustomizationSection)));
-            items.add(new ItemInner(VIEW_TYPE_EMPTY_BLOCK, 17, LocaleController.getString(R.string.MintGramCustomizationEmpty)));
+            items.add(new ItemInner(VIEW_TYPE_MESSAGE_SIZE_BLOCK, 17, null));
+            items.add(new ItemInner(VIEW_TYPE_SHADOW, 18, null));
         } else if (selectedSection == 2) {
             items.add(new ItemInner(VIEW_TYPE_HEADER, 23, LocaleController.getString(R.string.MintGramOtherSection)));
             items.add(new ItemInner(VIEW_TYPE_EMPTY_BLOCK, 18, LocaleController.getString(R.string.MintGramOtherEmpty)));
@@ -195,6 +205,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 view = new EmptyBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_LINKS_BLOCK) {
                 view = new LinksBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
+                view = new MessageSizeBlockCell(getContext());
             } else {
                 view = new TextInfoPrivacyCell(getContext());
             }
@@ -234,6 +246,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 ((EmptyBlockCell) holder.itemView).bind(item.text);
             } else if (holder.getItemViewType() == VIEW_TYPE_LINKS_BLOCK) {
                 ((LinksBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
+                ((MessageSizeBlockCell) holder.itemView).bind();
             }
         }
 
@@ -347,7 +361,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             block.addView(helpCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
 
             mainCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(0)));
-            customizationCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(1)));
+            customizationCell.setOnClickListener(v -> Toast.makeText(getContext(), LocaleController.getString(R.string.MintGramCustomizationTemporarilyUnavailable), Toast.LENGTH_SHORT).show());
             otherCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(2)));
             helpCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(3)));
         }
@@ -355,6 +369,7 @@ public class MintGramSettingsActivity extends BaseFragment {
         public void bind() {
             bindBlockRow(mainCell, LocaleController.getString(R.string.MintGramMainSection), R.drawable.settings_features, true);
             bindBlockRow(customizationCell, LocaleController.getString(R.string.MintGramCustomizationSection), R.drawable.settings_chat, true);
+            customizationCell.setAlpha(0.45f);
             bindBlockRow(otherCell, LocaleController.getString(R.string.MintGramOtherSection), R.drawable.settings_policy, true);
             bindBlockRow(helpCell, LocaleController.getString(R.string.MintGramHelpSection), R.drawable.settings_ask, false);
         }
@@ -370,7 +385,7 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         public EmptyBlockCell(Context context) {
             super(context);
-            setPadding(AndroidUtilities.dp(24), 0, AndroidUtilities.dp(24), AndroidUtilities.dp(4));
+            setPadding(AndroidUtilities.dp(12), 0, AndroidUtilities.dp(12), AndroidUtilities.dp(4));
 
             LinearLayout block = createBlock(context);
             block.setPadding(AndroidUtilities.dp(21), AndroidUtilities.dp(18), AndroidUtilities.dp(21), AndroidUtilities.dp(18));
@@ -401,7 +416,7 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         public LinksBlockCell(Context context) {
             super(context);
-            setPadding(AndroidUtilities.dp(24), 0, AndroidUtilities.dp(24), AndroidUtilities.dp(4));
+            setPadding(AndroidUtilities.dp(12), 0, AndroidUtilities.dp(12), AndroidUtilities.dp(4));
 
             LinearLayout block = createBlock(context);
             addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
@@ -478,6 +493,278 @@ public class MintGramSettingsActivity extends BaseFragment {
 
     private static int getAccentColor() {
         return 0xFF3E927A;
+    }
+
+    private static class MessageSizeBlockCell extends FrameLayout {
+        private static final int MIN_SIZE = 12;
+        private static final int MAX_SIZE = 30;
+        private final TextView titleView;
+        private final TextView valueView;
+        private final MessageSizeSliderView sliderView;
+        private final TextView previewNameView;
+        private final TextView previewMessageView;
+        private final TextView previewTimeView;
+        private final TextView previewReplyNameView;
+        private final TextView previewReplyTextView;
+        private final TextView previewReplyIconView;
+
+        public MessageSizeBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = new LinearLayout(context);
+            block.setOrientation(LinearLayout.VERTICAL);
+            block.setClipToOutline(true);
+            block.setPadding(0, 0, 0, AndroidUtilities.dp(14));
+            block.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(25), Theme.getColor(Theme.key_windowBackgroundWhite)));
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            FrameLayout controls = new FrameLayout(context);
+            controls.setPadding(AndroidUtilities.dp(20), AndroidUtilities.dp(18), AndroidUtilities.dp(20), 0);
+            block.addView(controls, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 146));
+
+            titleView = new TextView(context);
+            titleView.setTextColor(getAccentColor());
+            titleView.setTextSize(22);
+            titleView.setSingleLine(true);
+            controls.addView(titleView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 36, Gravity.LEFT | Gravity.TOP, 0, 0, 0, 0));
+
+            valueView = new TextView(context);
+            valueView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+            valueView.setTextSize(18);
+            valueView.setGravity(Gravity.CENTER);
+            valueView.setIncludeFontPadding(false);
+            valueView.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(8), Theme.multAlpha(getAccentColor(), 0.22f)));
+            controls.addView(valueView, LayoutHelper.createFrame(48, 34, Gravity.LEFT | Gravity.TOP, 190, 0, 0, 0));
+
+            TextView smallView = new TextView(context);
+            smallView.setText(LocaleController.getString(R.string.MintGramMessageSizeSmall));
+            smallView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+            smallView.setTextSize(17);
+            controls.addView(smallView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 30, Gravity.LEFT | Gravity.TOP, 0, 54, 0, 0));
+
+            TextView largeView = new TextView(context);
+            largeView.setText(LocaleController.getString(R.string.MintGramMessageSizeLarge));
+            largeView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+            largeView.setTextSize(17);
+            largeView.setGravity(Gravity.RIGHT);
+            controls.addView(largeView, LayoutHelper.createFrame(150, 30, Gravity.RIGHT | Gravity.TOP, 0, 54, 0, 0));
+
+            sliderView = new MessageSizeSliderView(context);
+            sliderView.setCallback(size -> applyMessageSize(size, true));
+            controls.addView(sliderView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 40, Gravity.LEFT | Gravity.TOP, 0, 96, 0, 0));
+
+            FrameLayout previewContainer = new FrameLayout(context);
+            previewContainer.setClipChildren(false);
+            block.addView(previewContainer, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 314));
+
+            FrameLayout tinyBubble = new FrameLayout(context);
+            tinyBubble.setPadding(AndroidUtilities.dp(10), AndroidUtilities.dp(7), AndroidUtilities.dp(10), AndroidUtilities.dp(7));
+            GradientDrawable tinyBackground = new GradientDrawable();
+            tinyBackground.setColor(0xFF313340);
+            tinyBackground.setCornerRadius(AndroidUtilities.dp(8));
+            tinyBubble.setBackground(tinyBackground);
+            previewContainer.addView(tinyBubble, LayoutHelper.createFrame(118, 64, Gravity.LEFT | Gravity.TOP, 36, 26, 0, 0));
+
+            TextView tinyNameView = new TextView(context);
+            tinyNameView.setText("immat0x1");
+            tinyNameView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+            tinyNameView.setTextSize(17);
+            tinyNameView.setSingleLine(true);
+            tinyBubble.addView(tinyNameView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 25, Gravity.LEFT | Gravity.TOP));
+
+            TextView tinyTextView = new TextView(context);
+            tinyTextView.setText("bay");
+            tinyTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+            tinyTextView.setTextSize(17);
+            tinyTextView.setSingleLine(true);
+            tinyBubble.addView(tinyTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 25, Gravity.LEFT | Gravity.TOP, 0, 26, 0, 0));
+
+            FrameLayout photoBubble = new FrameLayout(context);
+            GradientDrawable photoBackground = new GradientDrawable();
+            photoBackground.setColor(0xFF2B3833);
+            photoBackground.setCornerRadius(AndroidUtilities.dp(12));
+            photoBubble.setBackground(photoBackground);
+            previewContainer.addView(photoBubble, LayoutHelper.createFrame(210, 178, Gravity.RIGHT | Gravity.TOP, 0, 18, 28, 0));
+
+            ImageView photoLogo = new ImageView(context);
+            photoLogo.setImageResource(R.drawable.mintgram_logo_icon);
+            photoLogo.setAlpha(0.28f);
+            photoLogo.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            photoBubble.addView(photoLogo, LayoutHelper.createFrame(96, 96, Gravity.CENTER));
+
+            TextView photoTimeView = new TextView(context);
+            photoTimeView.setText("23:25:43 ✓✓");
+            photoTimeView.setTextSize(13);
+            photoTimeView.setTextColor(Theme.getColor(Theme.key_chat_outTimeText));
+            photoTimeView.setGravity(Gravity.CENTER);
+            photoTimeView.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(13), 0xCC262A33));
+            photoBubble.addView(photoTimeView, LayoutHelper.createFrame(92, 27, Gravity.RIGHT | Gravity.BOTTOM, 0, 0, 8, 8));
+
+            FrameLayout bubble = new FrameLayout(context);
+            bubble.setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(10), AndroidUtilities.dp(12), AndroidUtilities.dp(8));
+            GradientDrawable bubbleBackground = new GradientDrawable();
+            bubbleBackground.setColor(0xFF1F2227);
+            bubbleBackground.setCornerRadius(AndroidUtilities.dp(22));
+            bubble.setBackground(bubbleBackground);
+            previewContainer.addView(bubble, LayoutHelper.createFrame(320, 112, Gravity.LEFT | Gravity.BOTTOM, 26, 0, 0, 10));
+
+            FrameLayout reply = new FrameLayout(context);
+            GradientDrawable replyBackground = new GradientDrawable();
+            replyBackground.setColor(0xFF333743);
+            replyBackground.setCornerRadius(AndroidUtilities.dp(8));
+            reply.setBackground(replyBackground);
+            bubble.addView(reply, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 45, Gravity.LEFT | Gravity.TOP, 0, 0, 0, 0));
+
+            View replyLine = new View(context);
+            replyLine.setBackgroundColor(getAccentColor());
+            reply.addView(replyLine, LayoutHelper.createFrame(3, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP));
+
+            previewReplyNameView = new TextView(context);
+            previewReplyNameView.setText("8055");
+            previewReplyNameView.setTextColor(getAccentColor());
+            previewReplyNameView.setTextSize(15);
+            previewReplyNameView.setSingleLine(true);
+            reply.addView(previewReplyNameView, LayoutHelper.createFrame(90, 22, Gravity.LEFT | Gravity.TOP, 12, 4, 0, 0));
+
+            previewReplyIconView = new TextView(context);
+            previewReplyIconView.setText("◻");
+            previewReplyIconView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+            previewReplyIconView.setTextSize(13);
+            previewReplyIconView.setSingleLine(true);
+            reply.addView(previewReplyIconView, LayoutHelper.createFrame(22, 22, Gravity.LEFT | Gravity.TOP, 12, 24, 0, 0));
+
+            previewReplyTextView = new TextView(context);
+            previewReplyTextView.setText(LocaleController.getString(R.string.AttachSticker));
+            previewReplyTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+            previewReplyTextView.setTextSize(15);
+            previewReplyTextView.setSingleLine(true);
+            reply.addView(previewReplyTextView, LayoutHelper.createFrame(170, 22, Gravity.LEFT | Gravity.TOP, 34, 24, 0, 0));
+
+            previewNameView = new TextView(context);
+            previewNameView.setTextColor(getAccentColor());
+            previewNameView.setTextSize(13);
+            previewNameView.setTypeface(AndroidUtilities.bold());
+            previewNameView.setSingleLine(true);
+            previewNameView.setVisibility(View.GONE);
+            bubble.addView(previewNameView, LayoutHelper.createFrame(1, 1));
+
+            previewMessageView = new TextView(context);
+            previewMessageView.setTextColor(Theme.getColor(Theme.key_chat_messageTextIn));
+            previewMessageView.setSingleLine(true);
+            previewMessageView.setIncludeFontPadding(false);
+            bubble.addView(previewMessageView, LayoutHelper.createFrame(228, 46, Gravity.LEFT | Gravity.BOTTOM, 0, 0, 70, 0));
+
+            previewTimeView = new TextView(context);
+            previewTimeView.setText("23:27:33");
+            previewTimeView.setTextColor(Theme.getColor(Theme.key_chat_inTimeText));
+            previewTimeView.setTextSize(12);
+            previewTimeView.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
+            bubble.addView(previewTimeView, LayoutHelper.createFrame(68, 28, Gravity.RIGHT | Gravity.BOTTOM, 0, 0, 10, 7));
+        }
+
+        public void bind() {
+            titleView.setText(LocaleController.getString(R.string.MintGramMessageSize));
+            previewNameView.setText(LocaleController.getString(R.string.MintGramPreviewSender));
+            previewMessageView.setText(LocaleController.getString(R.string.MintGramPreviewMessage));
+            int size = Math.max(MIN_SIZE, Math.min(MAX_SIZE, SharedConfig.fontSize));
+            sliderView.setSize(size);
+            updatePreview(size);
+        }
+
+        private void applyMessageSize(int size, boolean save) {
+            updatePreview(size);
+            if (!save || SharedConfig.fontSize == size) {
+                return;
+            }
+            SharedConfig.fontSize = size;
+            SharedConfig.fontSizeIsDefault = false;
+            SharedPreferences preferences = getContext().getSharedPreferences("mainconfig", Context.MODE_PRIVATE);
+            preferences.edit().putInt("fons_size", SharedConfig.fontSize).apply();
+            Theme.createCommonMessageResources();
+            for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
+                NotificationCenter.getInstance(account).postNotificationName(NotificationCenter.updateInterfaces, MessagesController.UPDATE_MASK_AVATAR | MessagesController.UPDATE_MASK_NAME);
+            }
+        }
+
+        private void updatePreview(int size) {
+            valueView.setText(String.valueOf(size));
+            previewMessageView.setTextSize(size);
+            previewReplyNameView.setTextSize(Math.max(13, size - 3));
+            previewReplyTextView.setTextSize(Math.max(13, size - 4));
+            previewReplyIconView.setTextSize(Math.max(11, size - 5));
+            previewTimeView.setTextSize(12);
+            invalidate();
+        }
+    }
+
+    private static class MessageSizeSliderView extends View {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final RectF rect = new RectF();
+        private int size = SharedConfig.fontSize;
+        private Callback callback;
+
+        public MessageSizeSliderView(Context context) {
+            super(context);
+        }
+
+        public void setCallback(Callback callback) {
+            this.callback = callback;
+        }
+
+        public void setSize(int size) {
+            this.size = Math.max(MessageSizeBlockCell.MIN_SIZE, Math.min(MessageSizeBlockCell.MAX_SIZE, size));
+            invalidate();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            int cy = getMeasuredHeight() / 2;
+            int knobWidth = AndroidUtilities.dp(5);
+            int lineHeight = AndroidUtilities.dp(8);
+            int left = 0;
+            int right = getMeasuredWidth();
+            float progress = (size - MessageSizeBlockCell.MIN_SIZE) / (float) (MessageSizeBlockCell.MAX_SIZE - MessageSizeBlockCell.MIN_SIZE);
+            int knobX = Math.round(left + progress * (right - left));
+
+            paint.setColor(getAccentColor());
+            rect.set(left, cy - lineHeight / 2f, Math.max(left, knobX - AndroidUtilities.dp(10)), cy + lineHeight / 2f);
+            canvas.drawRoundRect(rect, lineHeight / 2f, lineHeight / 2f, paint);
+
+            paint.setColor(Theme.getColor(Theme.key_switchTrack));
+            rect.set(Math.min(right, knobX + AndroidUtilities.dp(10)), cy - lineHeight / 2f, right, cy + lineHeight / 2f);
+            canvas.drawRoundRect(rect, lineHeight / 2f, lineHeight / 2f, paint);
+
+            paint.setColor(getAccentColor());
+            rect.set(knobX - knobWidth / 2f, cy - AndroidUtilities.dp(22), knobX + knobWidth / 2f, cy + AndroidUtilities.dp(22));
+            canvas.drawRoundRect(rect, AndroidUtilities.dp(3), AndroidUtilities.dp(3), paint);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_UP) {
+                getParent().requestDisallowInterceptTouchEvent(true);
+                float progress = Math.max(0, Math.min(1, event.getX() / Math.max(1, getMeasuredWidth())));
+                int newSize = Math.round(MessageSizeBlockCell.MIN_SIZE + progress * (MessageSizeBlockCell.MAX_SIZE - MessageSizeBlockCell.MIN_SIZE));
+                if (newSize != size) {
+                    size = newSize;
+                    invalidate();
+                    if (callback != null) {
+                        callback.onSizeChanged(size);
+                    }
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                }
+                return true;
+            }
+            return super.onTouchEvent(event);
+        }
+
+        private interface Callback {
+            void onSizeChanged(int size);
+        }
     }
 
     private static class PrivacyBlockCell extends FrameLayout {
