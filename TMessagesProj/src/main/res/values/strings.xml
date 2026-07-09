@@ -10915,6 +10915,7 @@
     <string name="MintGramSelected">Selected</string>
     <string name="MintGramCustomizationEmpty">Customization settings will appear here soon.</string>
     <string name="MintGramCustomizationTemporarilyUnavailable">Customization is temporarily unavailable.</string>
+    <string name="MintGramFoldersBottom">Folders on bottom</string>
     <string name="MintGramMessageSize">Message Size</string>
     <string name="MintGramMessageSizeSmall">Small</string>
     <string name="MintGramMessageSizeLarge">Large</string>

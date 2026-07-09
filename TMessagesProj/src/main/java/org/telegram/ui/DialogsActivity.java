@@ -1001,7 +1001,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         drawBlurRect(canvas, 0, blurBounds, actionBarSearchPaint, true);
                     }
                     if (fragmentSearchField != null) {
-                        fragmentSearchField.setTranslationY(top + actionBarHeight - (actionBar.getHeight() + (filterTabsView != null ? filterTabsView.getMeasuredHeight() : 0)) + getSearchFieldAdditionOffset());
+                        fragmentSearchField.setTranslationY(top + actionBarHeight - (actionBar.getHeight() + (filterTabsView != null && !SharedConfig.mintGramFoldersBottom ? filterTabsView.getMeasuredHeight() : 0)) + getSearchFieldAdditionOffset());
                     }
                 }
             } else if (!inPreviewMode) {
@@ -1029,7 +1029,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 if (dialogStoriesCellVisible) {
                     storiesAlpha = 1f - Utilities.clamp(rightSlidingProgress / 0.5f, 1f, 0f);
                 }
-                if (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE) {
+                if (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && !SharedConfig.mintGramFoldersBottom) {
                     tabsYOffset -= (1f - animatorFilterTabsVisible.getFloatValue()) * filterTabsView.getMeasuredHeight();
                 }
                 if (fragmentSearchField != null) {
@@ -1257,6 +1257,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     childTop = actionBar.getMeasuredHeight();
                 } else if (child instanceof ViewPage) {
                     childTop = 0;
+                } else if (child == filterTabsView && SharedConfig.mintGramFoldersBottom) {
+                    childTop = b - t - height - navigationBarHeight - additionNavigationBarHeight - dp(4);
                 } else if (child == topPanelLayout || child == topBubblesFadeView || child == filterTabsView) {
                     childTop += actionBar.getMeasuredHeight();
                     childTop += dp(SEARCH_FIELD_HEIGHT);
@@ -2004,17 +2006,19 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             final float filterTabsVisibility = getFilterTabsVisibilityFactor(false);
             final float topPanelsVisibility = topPanelLayout != null ? topPanelLayout.getMetadata().getTotalVisibility() : 0f;
 
-            t += (int) (dp(36 + 14) * filterTabsVisibility);
-            additionalPadding += (int) (dp(36 + 14) * filterTabsVisibility);
+            if (!SharedConfig.mintGramFoldersBottom) {
+                t += (int) (dp(36 + 14) * filterTabsVisibility);
+                additionalPadding += (int) (dp(36 + 14) * filterTabsVisibility);
+            }
 
             if (topPanelLayout != null) {
-                final int h = (int) topPanelLayout.getAnimatedHeightWithPadding(lerp((float) dp(14), dp(7), filterTabsVisibility));
+                final int h = (int) topPanelLayout.getAnimatedHeightWithPadding(lerp((float) dp(14), dp(7), SharedConfig.mintGramFoldersBottom ? 0 : filterTabsVisibility));
                 t += h;
                 additionalPadding += h;
             }
 
-            t -= dp(5 * Math.max(filterTabsVisibility, topPanelsVisibility));
-            additionalPadding -= dp(5 * Math.max(filterTabsVisibility, topPanelsVisibility));
+            t -= dp(5 * Math.max(SharedConfig.mintGramFoldersBottom ? 0 : filterTabsVisibility, topPanelsVisibility));
+            additionalPadding -= dp(5 * Math.max(SharedConfig.mintGramFoldersBottom ? 0 : filterTabsVisibility, topPanelsVisibility));
 
             final int b = calculateListViewPaddingBottom();
             if (t != topPadding || b != getPaddingBottom()) {
@@ -5009,7 +5013,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             filterTabsViewBackground.setPadding(dp(6.666f));
             filterTabsView.setPadding(0, dp(7), 0, dp(7));
             filterTabsView.setBlurredBackground(filterTabsViewBackground);
-            contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36 + 7 + 7, Gravity.TOP, 4, 0, 4, 0));
+            contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36 + 7 + 7, SharedConfig.mintGramFoldersBottom ? Gravity.BOTTOM : Gravity.TOP, 4, 0, 4, 0));
         }
 
         if (fragmentSearchField != null) {
@@ -6398,10 +6402,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         float fadeViewT = totalOffset;
 
         if (filterTabsView != null) {
-            filterTabsView.setTranslationY(totalOffset - searchOffset);
+            filterTabsView.setTranslationY(SharedConfig.mintGramFoldersBottom ? 0 : totalOffset - searchOffset);
             filtersTabVisibility = filterTabsView.getAlpha();
-            filtersTabHeight = dp(36 + 7) * filtersTabVisibility;
-            totalOffset += filtersTabHeight;
+            if (!SharedConfig.mintGramFoldersBottom) {
+                filtersTabHeight = dp(36 + 7) * filtersTabVisibility;
+                totalOffset += filtersTabHeight;
+            }
         }
 
         if (topPanelLayout != null) {
@@ -10241,6 +10247,21 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         } else if (id == NotificationCenter.updateInterfaces) {
             Integer mask = (Integer) args[0];
             updateVisibleRows(mask);
+            if ((mask & MessagesController.UPDATE_MASK_ALL) != 0) {
+                if (filterTabsView != null) {
+                    filterTabsView.requestLayout();
+                }
+                if (viewPages != null) {
+                    for (int a = 0; a < viewPages.length; a++) {
+                        if (viewPages[a] != null && viewPages[a].listView != null) {
+                            viewPages[a].listView.requestLayout();
+                        }
+                    }
+                }
+                if (fragmentView != null) {
+                    fragmentView.requestLayout();
+                }
+            }
             if (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && (mask & MessagesController.UPDATE_MASK_READ_DIALOG_MESSAGE) != 0) {
                 filterTabsView.checkTabsCounter();
             }
@@ -13689,7 +13710,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         final int actionBarHeight = actionBar.getMeasuredHeight()
             + dp(DialogsActivity.SEARCH_FIELD_HEIGHT)
             + dp(hasStories ? DialogStoriesCell.HEIGHT_IN_DP : 0)
-            + (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE ? filterTabsView.getMeasuredHeight() : 0)
+            + (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && !SharedConfig.mintGramFoldersBottom ? filterTabsView.getMeasuredHeight() : 0)
             + (topPanelLayout != null && topPanelLayout.getVisibility() == View.VISIBLE ? topPanelLayout.getSumHeightOfAllVisibleChild() : 0)
             + ((int) scrollYOffset);
 
@@ -13728,10 +13749,11 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     }
 
     private int calculateListViewPaddingBottom() {
+        int tabsBottomPadding = filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && SharedConfig.mintGramFoldersBottom ? filterTabsView.getMeasuredHeight() + dp(8) : 0;
         if (commentView != null) {
-            return (int) (windowInsetsStateHolder.getAnimatedMaxBottomInset() + dp(9) + chatInputViewsContainer.getInputBubbleHeight() + dp(7) + dp(2));
+            return (int) (windowInsetsStateHolder.getAnimatedMaxBottomInset() + dp(9) + chatInputViewsContainer.getInputBubbleHeight() + dp(7) + dp(2)) + tabsBottomPadding;
         } else {
-            return navigationBarHeight + additionNavigationBarHeight;
+            return navigationBarHeight + additionNavigationBarHeight + tabsBottomPadding;
         }
     }
 

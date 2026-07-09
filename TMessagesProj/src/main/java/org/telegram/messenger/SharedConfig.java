@@ -340,6 +340,7 @@ public class SharedConfig {
     public static boolean ghostHideRecordVoice;
     public static boolean ghostHideUploadPhoto;
     public static boolean ghostHideUploadFile;
+    public static boolean mintGramFoldersBottom;
     public static int deletedMessageStyle;
     public static int mintGramMapProvider;
     private static HashSet<String> deletedMessages = new HashSet<>();
@@ -489,6 +490,7 @@ public class SharedConfig {
                 editor.putBoolean("ghostHideRecordVoice", ghostHideRecordVoice);
                 editor.putBoolean("ghostHideUploadPhoto", ghostHideUploadPhoto);
                 editor.putBoolean("ghostHideUploadFile", ghostHideUploadFile);
+                editor.putBoolean("mintGramFoldersBottom", mintGramFoldersBottom);
                 editor.putInt("deletedMessageStyle", deletedMessageStyle);
                 editor.putInt("mintGramMapProvider", mintGramMapProvider);
                 editor.putStringSet("plumDeletedMessages", new HashSet<>(deletedMessages));
@@ -585,6 +587,11 @@ public class SharedConfig {
     public static void setGhostHideUploadFile(boolean value) {
         setMainConfigBoolean("ghostHideUploadFile", value);
         ghostHideUploadFile = value;
+    }
+
+    public static void setMintGramFoldersBottom(boolean value) {
+        setMainConfigBoolean("mintGramFoldersBottom", value);
+        mintGramFoldersBottom = value;
     }
 
     private static void setMainConfigBoolean(String key, boolean value) {
@@ -789,6 +796,7 @@ public class SharedConfig {
             ghostHideRecordVoice = preferences.getBoolean("ghostHideRecordVoice", false);
             ghostHideUploadPhoto = preferences.getBoolean("ghostHideUploadPhoto", false);
             ghostHideUploadFile = preferences.getBoolean("ghostHideUploadFile", false);
+            mintGramFoldersBottom = preferences.getBoolean("mintGramFoldersBottom", false);
             deletedMessageStyle = preferences.getInt("deletedMessageStyle", 0);
             mintGramMapProvider = preferences.getInt("mintGramMapProvider", 0);
             deletedMessages = new HashSet<>(preferences.getStringSet("plumDeletedMessages", new HashSet<>()));

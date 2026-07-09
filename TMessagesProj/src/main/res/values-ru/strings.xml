@@ -274,6 +274,7 @@
     <string name="MintGramSelected">Выбрано</string>
     <string name="MintGramCustomizationEmpty">Здесь скоро появятся настройки кастомизации.</string>
     <string name="MintGramCustomizationTemporarilyUnavailable">Кастомизация временно недоступна.</string>
+    <string name="MintGramFoldersBottom">Папки снизу</string>
     <string name="MintGramMessageSize">Размер сообщений</string>
     <string name="MintGramMessageSizeSmall">Маленький</string>
     <string name="MintGramMessageSizeLarge">Большой</string>

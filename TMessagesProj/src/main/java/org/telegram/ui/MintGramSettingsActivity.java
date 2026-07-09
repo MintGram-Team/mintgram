@@ -74,6 +74,7 @@ public class MintGramSettingsActivity extends BaseFragment {
     private static final int VIEW_TYPE_OTHER_ACTIONS_BLOCK = 12;
     private static final int VIEW_TYPE_BIG_HEADER = 13;
     private static final int VIEW_TYPE_SUPPORT_INFO = 14;
+    private static final int VIEW_TYPE_CUSTOMIZATION_BLOCK = 15;
 
     public MintGramSettingsActivity() {
     }
@@ -142,7 +143,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             items.add(new ItemInner(VIEW_TYPE_SHADOW, 16, LocaleController.getString(R.string.MintGramFeaturesInfo)));
         } else if (selectedSection == 1) {
             items.add(new ItemInner(VIEW_TYPE_HEADER, 22, LocaleController.getString(R.string.MintGramCustomizationSection)));
-            items.add(new ItemInner(VIEW_TYPE_MESSAGE_SIZE_BLOCK, 17, null));
+            items.add(new ItemInner(VIEW_TYPE_CUSTOMIZATION_BLOCK, 17, null));
             items.add(new ItemInner(VIEW_TYPE_SHADOW, 18, null));
         } else if (selectedSection == 2) {
             items.add(new ItemInner(VIEW_TYPE_BIG_HEADER, 23, LocaleController.getString(R.string.MintGramOtherSection)));
@@ -233,6 +234,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 view = new LinksBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
                 view = new MessageSizeBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_CUSTOMIZATION_BLOCK) {
+                view = new CustomizationBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_OTHER_SUPPORT_BLOCK) {
                 view = new OtherSupportBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_OTHER_ACTIONS_BLOCK) {
@@ -282,6 +285,8 @@ public class MintGramSettingsActivity extends BaseFragment {
                 ((LinksBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
                 ((MessageSizeBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_CUSTOMIZATION_BLOCK) {
+                ((CustomizationBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_OTHER_SUPPORT_BLOCK) {
                 ((OtherSupportBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_OTHER_ACTIONS_BLOCK) {
@@ -402,7 +407,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             block.addView(helpCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
 
             mainCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(0)));
-            customizationCell.setOnClickListener(v -> Toast.makeText(getContext(), LocaleController.getString(R.string.MintGramCustomizationTemporarilyUnavailable), Toast.LENGTH_SHORT).show());
+            customizationCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(1)));
             otherCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(2)));
             helpCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintsupport"));
         }
@@ -410,7 +415,7 @@ public class MintGramSettingsActivity extends BaseFragment {
         public void bind() {
             bindBlockRow(mainCell, LocaleController.getString(R.string.MintGramMainSection), R.drawable.settings_features, true);
             bindBlockRow(customizationCell, LocaleController.getString(R.string.MintGramCustomizationSection), R.drawable.settings_chat, true);
-            customizationCell.setAlpha(0.45f);
+            customizationCell.setAlpha(1f);
             bindBlockRow(otherCell, LocaleController.getString(R.string.MintGramOtherSection), R.drawable.settings_policy, true);
             bindBlockRow(helpCell, LocaleController.getString(R.string.MintGramHelpSection), R.drawable.settings_ask, false);
         }
@@ -827,6 +832,7 @@ public class MintGramSettingsActivity extends BaseFragment {
                 + "ghostHideUploadFile=" + SharedConfig.ghostHideUploadFile + "\n"
                 + "deletedMessageStyle=" + SharedConfig.deletedMessageStyle + "\n"
                 + "mapProvider=" + SharedConfig.mintGramMapProvider + "\n"
+                + "foldersBottom=" + SharedConfig.mintGramFoldersBottom + "\n"
                 + "messageSize=" + SharedConfig.fontSize;
     }
 
@@ -852,6 +858,7 @@ public class MintGramSettingsActivity extends BaseFragment {
         SharedConfig.setGhostHideUploadFile(false);
         SharedConfig.setDeletedMessageStyle(0);
         SharedConfig.setMintGramMapProvider(0);
+        SharedConfig.setMintGramFoldersBottom(false);
         SharedConfig.fontSize = AndroidUtilities.isTablet() && !AndroidUtilities.isFold() ? 18 : 16;
         SharedConfig.fontSizeIsDefault = true;
         SharedPreferences preferences = context.getSharedPreferences("mainconfig", Context.MODE_PRIVATE);
@@ -1267,6 +1274,33 @@ public class MintGramSettingsActivity extends BaseFragment {
         public void bind() {
             hideReadCell.setTextAndCheck(LocaleController.getString(R.string.MintGramHideReadReceipts), SharedConfig.hideReadReceipts, true);
             keepDeletedCell.setTextAndCheck(LocaleController.getString(R.string.MintGramKeepDeletedMessages), SharedConfig.keepDeletedMessages, false);
+        }
+    }
+
+    private static class CustomizationBlockCell extends FrameLayout {
+        private final TextCheckCell foldersBottomCell;
+
+        public CustomizationBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = createBlock(context);
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            foldersBottomCell = new TextCheckCell(context, 21);
+            block.addView(foldersBottomCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+
+            foldersBottomCell.setOnClickListener(v -> {
+                SharedConfig.setMintGramFoldersBottom(!SharedConfig.mintGramFoldersBottom);
+                bind();
+                for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
+                    NotificationCenter.getInstance(account).postNotificationName(NotificationCenter.updateInterfaces, MessagesController.UPDATE_MASK_ALL);
+                }
+            });
+        }
+
+        public void bind() {
+            foldersBottomCell.setTextAndCheck(LocaleController.getString(R.string.MintGramFoldersBottom), SharedConfig.mintGramFoldersBottom, false);
         }
     }
 
