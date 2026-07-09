@@ -1,14 +1,17 @@
 package org.telegram.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -35,6 +38,7 @@ import org.telegram.messenger.browser.Browser;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ActionBar.BottomSheet;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Cells.HeaderCell;
 import org.telegram.ui.Cells.TextCheckCell;
@@ -65,6 +69,10 @@ public class MintGramSettingsActivity extends BaseFragment {
     private static final int VIEW_TYPE_EMPTY_BLOCK = 8;
     private static final int VIEW_TYPE_LINKS_BLOCK = 9;
     private static final int VIEW_TYPE_MESSAGE_SIZE_BLOCK = 10;
+    private static final int VIEW_TYPE_OTHER_SUPPORT_BLOCK = 11;
+    private static final int VIEW_TYPE_OTHER_ACTIONS_BLOCK = 12;
+    private static final int VIEW_TYPE_BIG_HEADER = 13;
+    private static final int VIEW_TYPE_SUPPORT_INFO = 14;
 
     public MintGramSettingsActivity() {
     }
@@ -136,8 +144,12 @@ public class MintGramSettingsActivity extends BaseFragment {
             items.add(new ItemInner(VIEW_TYPE_MESSAGE_SIZE_BLOCK, 17, null));
             items.add(new ItemInner(VIEW_TYPE_SHADOW, 18, null));
         } else if (selectedSection == 2) {
-            items.add(new ItemInner(VIEW_TYPE_HEADER, 23, LocaleController.getString(R.string.MintGramOtherSection)));
-            items.add(new ItemInner(VIEW_TYPE_EMPTY_BLOCK, 18, LocaleController.getString(R.string.MintGramOtherEmpty)));
+            items.add(new ItemInner(VIEW_TYPE_BIG_HEADER, 23, LocaleController.getString(R.string.MintGramOtherSection)));
+            items.add(new ItemInner(VIEW_TYPE_HEADER, 27, LocaleController.getString(R.string.MintGramSupportHeader)));
+            items.add(new ItemInner(VIEW_TYPE_OTHER_SUPPORT_BLOCK, 28, null));
+            items.add(new ItemInner(VIEW_TYPE_SUPPORT_INFO, 29, createSupportInfoText()));
+            items.add(new ItemInner(VIEW_TYPE_OTHER_ACTIONS_BLOCK, 30, null));
+            items.add(new ItemInner(VIEW_TYPE_SHADOW, 31, null));
         } else if (selectedSection == 3) {
             items.add(new ItemInner(VIEW_TYPE_HEADER, 24, LocaleController.getString(R.string.MintGramHelpSection)));
             items.add(new ItemInner(VIEW_TYPE_LINKS_BLOCK, 25, null));
@@ -155,6 +167,17 @@ public class MintGramSettingsActivity extends BaseFragment {
         int start = text.indexOf(link);
         if (start >= 0) {
             spannable.setSpan(new URLSpan("https://yandex.ru/legal/maps_api_offer/"), start, start + link.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return spannable;
+    }
+
+    private CharSequence createSupportInfoText() {
+        String text = LocaleController.getString(R.string.MintGramSupportDevelopmentInfo);
+        String colored = LocaleController.getString(R.string.MintGramSupportDevelopmentAccent);
+        SpannableString spannable = new SpannableString(text);
+        int start = text.indexOf(colored);
+        if (start >= 0) {
+            spannable.setSpan(new ForegroundColorSpan(0xFFFFB8CE), start, start + colored.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannable;
     }
@@ -189,6 +212,8 @@ public class MintGramSettingsActivity extends BaseFragment {
             View view;
             if (viewType == VIEW_TYPE_HEADER) {
                 view = new HeaderCell(getContext());
+            } else if (viewType == VIEW_TYPE_BIG_HEADER) {
+                view = new BigHeaderCell(getContext());
             } else if (viewType == VIEW_TYPE_BRAND_HEADER) {
                 view = new BrandHeaderCell(getContext());
             } else if (viewType == VIEW_TYPE_SECTION_BLOCK) {
@@ -207,6 +232,12 @@ public class MintGramSettingsActivity extends BaseFragment {
                 view = new LinksBlockCell(getContext());
             } else if (viewType == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
                 view = new MessageSizeBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_OTHER_SUPPORT_BLOCK) {
+                view = new OtherSupportBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_OTHER_ACTIONS_BLOCK) {
+                view = new OtherActionsBlockCell(getContext());
+            } else if (viewType == VIEW_TYPE_SUPPORT_INFO) {
+                view = new SupportInfoCell(getContext());
             } else {
                 view = new TextInfoPrivacyCell(getContext());
             }
@@ -221,6 +252,8 @@ public class MintGramSettingsActivity extends BaseFragment {
             ItemInner item = items.get(position);
             if (holder.getItemViewType() == VIEW_TYPE_HEADER) {
                 ((HeaderCell) holder.itemView).setText(item.text);
+            } else if (holder.getItemViewType() == VIEW_TYPE_BIG_HEADER) {
+                ((BigHeaderCell) holder.itemView).setText(item.text);
             } else if (holder.getItemViewType() == VIEW_TYPE_BRAND_HEADER) {
                 ((BrandHeaderCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_SECTION_BLOCK) {
@@ -248,6 +281,12 @@ public class MintGramSettingsActivity extends BaseFragment {
                 ((LinksBlockCell) holder.itemView).bind();
             } else if (holder.getItemViewType() == VIEW_TYPE_MESSAGE_SIZE_BLOCK) {
                 ((MessageSizeBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_OTHER_SUPPORT_BLOCK) {
+                ((OtherSupportBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_OTHER_ACTIONS_BLOCK) {
+                ((OtherActionsBlockCell) holder.itemView).bind();
+            } else if (holder.getItemViewType() == VIEW_TYPE_SUPPORT_INFO) {
+                ((SupportInfoCell) holder.itemView).bind(item.text);
             }
         }
 
@@ -258,7 +297,7 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
-            return false;
+            return holder.getItemViewType() == VIEW_TYPE_SUPPORT_INFO;
         }
 
         @Override
@@ -276,12 +315,13 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         public BigHeaderCell(Context context) {
             super(context);
-            setPadding(AndroidUtilities.dp(20), AndroidUtilities.dp(22), AndroidUtilities.dp(20), AndroidUtilities.dp(10));
+            setPadding(AndroidUtilities.dp(20), AndroidUtilities.dp(24), AndroidUtilities.dp(20), AndroidUtilities.dp(12));
             textView = new TextView(context);
-            textView.setTextSize(23);
-            textView.setTextColor(getAccentColor());
+            textView.setTextSize(30);
+            textView.setTypeface(AndroidUtilities.bold());
+            textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-            addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 34));
+            addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48));
         }
 
         public void setText(CharSequence text) {
@@ -487,12 +527,358 @@ public class MintGramSettingsActivity extends BaseFragment {
         Browser.openUrl(context, "https://t.me/" + username);
     }
 
+    private static void copyCardDetails(Context context) {
+        if (AndroidUtilities.addToClipboard("2204120130545938")) {
+            Toast.makeText(context, LocaleController.getString(R.string.CardNumberCopied), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private static String getVersionText() {
-        return "12.0.2";
+        return "12.0.3";
     }
 
     private static int getAccentColor() {
         return 0xFF3E927A;
+    }
+
+    private static int getSupportColor() {
+        return 0xFFFF8FB1;
+    }
+
+    private static class OtherSupportBlockCell extends FrameLayout {
+        private final PaymentRowCell tonkeeperCell;
+        private final PaymentRowCell tonSpaceCell;
+        private final PaymentRowCell cryptoBotCell;
+        private final PaymentRowCell cardCell;
+
+        public OtherSupportBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), 0, AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = createBlock(context);
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            tonkeeperCell = new PaymentRowCell(context);
+            tonSpaceCell = new PaymentRowCell(context);
+            cryptoBotCell = new PaymentRowCell(context);
+            cardCell = new PaymentRowCell(context);
+
+            block.addView(tonkeeperCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(tonSpaceCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(cryptoBotCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(cardCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+
+            View.OnClickListener unavailableClick = v -> Toast.makeText(getContext(), LocaleController.getString(R.string.MintGramSupportTemporarilyUnavailable), Toast.LENGTH_SHORT).show();
+            tonkeeperCell.setOnClickListener(unavailableClick);
+            tonSpaceCell.setOnClickListener(unavailableClick);
+            cryptoBotCell.setOnClickListener(unavailableClick);
+            cardCell.setOnClickListener(v -> copyCardDetails(getContext()));
+        }
+
+        public void bind() {
+            tonkeeperCell.bind("Tonkeeper", R.drawable.settings_ton, 0xFF193245, false, true);
+            tonkeeperCell.setAlpha(0.45f);
+            tonSpaceCell.bind("TON Space", R.drawable.settings_wallet, 0xFF29A8EA, false, true);
+            tonSpaceCell.setAlpha(0.45f);
+            cryptoBotCell.bind("CryptoBot", R.drawable.mintgram_cryptobot, 0xFF2CA8DF, true, true);
+            cryptoBotCell.setAlpha(0.45f);
+            cardCell.bind(LocaleController.getString(R.string.MintGramCard), R.drawable.mintgram_yoomoney, 0xFF7533EA, true, false);
+            cardCell.setAlpha(1.0f);
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), heightMeasureSpec);
+        }
+    }
+
+    private static class PaymentRowCell extends FrameLayout {
+        private final ImageView imageView;
+        private final TextView textView;
+        private final Paint dividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private boolean needDivider;
+
+        public PaymentRowCell(Context context) {
+            super(context);
+            setBackground(Theme.getSelectorDrawable(false));
+
+            imageView = new ImageView(context);
+            imageView.setClipToOutline(true);
+            addView(imageView, LayoutHelper.createFrame(28, 28, Gravity.LEFT | Gravity.CENTER_VERTICAL, 28, 0, 0, 0));
+
+            textView = new TextView(context);
+            textView.setTextSize(16);
+            textView.setSingleLine(true);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+            addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP, 71, 0, 16, 0));
+        }
+
+        public void bind(CharSequence text, int icon, int backgroundColor, boolean bitmap, boolean divider) {
+            textView.setText(text);
+            imageView.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(8), backgroundColor));
+            imageView.setScaleType(bitmap ? ImageView.ScaleType.CENTER_CROP : ImageView.ScaleType.FIT_CENTER);
+            int padding = bitmap ? 0 : AndroidUtilities.dp(6);
+            imageView.setPadding(padding, padding, padding, padding);
+            imageView.setImageResource(icon);
+            needDivider = divider;
+            setWillNotDraw(!divider);
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            if (needDivider) {
+                dividerPaint.setColor(Theme.getColor(Theme.key_divider));
+                canvas.drawRect(AndroidUtilities.dp(71), getMeasuredHeight() - 1, getMeasuredWidth(), getMeasuredHeight(), dividerPaint);
+            }
+        }
+    }
+
+    private static class OtherActionsBlockCell extends FrameLayout {
+        private final TextSettingsCell badgeCell;
+        private final TextSettingsCell exportCell;
+        private final TextSettingsCell resetCell;
+        private final TextSettingsCell deleteCell;
+
+        public OtherActionsBlockCell(Context context) {
+            super(context);
+            setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(4), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
+
+            LinearLayout block = createBlock(context);
+            addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            badgeCell = createRow(context);
+            exportCell = createRow(context);
+            resetCell = createRow(context);
+            deleteCell = createRow(context);
+
+            block.addView(badgeCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(exportCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(resetCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+            block.addView(deleteCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 54));
+
+            badgeCell.setOnClickListener(v -> showBadgeSheet(getContext()));
+            exportCell.setOnClickListener(v -> exportSettings(getContext()));
+            resetCell.setOnClickListener(v -> showResetSettingsDialog(getContext()));
+            deleteCell.setOnClickListener(v -> showDeleteAccountDialog(getContext()));
+        }
+
+        public void bind() {
+            bindBlockRow(badgeCell, LocaleController.getString(R.string.MintGramGetBadge), R.drawable.settings_gift, true);
+            bindBlockRow(exportCell, LocaleController.getString(R.string.MintGramExportSettings), R.drawable.settings_features, true);
+            bindBlockRow(resetCell, LocaleController.getString(R.string.MintGramResetSettings), R.drawable.settings_policy, true);
+            bindBlockRow(deleteCell, LocaleController.getString(R.string.MintGramDeleteAccount), R.drawable.msg_delete, false);
+            deleteCell.setTextColor(getSupportColor());
+        }
+
+        private static void showBadgeSheet(Context context) {
+            BottomSheet.Builder builder = new BottomSheet.Builder(context, false);
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setPadding(AndroidUtilities.dp(22), AndroidUtilities.dp(26), AndroidUtilities.dp(22), AndroidUtilities.dp(14));
+            builder.setCustomView(layout);
+
+            HeartLogoView logoView = new HeartLogoView(context);
+            layout.addView(logoView, LayoutHelper.createLinear(118, 106, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 18));
+
+            TextView titleView = new TextView(context);
+            titleView.setText(LocaleController.getString(R.string.MintGramSupportSheetTitle));
+            titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
+            titleView.setTextSize(24);
+            titleView.setGravity(Gravity.CENTER);
+            titleView.setTypeface(AndroidUtilities.bold());
+            layout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 10));
+
+            TextView subtitleView = new TextView(context);
+            subtitleView.setText(LocaleController.getString(R.string.MintGramSupportSheetSubtitle));
+            subtitleView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
+            subtitleView.setTextSize(16);
+            subtitleView.setGravity(Gravity.CENTER);
+            subtitleView.setLineSpacing(AndroidUtilities.dp(2), 1f);
+            layout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 10, 0, 10, 24));
+
+            addFeature(layout, R.drawable.settings_stars, LocaleController.getString(R.string.MintGramSupportSheetDonateTitle), LocaleController.getString(R.string.MintGramSupportSheetDonateText));
+            addFeature(layout, R.drawable.settings_features, LocaleController.getString(R.string.MintGramSupportSheetConfirmTitle), LocaleController.getString(R.string.MintGramSupportSheetConfirmText));
+            addFeature(layout, R.drawable.settings_gift, LocaleController.getString(R.string.MintGramSupportSheetBadgeTitle), LocaleController.getString(R.string.MintGramSupportSheetBadgeText));
+
+            TextView closeView = new TextView(context);
+            closeView.setText(LocaleController.getString(R.string.Close));
+            closeView.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
+            closeView.setTextSize(16);
+            closeView.setGravity(Gravity.CENTER);
+            closeView.setTypeface(AndroidUtilities.bold());
+            closeView.setBackground(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(26), getAccentColor(), getAccentColor() & 0xDDFFFFFF));
+            layout.addView(closeView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 52, 0, 18, 0, 0));
+
+            BottomSheet sheet = builder.create();
+            closeView.setOnClickListener(v -> sheet.dismiss());
+            sheet.fixNavigationBar();
+            sheet.show();
+        }
+
+        private static void addFeature(LinearLayout layout, int icon, CharSequence title, CharSequence text) {
+            Context context = layout.getContext();
+            LinearLayout row = new LinearLayout(context);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(Gravity.TOP);
+            layout.addView(row, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 18));
+
+            ImageView iconView = new ImageView(context);
+            iconView.setImageResource(icon);
+            iconView.setColorFilter(Theme.getColor(Theme.key_dialogTextBlack));
+            row.addView(iconView, LayoutHelper.createLinear(42, 42, 0, 2, 14, 0));
+
+            LinearLayout texts = new LinearLayout(context);
+            texts.setOrientation(LinearLayout.VERTICAL);
+            row.addView(texts, LayoutHelper.createLinear(0, LayoutHelper.WRAP_CONTENT, 1f));
+
+            TextView titleView = new TextView(context);
+            titleView.setText(title);
+            titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
+            titleView.setTextSize(17);
+            titleView.setTypeface(AndroidUtilities.bold());
+            texts.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            TextView textView = new TextView(context);
+            textView.setText(text);
+            textView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
+            textView.setTextSize(15);
+            textView.setLineSpacing(AndroidUtilities.dp(2), 1f);
+            texts.addView(textView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 3, 0, 0));
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), heightMeasureSpec);
+        }
+    }
+
+    private static class SupportInfoCell extends FrameLayout {
+        private final TextView textView;
+
+        public SupportInfoCell(Context context) {
+            super(context);
+            setBackground(Theme.getSelectorDrawable(false));
+            setOnClickListener(v -> OtherActionsBlockCell.showBadgeSheet(getContext()));
+
+            textView = new TextView(context);
+            textView.setTextSize(14);
+            textView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
+            textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText4));
+            textView.setPadding(0, AndroidUtilities.dp(10), 0, AndroidUtilities.dp(17));
+            textView.setOnClickListener(v -> OtherActionsBlockCell.showBadgeSheet(getContext()));
+            addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, 24, 0, 24, 0));
+        }
+
+        public void bind(CharSequence text) {
+            textView.setText(text);
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        }
+    }
+
+    private static void exportSettings(Context context) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, LocaleController.getString(R.string.MintGramExportSettings));
+        intent.putExtra(Intent.EXTRA_TEXT, buildExportText());
+        try {
+            context.startActivity(Intent.createChooser(intent, LocaleController.getString(R.string.MintGramExportSettings)));
+        } catch (Exception e) {
+            Toast.makeText(context, LocaleController.getString(R.string.MintGramExportUnavailable), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static String buildExportText() {
+        return "MintGram 12.0.3\n"
+                + "hideReadStatus=" + SharedConfig.hideReadReceipts + "\n"
+                + "keepDeletedMessages=" + SharedConfig.keepDeletedMessages + "\n"
+                + "ghostHideOnline=" + SharedConfig.ghostHideOnline + "\n"
+                + "ghostHideTyping=" + SharedConfig.ghostHideTyping + "\n"
+                + "ghostHideRecordVideo=" + SharedConfig.ghostHideRecordVideo + "\n"
+                + "ghostHideUploadVideo=" + SharedConfig.ghostHideUploadVideo + "\n"
+                + "ghostHideRecordVoice=" + SharedConfig.ghostHideRecordVoice + "\n"
+                + "ghostHideUploadPhoto=" + SharedConfig.ghostHideUploadPhoto + "\n"
+                + "ghostHideUploadFile=" + SharedConfig.ghostHideUploadFile + "\n"
+                + "deletedMessageStyle=" + SharedConfig.deletedMessageStyle + "\n"
+                + "mapProvider=" + SharedConfig.mintGramMapProvider + "\n"
+                + "messageSize=" + SharedConfig.fontSize;
+    }
+
+    private static void showResetSettingsDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(LocaleController.getString(R.string.MintGramResetSettings));
+        builder.setMessage(LocaleController.getString(R.string.MintGramResetSettingsText));
+        builder.setPositiveButton(LocaleController.getString(R.string.Reset), (dialogInterface, i) -> resetSettings(context));
+        builder.setNegativeButton(LocaleController.getString(R.string.Cancel), null);
+        builder.show();
+    }
+
+    private static void resetSettings(Context context) {
+        SharedConfig.setHideReadReceipts(false);
+        SharedConfig.setKeepDeletedMessages(false);
+        SharedConfig.setPlumFreeVoiceTranscription(false);
+        SharedConfig.setGhostHideOnline(false);
+        SharedConfig.setGhostHideTyping(false);
+        SharedConfig.setGhostHideRecordVideo(false);
+        SharedConfig.setGhostHideUploadVideo(false);
+        SharedConfig.setGhostHideRecordVoice(false);
+        SharedConfig.setGhostHideUploadPhoto(false);
+        SharedConfig.setGhostHideUploadFile(false);
+        SharedConfig.setDeletedMessageStyle(0);
+        SharedConfig.setMintGramMapProvider(0);
+        SharedConfig.fontSize = AndroidUtilities.isTablet() && !AndroidUtilities.isFold() ? 18 : 16;
+        SharedConfig.fontSizeIsDefault = true;
+        SharedPreferences preferences = context.getSharedPreferences("mainconfig", Context.MODE_PRIVATE);
+        preferences.edit().remove("fons_size").apply();
+        Theme.createCommonMessageResources();
+        for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
+            NotificationCenter.getInstance(account).postNotificationName(NotificationCenter.updateInterfaces, MessagesController.UPDATE_MASK_AVATAR | MessagesController.UPDATE_MASK_NAME);
+        }
+        Toast.makeText(context, LocaleController.getString(R.string.MintGramSettingsResetDone), Toast.LENGTH_SHORT).show();
+    }
+
+    private static void showDeleteAccountDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(LocaleController.getString(R.string.MintGramDeleteAccount));
+        builder.setMessage(LocaleController.getString(R.string.MintGramDeleteAccountText));
+        builder.setPositiveButton(LocaleController.getString(R.string.MintGramDeleteAccountOpen), (dialogInterface, i) -> Browser.openUrl(context, "https://my.telegram.org/delete"));
+        builder.setNegativeButton(LocaleController.getString(R.string.Cancel), null);
+        builder.show();
+    }
+
+    private static class HeartLogoView extends FrameLayout {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Path path = new Path();
+
+        public HeartLogoView(Context context) {
+            super(context);
+            setWillNotDraw(false);
+            ImageView logo = new ImageView(context);
+            logo.setImageResource(R.drawable.mintgram_logo_icon);
+            logo.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            addView(logo, LayoutHelper.createFrame(54, 54, Gravity.CENTER, 0, -AndroidUtilities.dp(3), 0, 0));
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            float w = getWidth();
+            float h = getHeight();
+            path.reset();
+            path.moveTo(w / 2f, h * 0.88f);
+            path.cubicTo(w * 0.08f, h * 0.58f, w * 0.02f, h * 0.26f, w * 0.22f, h * 0.12f);
+            path.cubicTo(w * 0.36f, h * 0.02f, w * 0.48f, h * 0.10f, w / 2f, h * 0.24f);
+            path.cubicTo(w * 0.52f, h * 0.10f, w * 0.64f, h * 0.02f, w * 0.78f, h * 0.12f);
+            path.cubicTo(w * 0.98f, h * 0.26f, w * 0.92f, h * 0.58f, w / 2f, h * 0.88f);
+            path.close();
+            paint.setColor(getAccentColor());
+            canvas.drawPath(path, paint);
+        }
     }
 
     private static class MessageSizeBlockCell extends FrameLayout {
