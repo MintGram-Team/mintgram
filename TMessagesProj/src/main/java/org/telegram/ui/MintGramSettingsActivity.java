@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -348,7 +349,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             logoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             logoView.setPadding(AndroidUtilities.dp(16), AndroidUtilities.dp(16), AndroidUtilities.dp(16), AndroidUtilities.dp(16));
             logoView.setBackground(Theme.createRoundRectDrawable(AndroidUtilities.dp(28), getAccentColor()));
-            addView(logoView, LayoutHelper.createFrame(108, 108, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 56, 0, 0));
+            addView(logoView, LayoutHelper.createFrame(108, 108, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 42, 0, 0));
 
             titleView = new TextView(context);
             titleView.setText("MintGram");
@@ -357,19 +358,19 @@ public class MintGramSettingsActivity extends BaseFragment {
             titleView.setGravity(Gravity.CENTER);
             titleView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             titleView.setSingleLine(true);
-            addView(titleView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.TOP | Gravity.LEFT, 32, 188, 32, 0));
+            addView(titleView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.TOP | Gravity.LEFT, 32, 174, 32, 0));
 
             versionView = new TextView(context);
             versionView.setTextSize(20);
             versionView.setGravity(Gravity.CENTER);
             versionView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText4));
             versionView.setSingleLine(true);
-            addView(versionView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 30, Gravity.TOP | Gravity.LEFT, 32, 228, 32, 0));
+            addView(versionView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 30, Gravity.TOP | Gravity.LEFT, 32, 214, 32, 0));
         }
 
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(AndroidUtilities.dp(282), MeasureSpec.EXACTLY));
+            super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(AndroidUtilities.dp(248), MeasureSpec.EXACTLY));
         }
 
         public void bind() {
@@ -403,7 +404,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             mainCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(0)));
             customizationCell.setOnClickListener(v -> Toast.makeText(getContext(), LocaleController.getString(R.string.MintGramCustomizationTemporarilyUnavailable), Toast.LENGTH_SHORT).show());
             otherCell.setOnClickListener(v -> presentFragment(new MintGramSettingsActivity(2)));
-            helpCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgramsupport"));
+            helpCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintsupport"));
         }
 
         public void bind() {
@@ -473,14 +474,14 @@ public class MintGramSettingsActivity extends BaseFragment {
 
             channelCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgram_tg"));
             chatCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgram_chat"));
-            supportCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgramsupport"));
+            supportCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintsupport"));
             faqCell.setOnClickListener(v -> openTelegramLink(getContext(), "mintgram_faq"));
         }
 
         public void bind() {
             bindBlockRow(channelCell, LocaleController.getString(R.string.MintGramChannel), "@mintgram_tg", R.drawable.settings_channel, true);
             bindBlockRow(chatCell, LocaleController.getString(R.string.MintGramChat), "@mintgram_chat", R.drawable.settings_group, true);
-            bindBlockRow(supportCell, LocaleController.getString(R.string.MintGramSupport), "@mintgramsupport", R.drawable.settings_ask, true);
+            bindBlockRow(supportCell, LocaleController.getString(R.string.MintGramSupport), "@mintsupport", R.drawable.settings_ask, true);
             bindBlockRow(faqCell, LocaleController.getString(R.string.MintGramFAQ), "@mintgram_faq", R.drawable.settings_faq, false);
         }
 
@@ -674,29 +675,37 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         private static void showBadgeSheet(Context context) {
             BottomSheet.Builder builder = new BottomSheet.Builder(context, false);
+            HalfSheetContainer container = new HalfSheetContainer(context);
+            builder.setCustomView(container);
+
+            ScrollView scrollView = new ScrollView(context);
+            scrollView.setFillViewport(false);
+            scrollView.setClipToPadding(false);
+            container.addView(scrollView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT, 0, 0, 0, 66));
+
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setPadding(AndroidUtilities.dp(22), AndroidUtilities.dp(26), AndroidUtilities.dp(22), AndroidUtilities.dp(14));
-            builder.setCustomView(layout);
+            layout.setPadding(AndroidUtilities.dp(22), AndroidUtilities.dp(16), AndroidUtilities.dp(22), AndroidUtilities.dp(4));
+            scrollView.addView(layout, new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             HeartLogoView logoView = new HeartLogoView(context);
-            layout.addView(logoView, LayoutHelper.createLinear(118, 106, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 18));
+            layout.addView(logoView, LayoutHelper.createLinear(82, 74, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 10));
 
             TextView titleView = new TextView(context);
             titleView.setText(LocaleController.getString(R.string.MintGramSupportSheetTitle));
             titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
-            titleView.setTextSize(24);
+            titleView.setTextSize(21);
             titleView.setGravity(Gravity.CENTER);
             titleView.setTypeface(AndroidUtilities.bold());
-            layout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 10));
+            layout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 6));
 
             TextView subtitleView = new TextView(context);
             subtitleView.setText(LocaleController.getString(R.string.MintGramSupportSheetSubtitle));
             subtitleView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
-            subtitleView.setTextSize(16);
+            subtitleView.setTextSize(14);
             subtitleView.setGravity(Gravity.CENTER);
             subtitleView.setLineSpacing(AndroidUtilities.dp(2), 1f);
-            layout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 10, 0, 10, 24));
+            layout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 8, 0, 8, 14));
 
             addFeature(layout, R.drawable.settings_stars, LocaleController.getString(R.string.MintGramSupportSheetDonateTitle), LocaleController.getString(R.string.MintGramSupportSheetDonateText));
             addFeature(layout, R.drawable.settings_features, LocaleController.getString(R.string.MintGramSupportSheetConfirmTitle), LocaleController.getString(R.string.MintGramSupportSheetConfirmText));
@@ -709,7 +718,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             closeView.setGravity(Gravity.CENTER);
             closeView.setTypeface(AndroidUtilities.bold());
             closeView.setBackground(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(26), getAccentColor(), getAccentColor() & 0xDDFFFFFF));
-            layout.addView(closeView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 52, 0, 18, 0, 0));
+            container.addView(closeView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM | Gravity.LEFT, 22, 0, 22, 12));
 
             BottomSheet sheet = builder.create();
             closeView.setOnClickListener(v -> sheet.dismiss());
@@ -722,12 +731,12 @@ public class MintGramSettingsActivity extends BaseFragment {
             LinearLayout row = new LinearLayout(context);
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setGravity(Gravity.TOP);
-            layout.addView(row, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 18));
+            layout.addView(row, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 10));
 
             ImageView iconView = new ImageView(context);
             iconView.setImageResource(icon);
             iconView.setColorFilter(Theme.getColor(Theme.key_dialogTextBlack));
-            row.addView(iconView, LayoutHelper.createLinear(42, 42, 0, 2, 14, 0));
+            row.addView(iconView, LayoutHelper.createLinear(32, 32, 0, 2, 12, 0));
 
             LinearLayout texts = new LinearLayout(context);
             texts.setOrientation(LinearLayout.VERTICAL);
@@ -736,14 +745,14 @@ public class MintGramSettingsActivity extends BaseFragment {
             TextView titleView = new TextView(context);
             titleView.setText(title);
             titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
-            titleView.setTextSize(17);
+            titleView.setTextSize(15);
             titleView.setTypeface(AndroidUtilities.bold());
             texts.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
             TextView textView = new TextView(context);
             textView.setText(text);
             textView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
-            textView.setTextSize(15);
+            textView.setTextSize(13);
             textView.setLineSpacing(AndroidUtilities.dp(2), 1f);
             texts.addView(textView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 3, 0, 0));
         }
@@ -751,6 +760,18 @@ public class MintGramSettingsActivity extends BaseFragment {
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), heightMeasureSpec);
+        }
+    }
+
+    private static class HalfSheetContainer extends FrameLayout {
+        public HalfSheetContainer(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            int height = AndroidUtilities.displaySize.y / 2;
+            super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         }
     }
 

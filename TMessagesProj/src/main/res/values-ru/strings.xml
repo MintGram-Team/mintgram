@@ -300,7 +300,7 @@
     <string name="MintGramSupportSheetDonateTitle">Сделать пожертвование</string>
     <string name="MintGramSupportSheetDonateText">Переведите любую удобную сумму по одной из примерных ссылок поддержки в разделе Другое.</string>
     <string name="MintGramSupportSheetConfirmTitle">Отправить подтверждение платежа</string>
-    <string name="MintGramSupportSheetConfirmText">Отправьте скриншот подтверждения платежа в @mintgramsupport. Убедитесь, что видны сумма, дата и время.</string>
+    <string name="MintGramSupportSheetConfirmText">Отправьте скриншот подтверждения платежа в @mintsupport. Убедитесь, что видны сумма, дата и время.</string>
     <string name="MintGramSupportSheetBadgeTitle">Получить значок</string>
     <string name="MintGramSupportSheetBadgeText">После проверки платежа вы получите уникальный значок, который можно будет отображать в профиле.</string>
     <string name="MintGramLinks">Ссылки</string>

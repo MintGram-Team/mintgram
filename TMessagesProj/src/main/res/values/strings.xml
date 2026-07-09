@@ -10941,7 +10941,7 @@
     <string name="MintGramSupportSheetDonateTitle">Make a Donation</string>
     <string name="MintGramSupportSheetDonateText">Send any convenient amount using one of the example support links in the Other section.</string>
     <string name="MintGramSupportSheetConfirmTitle">Send Payment Confirmation</string>
-    <string name="MintGramSupportSheetConfirmText">Send a payment confirmation screenshot to @mintgramsupport. Make sure the amount, date and time are visible.</string>
+    <string name="MintGramSupportSheetConfirmText">Send a payment confirmation screenshot to @mintsupport. Make sure the amount, date and time are visible.</string>
     <string name="MintGramSupportSheetBadgeTitle">Get a Badge</string>
     <string name="MintGramSupportSheetBadgeText">After the payment is checked, you will receive a unique badge that can be shown on your profile.</string>
     <string name="MintGramLinks">Links</string>
