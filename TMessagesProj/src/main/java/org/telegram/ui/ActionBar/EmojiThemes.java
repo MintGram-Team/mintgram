@@ -268,16 +268,14 @@ public class EmojiThemes {
 
         boolean extended = "MintGram Extended".equals(themeName);
         Theme.ThemeInfo lightThemeInfo = Theme.getTheme(extended ? "MintGram Extended light" : "MintGram basic light");
-        ThemeItem lightTheme = new ThemeItem();
-        lightTheme.themeInfo = lightThemeInfo;
-        lightTheme.accentId = lightThemeInfo != null ? lightThemeInfo.currentAccentId : 0;
-        themeItem.items.add(lightTheme);
-
         Theme.ThemeInfo darkThemeInfo = Theme.getTheme(extended ? "MintGram Extended" : "MintGram basic");
-        ThemeItem darkTheme = new ThemeItem();
-        darkTheme.themeInfo = darkThemeInfo;
-        darkTheme.accentId = darkThemeInfo != null ? darkThemeInfo.currentAccentId : 0;
-        themeItem.items.add(darkTheme);
+        for (int i = 0; i < 4; i++) {
+            Theme.ThemeInfo themeInfo = i < 2 ? lightThemeInfo : darkThemeInfo;
+            ThemeItem item = new ThemeItem();
+            item.themeInfo = themeInfo;
+            item.accentId = themeInfo != null ? themeInfo.currentAccentId : 0;
+            themeItem.items.add(item);
+        }
         return themeItem;
     }
 
