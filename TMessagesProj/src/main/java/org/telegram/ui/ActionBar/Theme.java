@@ -2463,7 +2463,7 @@ public class Theme {
             }
             if ("Dark Blue".equals(name) || "Night".equals(name) || "MintGram basic".equals(name) || "MintGram Extended".equals(name)) {
                 isDark = DARK;
-            } else if ("Blue".equals(name) || "Arctic Blue".equals(name) || "Day".equals(name)) {
+            } else if ("Blue".equals(name) || "Arctic Blue".equals(name) || "Day".equals(name) || "MintGram basic light".equals(name) || "MintGram Extended light".equals(name)) {
                 isDark = LIGHT;
             }
             if (isDark == UNKNOWN) {
@@ -4677,6 +4677,22 @@ public class Theme {
         themes.add(themeInfo);
         themesDict.put("Day", themeInfo);
 
+        ThemeInfo mintGramBasicLightTheme = new ThemeInfo(themeInfo);
+        mintGramBasicLightTheme.name = "MintGram basic light";
+        mintGramBasicLightTheme.assetName = "mintgram_basic_light.attheme";
+        mintGramBasicLightTheme.previewOutColor = 0xff3e927a;
+        mintGramBasicLightTheme.sortIndex = 0;
+        mintGramBasicLightTheme.setAccentColorOptions(new int[] { 0xFF3E927A });
+        themes.add(mintGramBasicLightTheme);
+        themesDict.put("MintGram basic light", mintGramBasicLightTheme);
+
+        ThemeInfo mintGramExtendedLightTheme = new ThemeInfo(mintGramBasicLightTheme);
+        mintGramExtendedLightTheme.name = "MintGram Extended light";
+        mintGramExtendedLightTheme.assetName = "mintgram_extended_light.attheme";
+        mintGramExtendedLightTheme.sortIndex = 1;
+        themes.add(mintGramExtendedLightTheme);
+        themesDict.put("MintGram Extended light", mintGramExtendedLightTheme);
+
         themeInfo = new ThemeInfo();
         themeInfo.name = "Night";
         themeInfo.assetName = "night.attheme";
@@ -4804,34 +4820,60 @@ public class Theme {
             }
 
             if (!preferences.contains("theme") && !themeConfig.contains("lastDayTheme")) {
-                ThemeInfo plumDefaultTheme = themesDict.get("MintGram basic");
-                if (plumDefaultTheme == null) {
-                    plumDefaultTheme = themeDarkBlue;
+                ThemeInfo plumDayTheme = themesDict.get("MintGram basic light");
+                ThemeInfo plumNightTheme = themesDict.get("MintGram basic");
+                if (plumDayTheme == null) {
+                    plumDayTheme = defaultTheme;
                 }
-                if (plumDefaultTheme != null) {
-                    applyingTheme = plumDefaultTheme;
-                    currentDayTheme = plumDefaultTheme;
-                    currentNightTheme = plumDefaultTheme;
+                if (plumNightTheme == null) {
+                    plumNightTheme = themeDarkBlue;
+                }
+                if (plumNightTheme != null) {
+                    applyingTheme = plumNightTheme;
+                    currentDayTheme = plumDayTheme;
+                    currentNightTheme = plumNightTheme;
                 }
             }
 
             if (!themeConfig.getBoolean("plumBasicThemeMigrated", false)) {
-                ThemeInfo plumDefaultTheme = themesDict.get("MintGram basic");
-                if (plumDefaultTheme != null) {
-                    applyingTheme = plumDefaultTheme;
-                    currentDayTheme = plumDefaultTheme;
-                    currentNightTheme = plumDefaultTheme;
+                ThemeInfo plumDayTheme = themesDict.get("MintGram basic light");
+                ThemeInfo plumNightTheme = themesDict.get("MintGram basic");
+                if (plumNightTheme != null) {
+                    applyingTheme = plumNightTheme;
+                    currentDayTheme = plumDayTheme != null ? plumDayTheme : defaultTheme;
+                    currentNightTheme = plumNightTheme;
                     preferences.edit()
-                            .putString("theme", plumDefaultTheme.getKey())
-                            .putString("nighttheme", plumDefaultTheme.getKey())
+                            .putString("theme", plumNightTheme.getKey())
+                            .putString("nighttheme", plumNightTheme.getKey())
                             .apply();
                     themeConfig.edit()
                             .putBoolean("plumBasicThemeMigrated", true)
-                            .putString("lastDayTheme", plumDefaultTheme.getKey())
-                            .putString("lastDarkTheme", plumDefaultTheme.getKey())
+                            .putString("lastDayTheme", currentDayTheme.getKey())
+                            .putString("lastDarkTheme", plumNightTheme.getKey())
                             .apply();
                 } else {
                     themeConfig.edit().putBoolean("plumBasicThemeMigrated", true).apply();
+                }
+            }
+
+            if (!themeConfig.getBoolean("plumDefaultDarkThemeMigrated", false)) {
+                ThemeInfo plumDayTheme = themesDict.get("MintGram basic light");
+                ThemeInfo plumNightTheme = themesDict.get("MintGram basic");
+                if (plumNightTheme != null) {
+                    applyingTheme = plumNightTheme;
+                    currentDayTheme = plumDayTheme != null ? plumDayTheme : defaultTheme;
+                    currentNightTheme = plumNightTheme;
+                    preferences.edit()
+                            .putString("theme", plumNightTheme.getKey())
+                            .putString("nighttheme", plumNightTheme.getKey())
+                            .apply();
+                    themeConfig.edit()
+                            .putBoolean("plumDefaultDarkThemeMigrated", true)
+                            .putString("lastDayTheme", currentDayTheme.getKey())
+                            .putString("lastDarkTheme", plumNightTheme.getKey())
+                            .apply();
+                } else {
+                    themeConfig.edit().putBoolean("plumDefaultDarkThemeMigrated", true).apply();
                 }
             }
 
@@ -6145,6 +6187,14 @@ public class Theme {
             } else if ("MintGram Extended".equals(o1.name)) {
                 return -1;
             } else if ("MintGram Extended".equals(o2.name)) {
+                return 1;
+            } else if ("MintGram basic light".equals(o1.name)) {
+                return -1;
+            } else if ("MintGram basic light".equals(o2.name)) {
+                return 1;
+            } else if ("MintGram Extended light".equals(o1.name)) {
+                return -1;
+            } else if ("MintGram Extended light".equals(o2.name)) {
                 return 1;
             }
             if (o1.pathToFile == null && o1.assetName == null) {

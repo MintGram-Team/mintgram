@@ -341,6 +341,7 @@ public class SharedConfig {
     public static boolean ghostHideUploadPhoto;
     public static boolean ghostHideUploadFile;
     public static boolean mintGramFoldersBottom;
+    public static int mintGramFolderTitleMode;
     public static int deletedMessageStyle;
     public static int mintGramMapProvider;
     private static HashSet<String> deletedMessages = new HashSet<>();
@@ -491,6 +492,7 @@ public class SharedConfig {
                 editor.putBoolean("ghostHideUploadPhoto", ghostHideUploadPhoto);
                 editor.putBoolean("ghostHideUploadFile", ghostHideUploadFile);
                 editor.putBoolean("mintGramFoldersBottom", mintGramFoldersBottom);
+                editor.putInt("mintGramFolderTitleMode", mintGramFolderTitleMode);
                 editor.putInt("deletedMessageStyle", deletedMessageStyle);
                 editor.putInt("mintGramMapProvider", mintGramMapProvider);
                 editor.putStringSet("plumDeletedMessages", new HashSet<>(deletedMessages));
@@ -592,6 +594,21 @@ public class SharedConfig {
     public static void setMintGramFoldersBottom(boolean value) {
         setMainConfigBoolean("mintGramFoldersBottom", value);
         mintGramFoldersBottom = value;
+    }
+
+    public static void setMintGramFolderTitleMode(int value) {
+        if (mintGramFolderTitleMode == value) {
+            return;
+        }
+        mintGramFolderTitleMode = value;
+        try {
+            ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Context.MODE_PRIVATE)
+                    .edit()
+                    .putInt("mintGramFolderTitleMode", mintGramFolderTitleMode)
+                    .apply();
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
     }
 
     private static void setMainConfigBoolean(String key, boolean value) {
@@ -797,6 +814,7 @@ public class SharedConfig {
             ghostHideUploadPhoto = preferences.getBoolean("ghostHideUploadPhoto", false);
             ghostHideUploadFile = preferences.getBoolean("ghostHideUploadFile", false);
             mintGramFoldersBottom = preferences.getBoolean("mintGramFoldersBottom", false);
+            mintGramFolderTitleMode = preferences.getInt("mintGramFolderTitleMode", 0);
             deletedMessageStyle = preferences.getInt("deletedMessageStyle", 0);
             mintGramMapProvider = preferences.getInt("mintGramMapProvider", 0);
             deletedMessages = new HashSet<>(preferences.getStringSet("plumDeletedMessages", new HashSet<>()));

@@ -690,27 +690,27 @@ public class MintGramSettingsActivity extends BaseFragment {
 
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setPadding(AndroidUtilities.dp(22), AndroidUtilities.dp(16), AndroidUtilities.dp(22), AndroidUtilities.dp(4));
+            layout.setPadding(AndroidUtilities.dp(22), AndroidUtilities.dp(10), AndroidUtilities.dp(22), AndroidUtilities.dp(2));
             scrollView.addView(layout, new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             HeartLogoView logoView = new HeartLogoView(context);
-            layout.addView(logoView, LayoutHelper.createLinear(82, 74, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 10));
+            layout.addView(logoView, LayoutHelper.createLinear(68, 62, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 6));
 
             TextView titleView = new TextView(context);
             titleView.setText(LocaleController.getString(R.string.MintGramSupportSheetTitle));
             titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
-            titleView.setTextSize(21);
+            titleView.setTextSize(19);
             titleView.setGravity(Gravity.CENTER);
             titleView.setTypeface(AndroidUtilities.bold());
-            layout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 6));
+            layout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 4));
 
             TextView subtitleView = new TextView(context);
             subtitleView.setText(LocaleController.getString(R.string.MintGramSupportSheetSubtitle));
             subtitleView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
-            subtitleView.setTextSize(14);
+            subtitleView.setTextSize(13);
             subtitleView.setGravity(Gravity.CENTER);
-            subtitleView.setLineSpacing(AndroidUtilities.dp(2), 1f);
-            layout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 8, 0, 8, 14));
+            subtitleView.setLineSpacing(AndroidUtilities.dp(1), 1f);
+            layout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 8, 0, 8, 9));
 
             addFeature(layout, R.drawable.settings_stars, LocaleController.getString(R.string.MintGramSupportSheetDonateTitle), LocaleController.getString(R.string.MintGramSupportSheetDonateText));
             addFeature(layout, R.drawable.settings_features, LocaleController.getString(R.string.MintGramSupportSheetConfirmTitle), LocaleController.getString(R.string.MintGramSupportSheetConfirmText));
@@ -723,7 +723,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             closeView.setGravity(Gravity.CENTER);
             closeView.setTypeface(AndroidUtilities.bold());
             closeView.setBackground(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(26), getAccentColor(), getAccentColor() & 0xDDFFFFFF));
-            container.addView(closeView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM | Gravity.LEFT, 22, 0, 22, 12));
+            container.addView(closeView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 46, Gravity.BOTTOM | Gravity.LEFT, 22, 0, 22, 10));
 
             BottomSheet sheet = builder.create();
             closeView.setOnClickListener(v -> sheet.dismiss());
@@ -736,12 +736,12 @@ public class MintGramSettingsActivity extends BaseFragment {
             LinearLayout row = new LinearLayout(context);
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setGravity(Gravity.TOP);
-            layout.addView(row, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 10));
+            layout.addView(row, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 7));
 
             ImageView iconView = new ImageView(context);
             iconView.setImageResource(icon);
             iconView.setColorFilter(Theme.getColor(Theme.key_dialogTextBlack));
-            row.addView(iconView, LayoutHelper.createLinear(32, 32, 0, 2, 12, 0));
+            row.addView(iconView, LayoutHelper.createLinear(28, 28, 0, 1, 11, 0));
 
             LinearLayout texts = new LinearLayout(context);
             texts.setOrientation(LinearLayout.VERTICAL);
@@ -750,16 +750,16 @@ public class MintGramSettingsActivity extends BaseFragment {
             TextView titleView = new TextView(context);
             titleView.setText(title);
             titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
-            titleView.setTextSize(15);
+            titleView.setTextSize(14);
             titleView.setTypeface(AndroidUtilities.bold());
             texts.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
             TextView textView = new TextView(context);
             textView.setText(text);
             textView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));
-            textView.setTextSize(13);
-            textView.setLineSpacing(AndroidUtilities.dp(2), 1f);
-            texts.addView(textView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 3, 0, 0));
+            textView.setTextSize(12);
+            textView.setLineSpacing(AndroidUtilities.dp(1), 1f);
+            texts.addView(textView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 2, 0, 0));
         }
 
         @Override
@@ -775,7 +775,7 @@ public class MintGramSettingsActivity extends BaseFragment {
 
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            int height = AndroidUtilities.displaySize.y / 2;
+            int height = (int) (AndroidUtilities.displaySize.y * 0.62f);
             super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         }
     }
@@ -833,6 +833,7 @@ public class MintGramSettingsActivity extends BaseFragment {
                 + "deletedMessageStyle=" + SharedConfig.deletedMessageStyle + "\n"
                 + "mapProvider=" + SharedConfig.mintGramMapProvider + "\n"
                 + "foldersBottom=" + SharedConfig.mintGramFoldersBottom + "\n"
+                + "folderTitleMode=" + SharedConfig.mintGramFolderTitleMode + "\n"
                 + "messageSize=" + SharedConfig.fontSize;
     }
 
@@ -859,6 +860,7 @@ public class MintGramSettingsActivity extends BaseFragment {
         SharedConfig.setDeletedMessageStyle(0);
         SharedConfig.setMintGramMapProvider(0);
         SharedConfig.setMintGramFoldersBottom(false);
+        SharedConfig.setMintGramFolderTitleMode(0);
         SharedConfig.fontSize = AndroidUtilities.isTablet() && !AndroidUtilities.isFold() ? 18 : 16;
         SharedConfig.fontSizeIsDefault = true;
         SharedPreferences preferences = context.getSharedPreferences("mainconfig", Context.MODE_PRIVATE);
@@ -889,7 +891,7 @@ public class MintGramSettingsActivity extends BaseFragment {
             ImageView logo = new ImageView(context);
             logo.setImageResource(R.drawable.mintgram_logo_icon);
             logo.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            addView(logo, LayoutHelper.createFrame(54, 54, Gravity.CENTER, 0, -AndroidUtilities.dp(3), 0, 0));
+            addView(logo, LayoutHelper.createFrame(40, 40, Gravity.CENTER, 0, -AndroidUtilities.dp(1), 0, 0));
         }
 
         @Override
@@ -1278,29 +1280,135 @@ public class MintGramSettingsActivity extends BaseFragment {
     }
 
     private static class CustomizationBlockCell extends FrameLayout {
+        private final FolderTabsPreviewView previewView;
+        private final TextView titleView;
+        private final TextView titleModeView;
         private final TextCheckCell foldersBottomCell;
+        private final TextSettingsCell titleNameCell;
+        private final TextSettingsCell titleIconCell;
+        private final TextSettingsCell titleBothCell;
 
         public CustomizationBlockCell(Context context) {
             super(context);
             setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(2), AndroidUtilities.dp(12), AndroidUtilities.dp(4));
 
             LinearLayout block = createBlock(context);
+            block.setPadding(0, AndroidUtilities.dp(12), 0, AndroidUtilities.dp(4));
             addView(block, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            previewView = new FolderTabsPreviewView(context);
+            block.addView(previewView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 82));
+
+            titleView = new TextView(context);
+            titleView.setTextColor(getAccentColor());
+            titleView.setTextSize(15);
+            titleView.setTypeface(AndroidUtilities.bold());
+            titleView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_VERTICAL);
+            block.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, 21, 0, 21, 0));
 
             foldersBottomCell = new TextCheckCell(context, 21);
             block.addView(foldersBottomCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
 
+            titleModeView = new TextView(context);
+            titleModeView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText4));
+            titleModeView.setTextSize(14);
+            titleModeView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_VERTICAL);
+            block.addView(titleModeView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 34, 21, 0, 21, 0));
+
+            titleNameCell = createRow(context);
+            titleIconCell = createRow(context);
+            titleBothCell = createRow(context);
+            block.addView(titleNameCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(titleIconCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+            block.addView(titleBothCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 50));
+
             foldersBottomCell.setOnClickListener(v -> {
                 SharedConfig.setMintGramFoldersBottom(!SharedConfig.mintGramFoldersBottom);
                 bind();
-                for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
-                    NotificationCenter.getInstance(account).postNotificationName(NotificationCenter.updateInterfaces, MessagesController.UPDATE_MASK_ALL);
-                }
+                notifyFoldersChanged();
             });
+            titleNameCell.setOnClickListener(v -> setTitleMode(0));
+            titleIconCell.setOnClickListener(v -> setTitleMode(1));
+            titleBothCell.setOnClickListener(v -> setTitleMode(2));
         }
 
         public void bind() {
-            foldersBottomCell.setTextAndCheck(LocaleController.getString(R.string.MintGramFoldersBottom), SharedConfig.mintGramFoldersBottom, false);
+            titleView.setText(LocaleController.getString(R.string.MintGramChatFolders));
+            titleModeView.setText(LocaleController.getString(R.string.MintGramFolderTitleMode));
+            previewView.invalidate();
+            foldersBottomCell.setTextAndCheck(LocaleController.getString(R.string.MintGramFoldersBottom), SharedConfig.mintGramFoldersBottom, true);
+            bindTitleRow(titleNameCell, LocaleController.getString(R.string.MintGramFolderTitleName), SharedConfig.mintGramFolderTitleMode == 0, true);
+            bindTitleRow(titleIconCell, LocaleController.getString(R.string.MintGramFolderTitleIcon), SharedConfig.mintGramFolderTitleMode == 1, true);
+            bindTitleRow(titleBothCell, LocaleController.getString(R.string.MintGramFolderTitleBoth), SharedConfig.mintGramFolderTitleMode == 2, false);
+        }
+
+        private void setTitleMode(int mode) {
+            SharedConfig.setMintGramFolderTitleMode(mode);
+            bind();
+            notifyFoldersChanged();
+        }
+
+        private void bindTitleRow(TextSettingsCell cell, CharSequence text, boolean selected, boolean divider) {
+            cell.setTextAndValue(text, selected ? LocaleController.getString(R.string.MintGramSelected) : null, true, divider);
+            cell.setTextValueColor(getAccentColor());
+        }
+
+        private void notifyFoldersChanged() {
+            for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
+                NotificationCenter.getInstance(account).postNotificationName(NotificationCenter.updateInterfaces, MessagesController.UPDATE_MASK_ALL);
+            }
+        }
+    }
+
+    private static class FolderTabsPreviewView extends View {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final RectF rect = new RectF();
+
+        public FolderTabsPreviewView(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            int left = AndroidUtilities.dp(18);
+            int top = AndroidUtilities.dp(12);
+            int height = AndroidUtilities.dp(42);
+            int width = getMeasuredWidth() - AndroidUtilities.dp(36);
+            rect.set(left, top, left + width, top + height);
+            paint.setColor(Theme.getColor(Theme.key_windowBackgroundGray));
+            canvas.drawRoundRect(rect, AndroidUtilities.dp(21), AndroidUtilities.dp(21), paint);
+
+            String[] names = {
+                    LocaleController.getString(R.string.FilterAllChats),
+                    LocaleController.getString(R.string.FilterNameUnread),
+                    LocaleController.getString(R.string.FolderLinkPreviewRight)
+            };
+            String[] icons = {"●", "◌", "◆"};
+            int mode = SharedConfig.mintGramFolderTitleMode;
+            int x = left + AndroidUtilities.dp(7);
+            for (int i = 0; i < names.length; i++) {
+                String text;
+                if (mode == 1) {
+                    text = icons[i];
+                } else if (mode == 2) {
+                    text = icons[i] + " " + names[i];
+                } else {
+                    text = names[i];
+                }
+                paint.setTextSize(AndroidUtilities.dp(14));
+                paint.setTypeface(i == 0 ? AndroidUtilities.bold() : null);
+                int textWidth = (int) Math.ceil(paint.measureText(text));
+                int tabWidth = Math.max(AndroidUtilities.dp(42), textWidth + AndroidUtilities.dp(24));
+                rect.set(x, top + AndroidUtilities.dp(5), x + tabWidth, top + height - AndroidUtilities.dp(5));
+                paint.setColor(i == 0 ? Theme.multAlpha(getAccentColor(), 0.18f) : 0x00000000);
+                if (i == 0) {
+                    canvas.drawRoundRect(rect, AndroidUtilities.dp(16), AndroidUtilities.dp(16), paint);
+                }
+                paint.setColor(i == 0 ? getAccentColor() : Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+                canvas.drawText(text, x + (tabWidth - textWidth) / 2f, top + AndroidUtilities.dp(27), paint);
+                x += tabWidth + AndroidUtilities.dp(4);
+            }
         }
     }
 

@@ -203,15 +203,19 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
             if (DialogsActivity.switchingTheme) return;
             DialogsActivity.switchingTheme = true;
 
-                        String dayThemeName = "Blue";
-            String nightThemeName = "Night";
+            String dayThemeName = "MintGram basic light";
+            String nightThemeName = "MintGram basic";
+            SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("themeconfig", Activity.MODE_PRIVATE);
+            preferences.edit()
+                    .putString("lastDayTheme", dayThemeName)
+                    .putString("lastDarkTheme", nightThemeName)
+                    .apply();
 
             Theme.ThemeInfo themeInfo;
-            boolean toDark;
-            if (toDark = !Theme.isCurrentThemeDark()) {
-                themeInfo = Theme.getTheme(nightThemeName);
-            } else {
-                themeInfo = Theme.getTheme(dayThemeName);
+            boolean toDark = !Theme.isCurrentThemeDark();
+            themeInfo = Theme.getTheme(toDark ? nightThemeName : dayThemeName);
+            if (themeInfo == null) {
+                themeInfo = Theme.getActiveTheme();
             }
 
             Theme.selectedAutoNightType = Theme.AUTO_NIGHT_TYPE_NONE;
@@ -221,11 +225,7 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
             darkThemeDrawable.setCustomEndFrame(toDark ? darkThemeDrawable.getFramesCount() - 1 : 0);
             themeIconView.playAnimation();
 
-            int[] pos = new int[2];
-            themeIconView.getLocationInWindow(pos);
-            pos[0] += themeIconView.getMeasuredWidth() / 2;
-            pos[1] += themeIconView.getMeasuredHeight() / 2;
-            NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.needSetDayNightTheme, themeInfo, false, pos, -1, toDark, themeIconView);
+            NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.needSetDayNightTheme, themeInfo, toDark, null, -1, toDark, themeIconView);
             themeIconView.setContentDescription(LocaleController.getString(toDark ? R.string.AccDescrSwitchToDayTheme : R.string.AccDescrSwitchToNightTheme));
         });
 

@@ -10915,7 +10915,12 @@
     <string name="MintGramSelected">Selected</string>
     <string name="MintGramCustomizationEmpty">Customization settings will appear here soon.</string>
     <string name="MintGramCustomizationTemporarilyUnavailable">Customization is temporarily unavailable.</string>
+    <string name="MintGramChatFolders">Chat Folders</string>
     <string name="MintGramFoldersBottom">Folders on bottom</string>
+    <string name="MintGramFolderTitleMode">Folder titles</string>
+    <string name="MintGramFolderTitleName">Name only</string>
+    <string name="MintGramFolderTitleIcon">Icon only</string>
+    <string name="MintGramFolderTitleBoth">Icon and name</string>
     <string name="MintGramMessageSize">Message Size</string>
     <string name="MintGramMessageSizeSmall">Small</string>
     <string name="MintGramMessageSizeLarge">Large</string>

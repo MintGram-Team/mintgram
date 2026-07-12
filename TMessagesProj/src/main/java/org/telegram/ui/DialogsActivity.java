@@ -5013,7 +5013,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             filterTabsViewBackground.setPadding(dp(6.666f));
             filterTabsView.setPadding(0, dp(7), 0, dp(7));
             filterTabsView.setBlurredBackground(filterTabsViewBackground);
-            contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36 + 7 + 7, SharedConfig.mintGramFoldersBottom ? Gravity.BOTTOM : Gravity.TOP, 4, 0, 4, 0));
+            contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36 + 7 + 7, SharedConfig.mintGramFoldersBottom ? Gravity.BOTTOM : Gravity.TOP, 4, 0, 4, SharedConfig.mintGramFoldersBottom ? -6 : 0));
         }
 
         if (fragmentSearchField != null) {
@@ -6402,7 +6402,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         float fadeViewT = totalOffset;
 
         if (filterTabsView != null) {
-            filterTabsView.setTranslationY(SharedConfig.mintGramFoldersBottom ? 0 : totalOffset - searchOffset);
+            filterTabsView.setTranslationY(SharedConfig.mintGramFoldersBottom ? dp(6) : totalOffset - searchOffset);
             filtersTabVisibility = filterTabsView.getAlpha();
             if (!SharedConfig.mintGramFoldersBottom) {
                 filtersTabHeight = dp(36 + 7) * filtersTabVisibility;
@@ -6677,10 +6677,15 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 filterTabsView.removeTabs();
                 for (int a = 0, N = filters.size(); a < N; a++) {
                     if (filters.get(a).isDefault()) {
-                        filterTabsView.addTab(a, 0, LocaleController.getString(R.string.FilterAllChats), null, false, true, filters.get(a).locked);
+                        String title = getMintGramFolderTitle(LocaleController.getString(R.string.FilterAllChats), true);
+                        filterTabsView.addTab(a, 0, title, null, false, true, filters.get(a).locked);
                     } else {
                         final MessagesController.DialogFilter filter = filters.get(a);
-                        filterTabsView.addTab(a, filter.localId, filter.name, filter.entities, filter.title_noanimate, false, filters.get(a).locked);
+                        if (SharedConfig.mintGramFolderTitleMode == 0) {
+                            filterTabsView.addTab(a, filter.localId, filter.name, filter.entities, filter.title_noanimate, false, filters.get(a).locked);
+                        } else {
+                            filterTabsView.addTab(a, filter.localId, getMintGramFolderTitle(filter.name, false), null, false, false, filters.get(a).locked);
+                        }
                     }
                 }
                 if (stableId >= 0) {
@@ -6771,6 +6776,46 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 }
             }
         }
+    }
+
+    private String getMintGramFolderTitle(String name, boolean isDefault) {
+        int mode = SharedConfig.mintGramFolderTitleMode;
+        if (mode == 0) {
+            return name;
+        }
+        String icon = getMintGramFolderIcon(name, isDefault);
+        if (mode == 1) {
+            return icon;
+        }
+        return icon + " " + stripMintGramFolderIcon(name);
+    }
+
+    private String getMintGramFolderIcon(String name, boolean isDefault) {
+        if (isDefault) {
+            return "●";
+        }
+        if (!TextUtils.isEmpty(name)) {
+            int codePoint = name.codePointAt(0);
+            if (Character.getType(codePoint) == Character.OTHER_SYMBOL) {
+                return new String(Character.toChars(codePoint));
+            }
+        }
+        return "◆";
+    }
+
+    private String stripMintGramFolderIcon(String name) {
+        if (TextUtils.isEmpty(name)) {
+            return "";
+        }
+        int index = 0;
+        int codePoint = name.codePointAt(0);
+        if (Character.getType(codePoint) == Character.OTHER_SYMBOL) {
+            index = Character.charCount(codePoint);
+            while (index < name.length() && Character.isWhitespace(name.charAt(index))) {
+                index++;
+            }
+        }
+        return name.substring(index);
     }
 
     @Override
