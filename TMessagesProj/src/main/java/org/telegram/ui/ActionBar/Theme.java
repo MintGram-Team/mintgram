@@ -7842,7 +7842,7 @@ public class Theme {
             size = 0;
             FileLog.e(e);
         }
-        if (!file.exists() || size != 0 && file.length() != size) {
+        if (assetName.startsWith("mintgram_") || !file.exists() || size != 0 && file.length() != size) {
             try (InputStream in = ApplicationLoader.applicationContext.getAssets().open(assetName)) {
                 AndroidUtilities.copyFile(in, file);
             } catch (Exception e) {
@@ -9700,11 +9700,11 @@ public class Theme {
     }
 
     public static boolean isPlumBasicThemeActive() {
-        return currentTheme != null && ("MintGram basic".equals(currentTheme.name) || "MintGram Extended".equals(currentTheme.name));
+        return currentTheme != null && ("MintGram basic".equals(currentTheme.name) || "MintGram Extended".equals(currentTheme.name) || "MintGram basic light".equals(currentTheme.name) || "MintGram Extended light".equals(currentTheme.name));
     }
 
     public static boolean isMintGramExtendedThemeActive() {
-        return currentTheme != null && "MintGram Extended".equals(currentTheme.name);
+        return currentTheme != null && ("MintGram Extended".equals(currentTheme.name) || "MintGram Extended light".equals(currentTheme.name));
     }
 
     public static int getColor(int key, boolean[] isDefault, boolean ignoreAnimation) {
